@@ -62,15 +62,15 @@ public class HuaweiPhone {
         return isUnlocked;
     }
 
-    public static double getMaxStorageSize() {
+    public static /*@ pure @*/ double getMaxStorageSize() {
         return MAX_STORAGE_SIZE;
     }
 
-    public static double getHEIGHT() {
+    public static /*@ pure @*/ double getHEIGHT() {
         return HEIGHT;
     }
 
-    public static double getWIDTH() {
+    public static /*@ pure @*/ double getWIDTH() {
         return WIDTH;
     }
 
