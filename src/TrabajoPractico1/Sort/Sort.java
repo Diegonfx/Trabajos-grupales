@@ -1,19 +1,21 @@
 package TrabajoPractico1.Sort;
 
+import java.util.Random;
+
 /**
  * Created by DiegoMancini on 7/3/17.
  */
 public class Sort {
 
-    public void bubbleSort(int[] arr) {
+    public <T extends Comparable<T>> void bubbleSort(T[] arr) {
         boolean swapped = true;
         int j = 0;
-        int tmp;
+        T tmp;
         while (swapped) {
             swapped = false;
             j++;
             for (int i = 0; i < arr.length - j; i++) {
-                if (arr[i] > arr[i + 1]) {
+                if (arr[i].compareTo(arr[i+1]) < 0) {
                     tmp = arr[i];
                     arr[i] = arr[i + 1];
                     arr[i + 1] = tmp;
@@ -23,16 +25,16 @@ public class Sort {
         }
     }
 
-    public void selectionSort(int[] arr) {
+    public <T extends Comparable<T>> void selectionSort(T[] arr) {
         int i;
         int j;
         int minIndex;
-        int tmp;
+        T tmp;
         int n = arr.length;
         for (i = 0; i < n - 1; i++) {
             minIndex = i;
             for (j = i + 1; j < n; j++)
-                if (arr[j] < arr[minIndex])
+                if (arr[j].compareTo(arr[minIndex]) < 0)
                     minIndex = j;
             if (minIndex != i) {
                 tmp = arr[i];
@@ -42,12 +44,13 @@ public class Sort {
         }
     }
 
-    public void insertionSort(int[] arr) {
-        int i, j, newValue;
+    public <T extends Comparable<T>> void insertionSort(T[] arr) {
+        int i, j;
+        T newValue;
         for (i = 1; i < arr.length; i++) {
             newValue = arr[i];
             j = i;
-            while (j > 0 && arr[j - 1] > newValue) {
+            while (j > 0 && arr[j - 1].compareTo(newValue) > 0) {
                 arr[j] = arr[j - 1];
                 j--;
             }
@@ -84,7 +87,19 @@ public class Sort {
             quickSort(arr, index, right);
     }
 
+    public  static  void main ( String [] args ){
+        int [] array  =  new  int [ Integer . MAX_VALUE / 10 ];
+        long startTime  =  System.currentTimeMillis();
+        fillWithRandoms ( array );
+        long endTime  =  System.currentTimeMillis();
+        System.out.println(endTime-startTime + "miliseconds");
+        System.out.println((endTime-startTime)/1000 + "seconds");
+    }
 
-
+    public static void fillWithRandoms ( int[] array ){
+        Random rand  =  new  Random ();
+        for ( int i = 0 ; i < array.length ; i++){
+            array [ i ]  = rand.nextInt (); }
+    }
 
 }

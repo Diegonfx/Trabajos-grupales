@@ -8,11 +8,13 @@ public class Merge {
     // size of C array must be equal or greater than
     // sum of A and B arrays' sizes
 
-    public int[] merge(int[] arrayA, int[] arrayB){
+    public <T extends Comparable<T>> Comparable<T>[] merge(T[] arrayA, T[] arrayB){
         int a = 0, b = 0, c = 0;
-        int[] arrayC = new int[arrayA.length + arrayB.length];
+        Comparable<T>[] arrayC = new Comparable[arrayA.length + arrayB.length];
+
         while(a < arrayA.length && b < arrayB.length){
-            if (arrayA[a] < arrayB[b]){
+
+            if (arrayA[a].compareTo(arrayB[b]) < 0){
                 arrayC[c] = arrayA[a];
                 a++;
             } else{
@@ -21,22 +23,16 @@ public class Merge {
             }
             c++;
         }
-        while (a < arrayA.length)
-        {
+        while (a < arrayA.length) {
             arrayC[c] = arrayA[a];
             a++;
             c++;
         }
-
-        while (b < arrayB.length)
-        {
+        while (b < arrayB.length) {
             arrayC[c] = arrayB[b];
             b++;
             c++;
         }
-
-
         return arrayC;
     }
-
 }

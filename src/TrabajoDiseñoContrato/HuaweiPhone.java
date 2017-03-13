@@ -24,7 +24,7 @@ public class HuaweiPhone {
 
     /*@
     invariant ( \forall (int i = 0 ; i < appsInstalled.size() ; i++) ;
-    appsInstalled.get(i).charAt(i) < appsInstalled.get(i+1).charAt(i+1)) ) ;
+    appsInstalled.get(i).charAt(i) < appsInstalled.get(i+1).charAt(i)) ) ;
      @*/
 
     /**

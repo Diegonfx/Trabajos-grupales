@@ -82,19 +82,15 @@ public class Search {
     }
 
     private static boolean binarySearch(int[] array, int number, int first, int last){
-
         if(first > last){ //condicion de corte
             return false;
         }
-
         int middleIndex = (first + last)/2;
 
-        if(number == array[middleIndex]){
-            return true;
-        }
-        else if(number < array[middleIndex]){
-            return binarySearch(array, number, 0, middleIndex-1);
-        }
+        if(number == array[middleIndex]){return true;}
+
+        else if(number < array[middleIndex]){return binarySearch(array, number, 0, middleIndex-1);}
+
         else{
             return binarySearch(array, number, middleIndex + 1, last);
         }
