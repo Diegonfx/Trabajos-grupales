@@ -3,7 +3,7 @@ package TrabajoPractico1.Sort;
 /**
  * Created by DiegoMancini on 7/3/17.
  */
-public class SortInternet {
+public class Sort {
 
     public void bubbleSort(int[] arr) {
         boolean swapped = true;

@@ -42,6 +42,15 @@ public class Search {
 
     }
 
+    public boolean secuencialSearch(int k, int[] list){
+        for (int i : list){
+            if (i == k)
+                return true;
+        }
+        return false;
+    }
+
+
     public static boolean isBinary(int[] arrayToSearch , int number) {
         int amountOfComparsions = 0;
         int low = 0;
