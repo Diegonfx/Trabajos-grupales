@@ -3,9 +3,9 @@ package TrabajoPractico1.Search;
 /**
  * Created by Tomas on 13/3/2017.
  */
-public class ModifiedSearch {
+public class ModifiedSearch <T extends Comparable<T>> {
 
-    public <T extends Comparable<T>> int secuentialSearch(T k, T[] list){
+    public int secuentialSearch(T k, T[] list){
 
         for (int i = 0; i < list.length; i++){
             if (list[i] == k)
@@ -15,7 +15,7 @@ public class ModifiedSearch {
         return -1;
     }
 
-    private <T extends Comparable<T>> int binarySearch(T k, T[] list, int first, int last){
+    private int binarySearch(T k, T[] list, int first, int last){
         if (first > last) {
             return -1;
         } else {
@@ -31,7 +31,7 @@ public class ModifiedSearch {
         }
     }
 
-    public <T extends Comparable<T>> int binarySearch(T k, T[] list){
+    public int binarySearch(T k, T[] list){
         return binarySearch(k, list, 0, list.length - 1);
     }
 

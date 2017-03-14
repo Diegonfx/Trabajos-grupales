@@ -3,14 +3,14 @@ package TrabajoPractico1.Sort;
 /**
  * Created by Tomas on 13/3/2017.
  */
-public class ModifiedSort {
+public class ModifiedSort <T extends Comparable<T>>  {
 
-    public <T extends Comparable<T>>  void selectionSort(T[] arr) {
+    public void selectionSort(T[] arr) {
         selectionSort(arr, 0);
     }
 
 
-    private <T extends Comparable<T>>  void selectionSort(T[] arr, int index) {
+    private void selectionSort(T[] arr, int index) {
         if (index < arr.length - 1) {
             int smallestIndex = index;
             for (int i = index + 1; i < arr.length; i++) {
@@ -18,7 +18,6 @@ public class ModifiedSort {
                     smallestIndex = i;
                 }
             }
-
             T t = arr[index];
             arr[index] = arr[smallestIndex];
             arr[smallestIndex] = t;

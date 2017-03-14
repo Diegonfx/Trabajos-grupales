@@ -1,6 +1,6 @@
 package TrabajoPractico1.Merge;
 
-import TrabajoPractico1.Sort.Sort;
+import main.TrabajoPractico1.Sort.Sort;
 
 /**
  * Created by DiegoMancini on 13/3/17.
@@ -58,7 +58,7 @@ public class Test {
         Sort sort = new Sort();
         sort.selectionSort(arregloATestear);
         sort.selectionSort(arregloTestear);
-        Comparable<Integer>[] array = merge.merge(arregloATestear, arregloTestear);
+        Comparable[] array = merge.merge(arregloATestear, arregloTestear);
         System.out.println("Post ordenamiento");
         for (int i = 0 ; i < array.length ; i++) {
             System.out.println("Position: " + i + " ||  Value: --> " + array[i]);

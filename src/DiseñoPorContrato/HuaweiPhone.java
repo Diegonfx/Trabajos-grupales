@@ -1,4 +1,4 @@
-package TrabajoDiseñoContrato;
+package DiseñoPorContrato;
 
 import java.util.ArrayList;
 

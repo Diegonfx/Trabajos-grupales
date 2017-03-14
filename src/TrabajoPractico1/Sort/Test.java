@@ -30,7 +30,7 @@ public class Test  {
             System.out.println("Position: " + i + " |||| Value: --> " + arregloATestear[i]);
         }
         System.out.println("-------------------------------------------");
-//      sort."TIPO DE SORT DESEADO"(arregloATestear);
+        sort.selectionSort(arregloATestear);
         System.out.println("Post ordenamiento");
         for (int i = 0 ; i < arregloATestear.length ; i++) {
             System.out.println("Position: " + i + " ||  Value: --> " + arregloATestear[i]);

@@ -1,4 +1,4 @@
-package TrabajoDiseñoContrato;
+package DiseñoPorContrato;
 
 /**
  * Created by DiegoMancini on 10/3/17.

@@ -5,9 +5,18 @@ import java.util.Random;
 /**
  * Created by DiegoMancini on 7/3/17.
  */
-public class Sort {
+public class Sort <T extends Comparable<T>>  {
 
-    public <T extends Comparable<T>> void bubbleSort(T[] arr) {
+    public  static  void main ( String [] args ){
+        int [] array  =  new  int [ Integer . MAX_VALUE / 10 ];
+        long startTime  =  System.currentTimeMillis();
+        fillWithRandoms ( array );
+        long endTime  =  System.currentTimeMillis();
+        System.out.println(endTime-startTime + "miliseconds");
+        System.out.println((endTime-startTime)/1000 + "seconds");
+    }
+
+    public void bubbleSort(T[] arr) {
         boolean swapped = true;
         int j = 0;
         T tmp;
@@ -25,7 +34,7 @@ public class Sort {
         }
     }
 
-    public <T extends Comparable<T>> void selectionSort(T[] arr) {
+    public void selectionSort(T[] arr) {
         int i;
         int j;
         int minIndex;
@@ -44,7 +53,7 @@ public class Sort {
         }
     }
 
-    public <T extends Comparable<T>> void insertionSort(T[] arr) {
+    public void insertionSort(T[] arr) {
         int i, j;
         T newValue;
         for (i = 1; i < arr.length; i++) {
@@ -85,15 +94,6 @@ public class Sort {
             quickSort(arr, left, index - 1);
         if (index < right)
             quickSort(arr, index, right);
-    }
-
-    public  static  void main ( String [] args ){
-        int [] array  =  new  int [ Integer . MAX_VALUE / 10 ];
-        long startTime  =  System.currentTimeMillis();
-        fillWithRandoms ( array );
-        long endTime  =  System.currentTimeMillis();
-        System.out.println(endTime-startTime + "miliseconds");
-        System.out.println((endTime-startTime)/1000 + "seconds");
     }
 
     public static void fillWithRandoms ( int[] array ){
