@@ -1,5 +1,7 @@
 package TrabajoPractico1.Merge;
 
+import TrabajoPractico1.Sort.Sort;
+
 /**
  * Created by DiegoMancini on 13/3/17.
  */
@@ -24,16 +26,42 @@ public class Test {
         arregloATestear[13] = 823 ;
         arregloATestear[14] = 3 ;
 
+        Integer[] arregloTestear = new Integer[15];
+
+        arregloTestear[0] = 9;
+        arregloTestear[1] = 15;
+        arregloTestear[2] = 7;
+        arregloTestear[3] = 29;
+        arregloTestear[4] = 32;
+        arregloTestear[5] = 42;
+        arregloTestear[6] = 51;
+        arregloTestear[7] = 28;
+        arregloTestear[8] = 95;
+        arregloTestear[9] = 75;
+        arregloTestear[10] = 19;
+        arregloTestear[11] = 58;
+        arregloTestear[12] = 36;
+        arregloTestear[13] = 23;
+        arregloTestear[14] = 142;
+
         Merge merge = new Merge();
         System.out.println("Pre ordenamiento");
         for (int i = 0 ; i < arregloATestear.length ; i++) {
             System.out.println("Position: " + i + " |||| Value: --> " + arregloATestear[i]);
         }
         System.out.println("-------------------------------------------");
-//      sort."TIPO DE MERGE DESEADO"(arregloATestear);
+        for (int i = 0 ; i < arregloTestear.length ; i++) {
+            System.out.println("Position: " + i + " |||| Value: --> " + arregloTestear[i]);
+        }
+        System.out.println("-------------------------------------------");
+        System.out.println("-------------------------------------------");
+        Sort sort = new Sort();
+        sort.selectionSort(arregloATestear);
+        sort.selectionSort(arregloTestear);
+        Comparable<Integer>[] array = merge.merge(arregloATestear, arregloTestear);
         System.out.println("Post ordenamiento");
-        for (int i = 0 ; i < arregloATestear.length ; i++) {
-            System.out.println("Position: " + i + " ||  Value: --> " + arregloATestear[i]);
+        for (int i = 0 ; i < array.length ; i++) {
+            System.out.println("Position: " + i + " ||  Value: --> " + array[i]);
         }
     }
 
