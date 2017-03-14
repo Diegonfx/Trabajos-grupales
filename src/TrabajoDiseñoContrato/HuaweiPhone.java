@@ -87,6 +87,7 @@ public class HuaweiPhone {
         this.appsInstalled = appsInstalled;
     }
 
+    //@assignable isUnlocked;
     public void setUnlocked(boolean unlocked) {
         isUnlocked = unlocked;
     }
