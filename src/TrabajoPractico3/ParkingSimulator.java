@@ -66,6 +66,16 @@ public class ParkingSimulator {
         }
     }
 
+    public boolean isEmpty(){
+        return top == 0;
+    }
+
+    public String peek(){
+        if (!isEmpty())
+            return parking[top];
+        return null;
+    }
+
     /**
      *
      * @return the amount of money was gained in a day.
