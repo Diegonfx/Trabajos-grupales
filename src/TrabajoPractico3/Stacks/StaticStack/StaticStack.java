@@ -1,11 +1,9 @@
 package TrabajoPractico3.Stacks.StaticStack;
 
-import ua.ayed.stack.Stack;
-
 /**
  * Created by DiegoMancini on 24/3/17.
  */
-public class StaticStack<T> implements Stack {
+public class StaticStack<T>{
 
     private int top;
     private int capacity;
@@ -17,45 +15,49 @@ public class StaticStack<T> implements Stack {
         data = new Object[capacity];
     }
 
-    @Override
-    public void push(Object o) {
+    /**
+     * Adds an object to the last position in the stack, if the stack is full it enlarges it and then adds the object.
+     * @param o to be added to the stack.
+     */
+    public void push(T o) {
         if (top + 1 == data.length ) {
             grow();
         }
         data[++top] = o;
     }
 
-    @Override
+    /**
+     * Takes out the last element added to the stack.
+     */
     public void pop() {
         top--;
     }
 
-    @Override
-    public Object peek() {
+    @SuppressWarnings("unchecked")
+    public T peek() {
         if (!isEmpty()) {
-            return data[top];
+            return (T)data[top];
         }
         return null;
     }
 
-    @Override
     public boolean isEmpty() {
-        if (top == -1) {
-            return true;
-        } else return false;
+        return top == -1;
     }
 
-    @Override
     public int size() {
-        return top+1;
+        return top + 1;
     }
 
-    @Override
     public void empty() {
         top = -1;
     }
 
-
+    /**
+     * private method used to enlarge the size of the array, because a stack should have unlimited capacity.
+     * It creates another array with double the size of the original one, copies everything from the first one
+     * to the new one, then the new one is assigned to the original one.
+     */
     private void grow() {
         Object[] data2 = new Object[2 * capacity];
         for (int i = 0 ; i < capacity ; i++) {

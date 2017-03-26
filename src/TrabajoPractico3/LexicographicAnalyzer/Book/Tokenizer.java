@@ -41,7 +41,7 @@ public class Tokenizer {
      * @return
      */
     public char getNextOpenClose(){
-        while (nextChar() == true) {
+        while (nextChar()) {
             if (currentCharacter == '/') {
                 processSlash();
             } else if (currentCharacter == '\''  || currentCharacter == '"' ) {
@@ -142,9 +142,9 @@ public class Tokenizer {
      *
      */
     private void processSlash() {
-        if (nextChar() == true) {
+        if (nextChar()) {
             if (currentCharacter == '*') {
-                if (nextChar() == true && currentCharacter!= '*') {
+                if (nextChar() && currentCharacter != '*') {
                     putBackCharacter();
                 } else {
                     skipComment(SLASH_STAR);

@@ -1,7 +1,6 @@
 package TrabajoPractico3.LexicographicAnalyzer.Book;
 
-import TrabajosPracticos.TrabajoPractico3.Stacks.DynamicStack.DynamicStack;
-
+import TrabajoPractico3.Stacks.DynamicStack.DynamicStack;
 import java.io.Reader;
 
 /**
