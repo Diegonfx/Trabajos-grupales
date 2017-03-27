@@ -1,6 +1,6 @@
 package TrabajoPractico1.Merge;
 
-import main.TrabajoPractico1.Sort.Sort;
+import TrabajoPractico1.Sort.Sort;
 
 /**
  * Created by DiegoMancini on 13/3/17.

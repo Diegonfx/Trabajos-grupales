@@ -1,17 +1,17 @@
-package TrabajoPractico3;
+package TrabajoPractico3.ParkingSimulator;
 
 /**
  * This Class simulates a parking, which can only store one car next to the other.
  */
-public class ParkingSimulator {
+public class Parking {
     private int income;
     private int top;
-    private String[] parking;
+    private Car[] parking;
 
-    public ParkingSimulator(){
+    public Parking(){
         income = 0;
-        top = 0;
-        parking = new String[50];
+        top = -1;
+        parking = new Car[50];
     }
 
     public int getIncome() {
@@ -22,7 +22,7 @@ public class ParkingSimulator {
         return top;
     }
 
-    public String[] getParking() {
+    public Car[] getParking() {
         return parking;
     }
 
@@ -30,11 +30,10 @@ public class ParkingSimulator {
      * Parks a car at the first spot available. If the parking is full an exception will be thrown.
      * @param car to be parked at the first spot possible.
      */
-    public void parkCar(String car){
+    public void parkCar(Car car){
         if (top == parking.length)
             throw new RuntimeException("The parking is full.");
-        parking[top] = car;
-        top++;
+        parking[++top] = car;
         income += 5;
     }
 
@@ -52,13 +51,12 @@ public class ParkingSimulator {
      * @param index position of the car to be removed.
      */
     public void removeCar(int index){
-        ParkingSimulator street = new ParkingSimulator();
+        Parking street = new Parking();
         for (int i = top; i > index; i--){
             street.parkCar(parking[i]);
             popCar();
         }
-        parking[index] = null;
-        top--;
+        popCar();
 
         for (int i = street.getTop(); i >= 0; i--){
            parkCar(street.getParking()[i]);
@@ -67,10 +65,10 @@ public class ParkingSimulator {
     }
 
     public boolean isEmpty(){
-        return top == 0;
+        return top == -1;
     }
 
-    public String peek(){
+    public Car peek(){
         if (!isEmpty())
             return parking[top];
         return null;
