@@ -24,22 +24,6 @@ public class LexicographicAnalyzer {
         openCharacters = new DynamicStack<>();
     }
 
-    public int getErrors() {
-        return errors;
-    }
-
-    public char getCurrentCharacter() {
-        return currentCharacter;
-    }
-
-    public int getCurrentLine() {
-        return currentLine;
-    }
-
-    public DynamicStack<Character> getOpenCharacters() {
-        return openCharacters;
-    }
-
     public void analizeText(String file) throws IOException{
         String text = readFile(file);
         for (int i = 0; i < text.length(); i++) {
@@ -72,5 +56,18 @@ public class LexicographicAnalyzer {
         } finally {
             reader.close();
         }
+    }
+
+    public int getErrors() {
+        return errors;
+    }
+    public char getCurrentCharacter() {
+        return currentCharacter;
+    }
+    public int getCurrentLine() {
+        return currentLine;
+    }
+    public DynamicStack<Character> getOpenCharacters() {
+        return openCharacters;
     }
 }
