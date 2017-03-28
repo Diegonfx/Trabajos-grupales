@@ -40,40 +40,45 @@ public class SimpleCalculator {
         }
     }
 
-    public void sum() {
+    private void sum() {
         askForOperation();
         result.push(firstNumber.peek() + secondNumber.peek() );
         firstNumber.pop();
         secondNumber.pop();
         operator.pop();
         finalResult = result.peek();
+        result.pop();
     }
 
-    public void substract(){
+    private void substract(){
         askForOperation();
         result.push(firstNumber.peek() - secondNumber.peek() );
         firstNumber.pop();
         secondNumber.pop();
         operator.pop();
         finalResult = result.peek();
+        result.pop();
     }
 
-    public void multiply(){
+    private void multiply(){
         askForOperation();
         result.push(firstNumber.peek() * secondNumber.peek() );
         firstNumber.pop();
         secondNumber.pop();
         operator.pop();
         finalResult = result.peek();
+        result.pop();
     }
 
-    public void divide(){
+    private void divide(){
+
         askForOperation();
         result.push(firstNumber.peek() / secondNumber.peek() );
         firstNumber.pop();
         secondNumber.pop();
         operator.pop();
         finalResult = result.peek();
+        result.pop();
     }
 
     public void operate() {
