@@ -12,18 +12,20 @@ import java.util.Scanner;
 public class LexicographicAnalyzer {
 
     private int errors;
-    private char currentCharacter;
-    private int currentLine;
     private DynamicStack<Character> openCharacters;
 
 
     public LexicographicAnalyzer() {
         errors = 0;
-        currentCharacter = '\0';
-        currentLine = 1;
         openCharacters = new DynamicStack<>();
     }
 
+    /**
+     * analyzes the text (converted into a String) and searches for '(', '{' or '['. If it finds any it stores the char
+     * found on a stack. If the closing char is found, it pops the stack.
+     * @param file converted into a String.
+     * @throws IOException
+     */
     public void analizeText(String file) throws IOException{
         String text = readFile(file);
         for (int i = 0; i < text.length(); i++) {
@@ -34,12 +36,22 @@ public class LexicographicAnalyzer {
         }
     }
 
+    /**
+     * Counts the errors of the text by looking at the size(top) of the stack. If the stack is empty it means there are no errors.
+     * @return the amount of error found in the text.
+     */
     public int countErrors(){
         if (!openCharacters.isEmpty())
             errors = openCharacters.size();
         return errors;
     }
 
+    /**
+     * Takes a file and converts it to a String.
+     * @param file .txt file.
+     * @return the txt file converted into a String.
+     * @throws IOException
+     */
     private String readFile(String file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
@@ -60,12 +72,6 @@ public class LexicographicAnalyzer {
 
     public int getErrors() {
         return errors;
-    }
-    public char getCurrentCharacter() {
-        return currentCharacter;
-    }
-    public int getCurrentLine() {
-        return currentLine;
     }
     public DynamicStack<Character> getOpenCharacters() {
         return openCharacters;

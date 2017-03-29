@@ -13,43 +13,46 @@ public class SimpleCalculator {
     private DynamicStack<Integer> result;
     private DynamicStack<Integer> firstNumber;
     private DynamicStack<Character> operator;
-    private DynamicStack<Integer> secondNumber;
+
 
     public SimpleCalculator() {
         finalResult = 0;
         result = new DynamicStack<>();
         firstNumber = new DynamicStack<>();
         operator = new DynamicStack<>();
-        secondNumber = new DynamicStack<>();
+
         string = null;
     }
 
     private void askForOperation() {
 
         String input = Scanner.getString("Insert operation: " );
-        string = input.toCharArray();
-        for (int i = 0 ; i < string.length ; i++) {
-            if (string[i] == '1' || string[i] == '2' || string[i] == '3' || string[i] == '4' || string[i] == '5' || string[i] == '6' || string[i] == '7'
-                    || string[i] == '8' || string[i] == '9' || string[i] == '0') {
-                firstNumber.push((Character.getNumericValue(string[i])));
-            } else if (string[i] != '+' || string[i] != '-' || string[i] != '/' || string[i] != '*') {
-                operator.push(string[i]);
-                while (string[i] != '+' || string[i] != '-' || string[i] != '/' || string[i] != '*' )
-                secondNumber.push(Character.getNumericValue(string[i+1]));
+        int counter = 0;
+        for (int i = 0 ; i < input.length() ; i++) {
+            if(input.charAt(i) == '-' || input.charAt(i) == '+'){
+                int number = Integer.parseInt(input.substring(counter, i));
+                counter= i + 1;
+                firstNumber.push(number);
+                char oper = input.charAt(i);
+                operator.push(oper);
             }
         }
+        int num = Integer.parseInt(input.substring(counter, input.length()));
+        firstNumber.push(num);
     }
 
     private void sum() {
         askForOperation();
-        result.push(firstNumber.peek() + secondNumber.peek() );
+        int num1 = firstNumber.peek();
         firstNumber.pop();
-        secondNumber.pop();
+        int num2 = firstNumber.peek();
+        firstNumber.pop();
+        result.push(num1 + num2 );
         operator.pop();
         finalResult = result.peek();
         result.pop();
     }
-
+/*
     private void substract(){
         askForOperation();
         result.push(firstNumber.peek() - secondNumber.peek() );
@@ -80,7 +83,7 @@ public class SimpleCalculator {
         finalResult = result.peek();
         result.pop();
     }
-
+*/
     public void operate() {
 
         while(true) {
@@ -96,7 +99,7 @@ public class SimpleCalculator {
                 case 1:
                     sum();
                     System.out.println("Result is: " + getFinalResult());
-                case 2:
+                /*case 2:
                     substract();
                     System.out.println("Result is: " + getFinalResult());
                 case 3:
@@ -106,7 +109,7 @@ public class SimpleCalculator {
                     divide();
                     System.out.println("Result is: " + getFinalResult());
                 case 5:
-                    System.exit(0);
+                    System.exit(0);*/
             }
         }
     }
@@ -123,8 +126,5 @@ public class SimpleCalculator {
     }
     public DynamicStack<Character> getOperator() {
         return operator;
-    }
-    public DynamicStack<Integer> getSecondNumber() {
-        return secondNumber;
     }
 }
