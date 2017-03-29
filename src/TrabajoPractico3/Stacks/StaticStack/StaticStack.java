@@ -1,7 +1,9 @@
 package TrabajoPractico3.Stacks.StaticStack;
 
 /**
- * Created by DiegoMancini on 24/3/17.
+ * Creates a static stack using an array
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class StaticStack<T>{
 

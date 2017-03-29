@@ -1,7 +1,9 @@
 package TrabajoPractico3.Stacks.DynamicStack;
 
 /**
- * Created by DiegoMancini on 24/3/17.
+ * Creates a dynamic stack using nodes
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class DynamicStack<T>{
 
@@ -50,6 +52,10 @@ public class DynamicStack<T>{
         topOfStack = null;
     }
 
+    /**
+     * Creates a node which stores a type of data, and has a reference to the next node
+     * @param <T> type of data used inside the node
+     */
     private final static class LinkedNode<T> {
 
         private T data;

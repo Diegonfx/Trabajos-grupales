@@ -1,7 +1,9 @@
 package TrabajoPractico3.ParkingSimulator;
 
 /**
- * Created by Tomas on 27/3/2017.
+ * Creates a car with the following atributes: a license plate, a brand, a color and a model
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class Car {
     private String plate;

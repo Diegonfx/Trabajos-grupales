@@ -2,6 +2,8 @@ package TrabajoPractico3.ParkingSimulator;
 
 /**
  * This Class simulates a parking, which can only store one car next to the other.
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class Parking {
     private int income;

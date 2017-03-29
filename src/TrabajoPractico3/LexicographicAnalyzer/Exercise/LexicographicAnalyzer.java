@@ -7,7 +7,9 @@ import java.net.URL;
 import java.util.Scanner;
 
 /**
- * Created by DiegoMancini on 24/3/17.
+ * Creates a lexicographic analyzer which counts the errors ( every '(', '{' or '[' that isn't closed) in a .txt file
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class LexicographicAnalyzer {
 

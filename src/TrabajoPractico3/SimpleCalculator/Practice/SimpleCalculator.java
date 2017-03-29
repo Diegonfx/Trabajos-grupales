@@ -4,8 +4,10 @@ import TrabajoPractico3.SimpleCalculator.Scanner;
 import TrabajoPractico3.Stacks.DynamicStack.DynamicStack;
 
 /**
- * Created by DiegoMancini on 24/3/17.
- */
+ * Creates a calculator which can do the following operations : '+', '-', '*' and '/'
+ * @author Tomas Iturralde
+ * @author Diego Mancini
+ **/
 public class SimpleCalculator {
 
     private int finalResult;
