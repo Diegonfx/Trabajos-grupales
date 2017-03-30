@@ -30,7 +30,7 @@ public class SimpleCalculator {
         for (int i = 0 ; i < input.length() ; i++) {
             if(input.charAt(i) == '-' || input.charAt(i) == '+' || input.charAt(i) == '*' || input.charAt(i) == '/'){
                 int number = Integer.parseInt(input.substring(counter, i));
-                counter= i + 1;
+                counter = i + 1;
                 firstNumber.push(number);
                 char oper = input.charAt(i);
                 operator.push(oper);
@@ -51,19 +51,19 @@ public class SimpleCalculator {
         finalResult = result.peek();
         result.pop();
     }
-
     private void substract(){
         askForOperation();
         int num1 = firstNumber.peek();
         firstNumber.pop();
         int num2 = firstNumber.peek();
         firstNumber.pop();
-        result.push(num1 - num2 );
-        operator.pop();
+        if (operator.peek() == '-') {
+            result.push(num2 - num1 );
+            operator.pop();
+        }
         finalResult = result.peek();
         result.pop();
     }
-
     private void multiply(){
        askForOperation();
         int num1 = firstNumber.peek();
@@ -75,45 +75,79 @@ public class SimpleCalculator {
         finalResult = result.peek();
         result.pop();
     }
-
     private void divide(){
         askForOperation();
         int num1 = firstNumber.peek();
         firstNumber.pop();
         int num2 = firstNumber.peek();
         firstNumber.pop();
-        result.push(num1 / num2 );
+        result.push(num2 / num1 );
         operator.pop();
         finalResult = result.peek();
         result.pop();
     }
+    private boolean isSum(char operator) {
+        if (operator == '+') {
+            return true;
+        } else return false;
+    }
+    private boolean isSubstract(char operator) {
+        if (operator == '-') {
+            return true;
+        } else return false;
+    }
+    private boolean isDivide(char operator) {
+        if (operator == '/') {
+            return true;
+        } else return false;
+    }
+    private boolean isMultiply(char operator) {
+        if (operator == '*') {
+            return true;
+        } else return false;
+    }
 
     public void operate() {
 
-        while(true) {
-            System.out.println("Welcome to calculator menu \n");
+        boolean operate = true;
+
+        while(operate) {
+            System.out.println("\nWelcome to calculator menu \n");
             System.out.println("Choose operations please: \n" +
                     "1 - Sum \n" +
                     "2 - Substract \n" +
                     "3 - Multiply \n" +
                     "4 - Divide \n" +
-                    "5 - Salir");
+                    "5 - Multioperation \n" +
+                    "6 - Salir");
             int scanner = Scanner.getInt("Ingrese la operacion deseada: ");
             switch (scanner) {
                 case 1:
                     sum();
                     System.out.println("Result is: " + getFinalResult());
+                    break;
                 case 2:
                     substract();
                     System.out.println("Result is: " + getFinalResult());
+                    break;
                 case 3:
                     multiply();
                     System.out.println("Result is: " + getFinalResult());
+                    break;
                 case 4:
                     divide();
                     System.out.println("Result is: " + getFinalResult());
+                    break;
                 case 5:
-                    System.exit(0);
+                    System.out.println("Result is: " + getFinalResult());
+                    break;
+                case 6:
+                    operate = false;
+                System.exit(0);
+                    break;
+                default:
+                System.exit(0);
+                    break;
             }
         }
     }

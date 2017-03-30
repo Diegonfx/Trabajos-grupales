@@ -7,49 +7,57 @@ package TrabajoPractico3.Stacks.DynamicStack;
  */
 public class DynamicStack<T>{
 
+    private int length;
     private LinkedNode<T> topOfStack;
 
     public DynamicStack() {
+        length = 0;
         topOfStack = null;
     }
 
+    /** **/
     @SuppressWarnings("unchecked")
     public void push(T data) {
         LinkedNode newTopOfStack = new LinkedNode(data);
-        newTopOfStack.next = topOfStack;
-        topOfStack = newTopOfStack;
+        if (topOfStack == null) {
+            topOfStack = newTopOfStack;
+        } else {
+            newTopOfStack.next = topOfStack;
+            topOfStack = newTopOfStack;
+        }
+        length++;
     }
 
+    /** **/
     @SuppressWarnings("unchecked")
     public void pop() {
         LinkedNode oldTopOfStack = topOfStack;
-        topOfStack = topOfStack.next;
+        topOfStack = topOfStack.getNext();
         oldTopOfStack = null;
+        length--;
     }
 
+    /** **/
     public T peek() {
-        return topOfStack.data;
+        return topOfStack.getData();
     }
 
+    /** **/
     public boolean isEmpty() {
-        if (topOfStack != null) {
-            return false;
-        } return true;
+        if (length == 0) {
+            return true;
+        } return false;
     }
 
+    /** **/
     @SuppressWarnings("unchecked")
     public int size() {
-        int result = 0;
-        while (topOfStack != null) {
-            LinkedNode oldTopOfStack = topOfStack;
-            topOfStack = topOfStack.next;
-            result ++;
-        }
-        return result;
+        return length;
     }
 
     public void empty() {
         topOfStack = null;
+        length = 0;
     }
 
     /**
