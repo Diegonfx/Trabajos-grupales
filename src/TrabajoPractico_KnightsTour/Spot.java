@@ -38,12 +38,9 @@ public class Spot {
     public Knight getKnight() {
         return knight;
     }
+
     private boolean hasKnight() {
-        if (knight == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return knight != null;
     }
     private void addHorseToSpot() {
         knight = new Knight();

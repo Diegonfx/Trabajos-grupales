@@ -1,6 +1,6 @@
 package TrabajoPractico_KnightsTour;
 
-import Cursada.TrabajosPracticos.TrabajoPractico3.Stacks.DynamicStack.DynamicStack;
+import TrabajoPractico3.Stacks.DynamicStack.DynamicStack;
 
 import java.util.ArrayList;
 import java.util.List;
