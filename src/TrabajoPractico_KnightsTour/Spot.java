@@ -16,19 +16,25 @@ public class Spot {
             return name;
         }
     }
-    private int row;
-    private int column;
+    private int positionInRow;
+    private int positionInColumn;
     private String name;
     private boolean isOccupied;
     private int value;
     private Knight knight;
 
+    public Spot() {
+        positionInRow = 0;
+        positionInColumn = 0;
+        isOccupied = false;
+        name = addName(positionInRow, positionInColumn);
+        knight = null;
+        value = -1;
+    }
+
     public Spot(int row, int column) {
-        if (row < 0 || row > 8 || column < 0 || column >8) {
-            throw new RuntimeException("Values must be between 0 - 7");
-        }
-        this.row = row;
-        this.column = column;
+        this.positionInRow = row;
+        this.positionInColumn = column;
         isOccupied = false;
         name = addName(row , column);
         knight = null;
@@ -38,20 +44,19 @@ public class Spot {
     public Knight getKnight() {
         return knight;
     }
-
-    private boolean hasKnight() {
+    public boolean hasKnight() {
         return knight != null;
     }
-    private void addHorseToSpot() {
+    public void addHorseToSpot() {
         knight = new Knight();
     }
-    public int getRow() {
-        return row;
+    public int getPositionInRow() {
+        return positionInRow;
     }
-    public int getColumn() {
-        return column;
+    public int getPositionInColumn() {
+        return positionInColumn;
     }
-    public String getName() {
+   public String getName() {
         return name;
     }
     public boolean isOccupied() {
@@ -204,5 +209,10 @@ public class Spot {
             name = "H8";
         } return name;
     }
-
+    public void setPositionInRow(int positionInRow) {
+        this.positionInRow = positionInRow;
+    }
+    public void setPositionInColumn(int positionInColumn) {
+        this.positionInColumn = positionInColumn;
+    }
 }

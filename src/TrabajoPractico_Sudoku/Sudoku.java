@@ -20,8 +20,6 @@ public class Sudoku {
     public int[][] getSudoku() {
         return sudoku;
     }
-
-
     public boolean addNumber(int posRow, int posColumn){
         if (posColumn > 8)
             return true;
@@ -32,11 +30,8 @@ public class Sudoku {
                 possibleSolutions.push(i);
         }
         sudoku[posRow][posColumn] = possibleSolutions.peek();
-
+return false;
     }
-
-
-
 
     private boolean checkForAvailability(int numberToCheck, int posRow, int posColumn){
         return (checkForAvailabilityInRow(numberToCheck, posColumn) && checkForAvailabilityInColumn(numberToCheck, posRow) && checkForAvailabilityInBox(numberToCheck, posRow, posColumn));
