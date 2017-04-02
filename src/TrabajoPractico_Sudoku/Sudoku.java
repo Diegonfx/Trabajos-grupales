@@ -8,6 +8,7 @@ import TrabajoPractico3.Stacks.StaticStack.StaticStack;
 public class Sudoku {
     private static int[][] sudoku = new int[9][9];
 
+
     public Sudoku(){
         for (int i = 0 ; i < 9 ; i++) {
             for (int j = 0 ; j < 9 ; j++) {
@@ -37,9 +38,7 @@ public class Sudoku {
 
     private boolean checkForAvailability(int numberToCheck, int posRow, int posColumn){
         return (checkForAvailabilityInRow(numberToCheck, posColumn) && checkForAvailabilityInColumn(numberToCheck, posRow) && checkForAvailabilityInBox(numberToCheck, posRow, posColumn));
-
     }
-
     private boolean checkForAvailabilityInRow(int numberToCheck, int column){
         for (int row = 0; row < 9; row++){
             if (sudoku[row][column] == numberToCheck)
