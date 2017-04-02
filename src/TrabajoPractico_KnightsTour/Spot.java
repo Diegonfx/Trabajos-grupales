@@ -5,51 +5,25 @@ package TrabajoPractico_KnightsTour;
  */
 public class Spot {
 
-    private final static class Knight {
-        private String name;
-
-        public Knight() {
-            name = "El caballo de San Martin";
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
     private int positionInRow;
     private int positionInColumn;
     private String name;
-    private boolean isOccupied;
     private int value;
-    private Knight knight;
 
     public Spot() {
         positionInRow = 0;
         positionInColumn = 0;
-        isOccupied = false;
         name = addName(positionInRow, positionInColumn);
-        knight = null;
         value = -1;
     }
 
     public Spot(int row, int column) {
         this.positionInRow = row;
         this.positionInColumn = column;
-        isOccupied = false;
         name = addName(row , column);
-        knight = null;
         value = -1;
     }
 
-    public Knight getKnight() {
-        return knight;
-    }
-    public boolean hasKnight() {
-        return knight != null;
-    }
-    public void addHorseToSpot() {
-        knight = new Knight();
-    }
     public int getPositionInRow() {
         return positionInRow;
     }
@@ -58,18 +32,6 @@ public class Spot {
     }
    public String getName() {
         return name;
-    }
-    public boolean isOccupied() {
-        if (this.getValue() == -1) {
-            isOccupied = false;
-            return isOccupied;
-        } else {
-            isOccupied = true;
-            return isOccupied;
-        }
-    }
-    public void setOccupied(boolean occupied) {
-        isOccupied = occupied;
     }
     public int getValue() {
         return value;

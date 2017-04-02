@@ -6,10 +6,15 @@ import TrabajoPractico3.Stacks.StaticStack.StaticStack;
  * Created by Tomas on 30/3/2017.
  */
 public class Sudoku {
-    private int[][] sudoku;
+    private static int[][] sudoku = new int[9][9];
 
     public Sudoku(){
-        sudoku = new int[9][9];
+        for (int i = 0 ; i < 9 ; i++) {
+            for (int j = 0 ; j < 9 ; j++) {
+                sudoku[i][j] = 0;
+            }
+        }
+        // FUNCIONA ESTO? JAJAJA
         for (int[] a : sudoku){
             for (int b : a){
                 b = 0;
@@ -17,9 +22,6 @@ public class Sudoku {
         }
     }
 
-    public int[][] getSudoku() {
-        return sudoku;
-    }
     public boolean addNumber(int posRow, int posColumn){
         if (posColumn > 8)
             return true;
@@ -30,7 +32,7 @@ public class Sudoku {
                 possibleSolutions.push(i);
         }
         sudoku[posRow][posColumn] = possibleSolutions.peek();
-return false;
+        return false;
     }
 
     private boolean checkForAvailability(int numberToCheck, int posRow, int posColumn){
@@ -45,7 +47,6 @@ return false;
         }
         return true;
     }
-
     private boolean checkForAvailabilityInColumn(int numberToCheck, int row){
         for (int column = 0; column < 9; column++){
             if (sudoku[row][column] == numberToCheck)
@@ -53,7 +54,6 @@ return false;
         }
         return true;
     }
-
     private boolean checkForAvailabilityInBox(int numberToCheck, int row, int column){
         row = (row % 3)/3;
         column = (column % 3)/3;
@@ -64,5 +64,9 @@ return false;
             }
         }
         return true;
+    }
+
+    public int[][] getSudoku() {
+        return sudoku;
     }
 }
