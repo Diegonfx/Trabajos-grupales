@@ -28,6 +28,7 @@ public class DynamicStack<T>{
         length++;
     }
 
+
     /** **/
     @SuppressWarnings("unchecked")
     public void pop() {

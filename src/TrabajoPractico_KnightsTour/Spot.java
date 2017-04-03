@@ -9,21 +9,22 @@ public class Spot {
     private int positionInColumn;
     private String name;
     private int value;
-
-    public Spot() {
-        positionInRow = 0;
-        positionInColumn = 0;
-        name = addName(positionInRow, positionInColumn);
-        value = -1;
-    }
+    private boolean wasUsed;
 
     public Spot(int row, int column) {
         this.positionInRow = row;
         this.positionInColumn = column;
         name = addName(row , column);
         value = -1;
+        wasUsed = false;
     }
 
+    public boolean wasUsed() {
+        return wasUsed;
+    }
+    public void setWasUsed(boolean wasUsed) {
+        this.wasUsed = wasUsed;
+    }
     public int getPositionInRow() {
         return positionInRow;
     }

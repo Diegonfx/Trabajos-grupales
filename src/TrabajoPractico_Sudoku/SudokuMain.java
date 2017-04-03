@@ -6,10 +6,11 @@ package TrabajoPractico_Sudoku;
 public class SudokuMain {
 
     public static void main(String[] args) {
-        Sudoku sdk= new Sudoku();
+        Sudoku sdk = new Sudoku();
+        System.out.println(" \nINITIAL SUDOKU\n");
         sdk.print();
-        System.out.println(sdk.solver(0,0, sdk.getSudoku()));
+        sdk.solver(0,0, sdk.getSudoku());
+        System.out.println("\nSOLVED SUDOKU\n");
         sdk.print();
-//
     }
 }

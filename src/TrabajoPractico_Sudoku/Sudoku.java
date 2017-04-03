@@ -42,43 +42,43 @@ public class Sudoku {
     }
 
     public void print() {
+        System.out.println("=================================================");
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(sudoku[i][j] +" / " );
+                System.out.print( " || " + sudoku[i][j]);
             }
-            System.out.println();
+            System.out.println(" ||");
+            System.out.println("=================================================");
         }
     }
-    public void setValueAtPosition(int numberToAdd, int posRow, int posCol){
+    private void setValueAtPosition(int numberToAdd, int posRow, int posCol){
         sudoku[posRow][posCol] = numberToAdd;
    }
 
     public boolean solver(int i, int j, int[][] sudoku) {
-        if (i == 9) {
-            i = 0;
-            if (++j == 9)
-                return true;
-        }
-        if (sudoku[i][j] != 0)  // skip filled cells
-            return solver(i+1,j,sudoku);
-
-        for (int val = 1; val <= 9; ++val) {
-            if (checkForAvailability(val, i,j)) {
-                sudoku[i][j] = val;
-                if (solver(i+1,j,sudoku))
+            if (i == 9) {
+                i = 0;
+                if (++j == 9)
                     return true;
             }
-        }
-        sudoku[i][j] = 0; // reset on backtrack
-        return false;
-    }
+            if (sudoku[i][j] != 0)  // skip filled cells
+                return solver(i + 1, j, sudoku);
 
+            for (int val = 1; val <= 9; ++val) {
+                if (checkForAvailability(val, i, j)) {
+                    sudoku[i][j] = val;
+                    if (solver(i + 1, j, sudoku))
+                        return true;
+                }
+            }
+            sudoku[i][j] = 0; // reset on backtrack
+            return false;
+    }
 
     private boolean checkForAvailability(int numberToCheck, int posRow, int posColumn){
         return (checkForAvailabilityInRow(numberToCheck, posColumn) && checkForAvailabilityInColumn(numberToCheck, posRow) && checkForAvailabilityInBox(numberToCheck, posRow, posColumn));
 
     }
-
     public boolean checkForAvailabilityInRow(int numberToCheck, int column){
         for (int row = 0; row < 9; row++){
             if (sudoku[row][column] == numberToCheck)
