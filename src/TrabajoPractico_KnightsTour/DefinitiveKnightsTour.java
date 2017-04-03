@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class DefinitiveKnightsTour {
 
-   /* public static void main(String[] args) {
+    public static void main(String[] args) {
         fillList();
         printBoard();
     }
@@ -54,7 +54,7 @@ public class DefinitiveKnightsTour {
         }
         return false;
     }
-    /*private static DynamicStack<Spot> getNextStackOfMoves() {
+    private static DynamicStack<Spot> getNextStackOfMoves() {
         int nextSpotsRow, nextSpotsColumn;
         Spot nextSpotInStack;
         for (int possibleSpot = 0 ; possibleSpot < SIZE ; possibleSpot++) {
@@ -114,7 +114,7 @@ public class DefinitiveKnightsTour {
             }
             System.out.println();
         }
-    }*/
+    }
 //    private void printNextMove(Spot nextSpot) {
 //        System.out.println(board[nextSpot.getPositionInRow()][nextSpot.getPositionInColumn()].getValue() + " || ");
 //    }
