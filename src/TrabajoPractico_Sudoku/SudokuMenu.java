@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 /**
  * Created by Tomas on 3/4/2017.
@@ -23,7 +24,7 @@ public class SudokuMenu extends JFrame {
         JPanel info = new JPanel();
         info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
 
-        JLabel title = new JLabel("Sudoku solver v1.5");
+        JLabel title = new JLabel("Sudoku solver v2.0");
         title.setAlignmentY(Component.TOP_ALIGNMENT);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setFont(new Font(title.getFont().getName(), Font.ROMAN_BASELINE, 20));
@@ -31,7 +32,7 @@ public class SudokuMenu extends JFrame {
         JLabel authors = new JLabel("Tomas Iturralde, Diego Mancini");
         authors.setAlignmentY(Component.TOP_ALIGNMENT);
         authors.setAlignmentX(Component.CENTER_ALIGNMENT );
-        title.setFont(new Font(title.getFont().getName(), Font.ROMAN_BASELINE, 20));
+        authors.setFont(new Font(title.getFont().getName(), Font.ROMAN_BASELINE, 20));
 
 
         for (int i = 0; i< 9; i++){
@@ -39,22 +40,16 @@ public class SudokuMenu extends JFrame {
                 board[i][j] = new JTextField();
                 board[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 sudoku.add(board[i][j]);
-                Font font = new Font("Arial", Font.PLAIN, 20);
-
-                board[i][j].setFont(font);
-
-
+                board[i][j].setFont(new Font("Arial", Font.PLAIN, 20));
                 board[i][j].setBackground(Color.WHITE);
-
-
                 board[i][j].setOpaque(true);
-
                 board[i][j].setHorizontalAlignment(JTextField.CENTER);
             }
         }
 
         JButton solveSudoku = new JButton("Solve");
         solveSudoku.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        solveSudoku.setAlignmentX(Component.LEFT_ALIGNMENT);
         solveSudoku.addActionListener(solve);
 
         JButton Clear = new JButton("Clear board");
@@ -70,7 +65,7 @@ public class SudokuMenu extends JFrame {
         info.add(Clear);
 
         JPanel mainPanel = new JPanel();
-        mainPanel.setSize(1000, 1000);
+
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.add(info);
         mainPanel.add(sudoku);
@@ -79,5 +74,9 @@ public class SudokuMenu extends JFrame {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public JTextField[][] getBoard() {
+        return board;
     }
 }
