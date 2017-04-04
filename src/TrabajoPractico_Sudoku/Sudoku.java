@@ -32,6 +32,17 @@ public class Sudoku {
    }
 
     public boolean solver(int posRow, int posColumn, int[][] sudoku) {
+        int i = 0;
+        while (i < 1) {
+            for (int j = 0; j < sudoku.length; j++) {
+                for (int k = 0; k < sudoku.length; k++) {
+                    int value = sudoku[j][k];
+                    if (sudoku[j+1][k+1] == value ) {
+                        return false;
+                    }
+                }
+            } i++;
+        }
         if (posRow == 9) {
             posRow = 0;
             if (++posColumn == 9)
@@ -54,7 +65,6 @@ public class Sudoku {
 
     private boolean checkForAvailability(int numberToCheck, int posRow, int posColumn){
         return (checkForAvailabilityInRow(numberToCheck, posColumn) && checkForAvailabilityInColumn(numberToCheck, posRow) && checkForAvailabilityInBox(numberToCheck, posRow, posColumn));
-
     }
 
     private boolean checkForAvailabilityInRow(int numberToCheck, int column){

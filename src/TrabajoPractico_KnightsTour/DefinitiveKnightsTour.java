@@ -42,7 +42,7 @@ public class DefinitiveKnightsTour {
         listOfStacksWithMovements.add(fourthStack);
     }
 
-    private boolean isInLimits(Spot anySpot, Spot[][] board) {
+    private boolean moveIsAllowed(Spot anySpot, Spot[][] board) {
         if (anySpot.getPositionInRow() >= 0 && anySpot.getPositionInRow() < SIZE) {
             if (anySpot.getPositionInColumn() >= 0 && anySpot.getPositionInColumn() < SIZE) {
                 if (!board[anySpot.getPositionInRow()][anySpot.getPositionInColumn()].wasUsed()) {
@@ -52,7 +52,6 @@ public class DefinitiveKnightsTour {
         }
         return false;
     }
-
     private DynamicStack<Spot> getNextStackOfMoves(int index) {
         DynamicStack<Spot> nextStack = new DynamicStack<>();
         int nextSpotsRow, nextSpotsColumn;
@@ -61,7 +60,7 @@ public class DefinitiveKnightsTour {
             nextSpotsRow = currentSpot.getPositionInRow() + MOVES_ALLOWED_IN_BOARD[possibleSpot].getPositionInRow();
             nextSpotsColumn = currentSpot.getPositionInColumn() + MOVES_ALLOWED_IN_BOARD[possibleSpot].getPositionInColumn();
             nextSpotInStack = new Spot(nextSpotsRow, nextSpotsColumn);
-            if (isInLimits(nextSpotInStack, board) && !nextSpotInStack.wasUsed()) {
+            if (moveIsAllowed(nextSpotInStack, board) && !nextSpotInStack.wasUsed()) {
                 nextSpotInStack.setValue(index);
                 nextSpotInStack.setWasUsed(true);
                 board[nextSpotsRow][nextSpotsColumn] = nextSpotInStack;
@@ -71,7 +70,6 @@ public class DefinitiveKnightsTour {
         }
         return nextStack;
     }
-
     private void getMovements() throws NullPointerException {
         try {
             printBoard();
