@@ -34,17 +34,17 @@ public class SudokuController {
                             sudoku.setValueAtPosition(Integer.parseInt(sudokuMenu.getBoard()[i][j].getText()), i ,j);
                     }
                 }
-                //if(sudoku.boardIsValid(sudoku)) {
+                if(sudoku.boardIsValid(sudoku)) {
                     sudoku.solver(0,0,sudoku.getSudoku());
                     for (int i = 0; i < 9; i++) {
                         for (int j = 0; j < 9; j++) {
                             sudokuMenu.getBoard()[i][j].setText("" + sudoku.getSudoku()[i][j]);
                         }
                     }
-                /*} else {
+                } else {
                     error.setVisible(true);
 
-                }*/
+                }
             }
         }
 

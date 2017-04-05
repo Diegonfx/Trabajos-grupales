@@ -29,7 +29,7 @@ public class SudokuMenu extends JFrame {
         JPanel info = new JPanel();
         info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
 
-        JLabel title = new JLabel("Sudoku solver v2.5.1");
+        JLabel title = new JLabel("Sudoku solver v3.0");
         title.setAlignmentY(Component.TOP_ALIGNMENT);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setFont(new Font(title.getFont().getName(), Font.ROMAN_BASELINE, 20));

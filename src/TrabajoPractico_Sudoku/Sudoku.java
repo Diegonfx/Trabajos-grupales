@@ -72,8 +72,14 @@ public class Sudoku {
         boolean b = true;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (sudoku.getSudoku()[i][j] != 0)
-                    b = checkForAvailability(sudoku.getSudoku()[i][j], i, j);
+                if (sudoku.getSudoku()[i][j] != 0){
+                    int aux = sudoku.getSudoku()[i][j];
+                    sudoku.getSudoku()[i][j] = 0;
+                    if(checkForAvailability(aux, i, j)){
+                        sudoku.getSudoku()[i][j] = aux;
+                    }else
+                        b = false;
+                }
             }
         }
         return b;
