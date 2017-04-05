@@ -1,7 +1,9 @@
 package TrabajoPractico_Sudoku;
 
 /**
- * Created by DiegoMancini on 1/4/17.
+ * Used to run the Sudoku Solver.
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class Main {
 

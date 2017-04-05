@@ -4,7 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Tomas on 4/4/2017.
+ * Pop up message created to show the user that an invalid board has been used.
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class ErrorPopUp extends JFrame {
     public ErrorPopUp(){
@@ -15,7 +17,7 @@ public class ErrorPopUp extends JFrame {
         JPanel message = new JPanel();
         message.setLayout(new BoxLayout(message, BoxLayout.LINE_AXIS));
 
-        JLabel title = new JLabel("Error: Couldn't solve the sudoku,\n please try again with different numbers.");
+        JLabel title = new JLabel("Error: Couldn't solve the sudoku, please try again with different numbers.");
         title.setAlignmentY(Component.TOP_ALIGNMENT);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setFont(new Font(title.getFont().getName(), Font.ROMAN_BASELINE, 20));
