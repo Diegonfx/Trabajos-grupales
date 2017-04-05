@@ -27,24 +27,24 @@ public class SudokuController {
                             sudoku.setValueAtPosition(Integer.parseInt(sudokuMenu.getBoard()[i][j].getText()), i ,j);
                     }
                 }
-                if(sudoku.solver(0,0,sudoku.getSudoku())) {
+                //if(sudoku.boardIsValid(sudoku)) {
+                    sudoku.solver(0,0,sudoku.getSudoku());
                     for (int i = 0; i < 9; i++) {
                         for (int j = 0; j < 9; j++) {
                             sudokuMenu.getBoard()[i][j].setText("" + sudoku.getSudoku()[i][j]);
                         }
                     }
-                } else {
+                /*} else {
                     error.setVisible(true);
 
-                }
+                }*/
             }
         }
 
         public class ClearBoard implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
-                Sudoku clearBoard = new Sudoku();
-                sudoku = clearBoard;
+                sudoku = new Sudoku();
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 9; j++) {
                         sudokuMenu.getBoard()[i][j].setText("");

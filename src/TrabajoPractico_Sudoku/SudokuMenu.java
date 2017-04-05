@@ -1,10 +1,8 @@
 package TrabajoPractico_Sudoku;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 /**
  * Created by Tomas on 3/4/2017.
@@ -24,7 +22,7 @@ public class SudokuMenu extends JFrame {
         JPanel info = new JPanel();
         info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
 
-        JLabel title = new JLabel("Sudoku solver v2.0");
+        JLabel title = new JLabel("Sudoku solver v2.0.1");
         title.setAlignmentY(Component.TOP_ALIGNMENT);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setFont(new Font(title.getFont().getName(), Font.ROMAN_BASELINE, 20));
@@ -39,28 +37,28 @@ public class SudokuMenu extends JFrame {
             for (int j = 0; j < 9; j++) {
                 board[i][j] = new JTextField();
                 board[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                sudoku.add(board[i][j]);
                 board[i][j].setFont(new Font("Arial", Font.PLAIN, 20));
                 board[i][j].setBackground(Color.WHITE);
                 board[i][j].setOpaque(true);
                 board[i][j].setHorizontalAlignment(JTextField.CENTER);
+                board[i][j].setSize(50,50);
+                sudoku.add(board[i][j]);
             }
         }
 
         JButton solveSudoku = new JButton("Solve");
-        solveSudoku.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-        solveSudoku.setAlignmentX(Component.LEFT_ALIGNMENT);
+        solveSudoku.setAlignmentX(Component.CENTER_ALIGNMENT);
         solveSudoku.addActionListener(solve);
 
         JButton Clear = new JButton("Clear board");
-        Clear.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        Clear.setAlignmentX(Component.CENTER_ALIGNMENT);
         Clear.addActionListener(clear);
 
-        info.add(Box.createRigidArea(new Dimension(100, 50)));
+        info.add(Box.createRigidArea(new Dimension(200, 50)));
         info.add(title);
-        info.add(Box.createRigidArea(new Dimension(100, 50)));
+        info.add(Box.createRigidArea(new Dimension(200, 50)));
         info.add(authors);
-        info.add(Box.createRigidArea(new Dimension(100, 50)));
+        info.add(Box.createRigidArea(new Dimension(200, 50)));
         info.add(solveSudoku);
         info.add(Clear);
 

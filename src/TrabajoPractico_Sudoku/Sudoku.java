@@ -32,17 +32,6 @@ public class Sudoku {
    }
 
     public boolean solver(int posRow, int posColumn, int[][] sudoku) {
-        int i = 0;
-        while (i < 1) {
-            for (int j = 0; j < sudoku.length; j++) {
-                for (int k = 0; k < sudoku.length; k++) {
-                    int value = sudoku[j][k];
-                    if (sudoku[j+1][k+1] == value ) {
-                        return false;
-                    }
-                }
-            } i++;
-        }
         if (posRow == 9) {
             posRow = 0;
             if (++posColumn == 9)
@@ -62,19 +51,29 @@ public class Sudoku {
         return false;
     }
 
-
-    private boolean checkForAvailability(int numberToCheck, int posRow, int posColumn){
-        return (checkForAvailabilityInRow(numberToCheck, posColumn) && checkForAvailabilityInColumn(numberToCheck, posRow) && checkForAvailabilityInBox(numberToCheck, posRow, posColumn));
+    public boolean boardIsValid(Sudoku sudoku){
+        boolean b = true;
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (sudoku.getSudoku()[i][j] != 0)
+                    b = checkForAvailability(sudoku.getSudoku()[i][j], i, j);
+            }
+        }
+        return b;
     }
 
-    private boolean checkForAvailabilityInRow(int numberToCheck, int column){
+    private boolean checkForAvailability(int numberToCheck, int posRow, int posColumn){
+        return (checkForAvailabilityInColumn(numberToCheck, posColumn) && checkForAvailabilityInRow(numberToCheck, posRow) && checkForAvailabilityInBox(numberToCheck, posRow, posColumn));
+    }
+
+    private boolean checkForAvailabilityInColumn(int numberToCheck, int column){
         for (int row = 0; row < 9; row++){
             if (sudoku[row][column] == numberToCheck)
                 return false;
         }
         return true;
     }
-    private boolean checkForAvailabilityInColumn(int numberToCheck, int row){
+    private boolean checkForAvailabilityInRow(int numberToCheck, int row){
         for (int column = 0; column < 9; column++){
             if (sudoku[row][column] == numberToCheck)
                 return false;
