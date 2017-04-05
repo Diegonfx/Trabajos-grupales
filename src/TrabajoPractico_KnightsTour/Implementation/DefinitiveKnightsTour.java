@@ -1,5 +1,6 @@
-package TrabajoPractico_KnightsTour;
+package TrabajoPractico_KnightsTour.Implementation;
 
+import TrabajoPractico1.Sort.Sort;
 import TrabajoPractico3.Stacks.DynamicStack.DynamicStack;
 
 import java.util.ArrayList;
@@ -17,12 +18,13 @@ public class DefinitiveKnightsTour {
     private Spot[][] board = new Spot[SIZE][SIZE];
     private List<DynamicStack<Spot>> listOfStacksWithMovements;
     private Spot currentSpot = new Spot(0, 0);
-    private int movementNumber = 0;
     private DynamicStack<Spot> initialStack = new DynamicStack<>();
     private DynamicStack<Spot> firstStack = new DynamicStack<>();
     private DynamicStack<Spot> secondStack = new DynamicStack<>();
     private DynamicStack<Spot> thirdStack = new DynamicStack<>();
     private DynamicStack<Spot> fourthStack = new DynamicStack<>();
+    private List<Spot> spotsToIterate;
+    private int moves = 0;
 
     public DefinitiveKnightsTour() {
         for (int j = 0; j < SIZE; j++) {
@@ -31,10 +33,12 @@ public class DefinitiveKnightsTour {
                 board[j][k].setValue(board[j][k].getValue());
             }
         }
+        spotsToIterate = new ArrayList<>();
         currentSpot.setValue(0);
         currentSpot.setWasUsed(true);
         board[0][0] = currentSpot;
         listOfStacksWithMovements = new ArrayList<>();
+        spotsToIterate.add(currentSpot);
         listOfStacksWithMovements.add(initialStack);
         listOfStacksWithMovements.add(firstStack);
         listOfStacksWithMovements.add(secondStack);
@@ -42,7 +46,7 @@ public class DefinitiveKnightsTour {
         listOfStacksWithMovements.add(fourthStack);
     }
 
-    private boolean moveIsAllowed(Spot anySpot, Spot[][] board) {
+    public boolean moveIsAllowed(Spot anySpot, Spot[][] board) {
         if (anySpot.getPositionInRow() >= 0 && anySpot.getPositionInRow() < SIZE) {
             if (anySpot.getPositionInColumn() >= 0 && anySpot.getPositionInColumn() < SIZE) {
                 if (!board[anySpot.getPositionInRow()][anySpot.getPositionInColumn()].wasUsed()) {
@@ -52,7 +56,8 @@ public class DefinitiveKnightsTour {
         }
         return false;
     }
-    private DynamicStack<Spot> getNextStackOfMoves(int index) {
+
+    public DynamicStack<Spot> getNextStackOfMoves() {
         DynamicStack<Spot> nextStack = new DynamicStack<>();
         int nextSpotsRow, nextSpotsColumn;
         Spot nextSpotInStack;
@@ -61,97 +66,97 @@ public class DefinitiveKnightsTour {
             nextSpotsColumn = currentSpot.getPositionInColumn() + MOVES_ALLOWED_IN_BOARD[possibleSpot].getPositionInColumn();
             nextSpotInStack = new Spot(nextSpotsRow, nextSpotsColumn);
             if (moveIsAllowed(nextSpotInStack, board) && !nextSpotInStack.wasUsed()) {
-                nextSpotInStack.setValue(index);
                 nextSpotInStack.setWasUsed(true);
+                nextSpotInStack.setValue(++moves);
                 board[nextSpotsRow][nextSpotsColumn] = nextSpotInStack;
+                spotsToIterate.add(nextSpotInStack);
                 nextStack.push(nextSpotInStack);
-                System.out.println(" || Value of spot: " + nextSpotInStack.getValue() + " || Name of spot in board: " + nextSpotInStack.getName());
+//                System.out.println(" || Value of spot: " + nextSpotInStack.getValue() + " || Name of spot in board: " + nextSpotInStack.getName());
             }
         }
         return nextStack;
     }
-    private void getMovements() throws NullPointerException {
+
+    public Spot getNextSpot() throws NullPointerException {
+
         try {
-            printBoard();
+          getNextStackOfMoves();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        return getNextStackOfMoves().peek();
+    }
+
+    public void fillArrayList() throws NullPointerException {
+        try {
             initialStack.push(currentSpot);
             currentSpot = initialStack.peek();
             while (!initialStack.isEmpty()) {
                 currentSpot = initialStack.peek();
-                System.out.println("Entro en stack 0 --> Movimiento: " + initialStack.peek().getName() + " --> Value: " + initialStack.peek().getValue() + " --> Status: " + initialStack.peek().wasUsed());
-                firstStack = getNextStackOfMoves(1);
-                printBoard();
+                firstStack = getNextStackOfMoves();
                 while (!firstStack.isEmpty()) {
                     currentSpot = firstStack.peek();
-                    System.out.println("Entro en stack 1 --> Movimiento: " + firstStack.peek().getName() + " --> Value: " + firstStack.peek().getValue() + " --> Status: " + firstStack.peek().wasUsed());
-                    secondStack = getNextStackOfMoves(2);
-                    printBoard();
+                    secondStack = getNextStackOfMoves();
                     while (!secondStack.isEmpty()) {
                         currentSpot = secondStack.peek();
-                        System.out.println("Entro en stack2 --> Movimiento:" + secondStack.peek().getName() + " --> Value: " + secondStack.peek().getValue() + " --> Status: " + firstStack.peek().wasUsed());
-                        thirdStack = getNextStackOfMoves(3);
-                        printBoard();
+                        thirdStack = getNextStackOfMoves();
                         while (!thirdStack.isEmpty()) {
                             currentSpot = thirdStack.peek();
-                            fourthStack = getNextStackOfMoves(4);
-                            printBoard();
+                            fourthStack = getNextStackOfMoves();
                             while (!fourthStack.isEmpty()) {
-                                System.out.println("Entro en stack 3 --> Movimiento:" + thirdStack.peek().getName() + " --> Value: " + thirdStack.peek().getValue() + " -->Status: " + firstStack.peek().wasUsed());
-                                System.out.println("Movimientos posibles guardado en stack 4 --> Movimiento:  " + fourthStack.peek().getName() + " --> Value: " + fourthStack.peek().getValue() + " --> Status: " + firstStack.peek().wasUsed());
                                 fourthStack.peek().setWasUsed(false);
                                 fourthStack.pop();
-                                printBoard();
                             }
                             thirdStackOp();
-                            printBoard();
+
                         }
                         secondStackOp();
-                        printBoard();
                     }
                     firstStackOp();
-                    printBoard();
                 }
                 initialStackOp();
-                printBoard();
             }
         }catch (NullPointerException e) {
             System.out.println("COMPLETE");
         }
     }
-    private void initialStackOp() {
+
+    public void initialStackOp() {
         initialStack.pop();
         currentSpot = null;
         if (initialStack.isEmpty()) {
-            System.out.println("\nINITIAL STACK HAS NO MORE REMAINING MOVES");
+//            System.out.println("\nINITIAL STACK HAS NO MORE REMAINING MOVES");
         }
     }
-    private void firstStackOp() {
+    public void firstStackOp() {
         firstStack.peek().setWasUsed(false);
         firstStack.pop();
         if (!firstStack.isEmpty()) {
             currentSpot = firstStack.peek();
         }
         else {
-            System.out.println("\nFIRST STACK HAS NO MORE REMAINING MOVES");currentSpot = initialStack.peek();}
+//            System.out.println("\nFIRST STACK HAS NO MORE REMAINING MOVES");currentSpot = initialStack.peek();
+        }
     }
-    private void secondStackOp() {
+    public void secondStackOp() {
         secondStack.peek().setWasUsed(false);
         secondStack.pop();
         if (!secondStack.isEmpty()) {
             currentSpot = secondStack.peek();
         }
         else {
-            System.out.println("\nSECOND STACK HAS NO MORE REMAINING MOVES");currentSpot = firstStack.peek();
+//            System.out.println("\nSECOND STACK HAS NO MORE REMAINING MOVES");currentSpot = firstStack.peek();
         }
     }
-    private void thirdStackOp() {
-        System.out.println("\nFOURTH STACK HAS NO MORE REMAINING MOVES");
+    public void thirdStackOp() {
+//        System.out.println("\nFOURTH STACK HAS NO MORE REMAINING MOVES");
         thirdStack.peek().setWasUsed(false);
         thirdStack.pop();
         if (!thirdStack.isEmpty()) {
             currentSpot = thirdStack.peek();
         }
         else {
-            System.out.println("\nTHIRD STACK HAS NO MORE REMAINING MOVES");currentSpot = secondStack.peek();
+//            System.out.println("\nTHIRD STACK HAS NO MORE REMAINING MOVES");currentSpot = secondStack.peek();
         }
     }
     public void printBoard() {
@@ -162,7 +167,57 @@ public class DefinitiveKnightsTour {
             System.out.println();
         }
     }
-    public void printList() {
-        getMovements();
+    public List<Spot> getSpotsToIterate() {
+        return spotsToIterate;
     }
+
+//    public void getMovements() throws NullPointerException {
+//        try {
+////            printBoard();
+//            initialStack.push(currentSpot);
+//            currentSpot = initialStack.peek();
+//            while (!initialStack.isEmpty()) {
+//                currentSpot = initialStack.peek();
+////                System.out.println("Entro en stack 0 --> Movimiento: " + initialStack.peek().getName() + " --> Value: " + initialStack.peek().getValue() + " --> Status: " + initialStack.peek().wasUsed());
+//                firstStack = getNextStackOfMoves();
+////                printBoard();
+//                while (!firstStack.isEmpty()) {
+//                    currentSpot = firstStack.peek();
+////                    System.out.println("Entro en stack 1 --> Movimiento: " + firstStack.peek().getName() + " --> Value: " + firstStack.peek().getValue() + " --> Status: " + firstStack.peek().wasUsed());
+//                    secondStack = getNextStackOfMoves();
+////                    printBoard();
+//                    while (!secondStack.isEmpty()) {
+//                        currentSpot = secondStack.peek();
+////                        System.out.println("Entro en stack2 --> Movimiento:" + secondStack.peek().getName() + " --> Value: " + secondStack.peek().getValue() + " --> Status: " + firstStack.peek().wasUsed());
+//                        thirdStack = getNextStackOfMoves();
+////                        printBoard();
+//                        while (!thirdStack.isEmpty()) {
+//                            currentSpot = thirdStack.peek();
+//                            fourthStack = getNextStackOfMoves();
+////                            printBoard();
+//                            while (!fourthStack.isEmpty()) {
+////                                System.out.println("Entro en stack 3 --> Movimiento:" + thirdStack.peek().getName() + " --> Value: " + thirdStack.peek().getValue() + " -->Status: " + firstStack.peek().wasUsed());
+////                                System.out.println("Movimientos posibles guardado en stack 4 --> Movimiento:  " + fourthStack.peek().getName() + " --> Value: " + fourthStack.peek().getValue() + " --> Status: " + firstStack.peek().wasUsed());
+//                                fourthStack.peek().setWasUsed(false);
+//                                fourthStack.pop();
+////                                printBoard();
+//                            }
+//                            thirdStackOp();
+////                            printBoard();
+//                        }
+//                        secondStackOp();
+////                        printBoard();
+//                    }
+//                    firstStackOp();
+////                    printBoard();
+//                }
+//                initialStackOp();
+////                printBoard();
+//            }
+//        }catch (NullPointerException e) {
+//            System.out.println("COMPLETE");
+//        }
+//    }
+
+
 }

@@ -15,7 +15,6 @@ public class SudokuController {
             sudokuMenu = new SudokuMenu(new Solve(), new ClearBoard());
             sudoku = new Sudoku();
             error = new ErrorPopUp();
-
         }
 
         public class Solve implements ActionListener{
@@ -35,7 +34,6 @@ public class SudokuController {
                     }
                 } else {
                     error.setVisible(true);
-
                 }
             }
         }

@@ -1,4 +1,4 @@
-package TrabajoPractico_KnightsTour;
+package TrabajoPractico_KnightsTour.Implementation;
 
 /**
  * Created by DiegoMancini on 30/3/17.
@@ -15,6 +15,14 @@ public class Spot {
         this.positionInRow = row;
         this.positionInColumn = column;
         name = addName(row , column);
+        value = -1;
+        wasUsed = false;
+    }
+
+    public Spot() {
+        positionInRow = 0;
+        positionInColumn = 0;
+        name = getName();
         value = -1;
         wasUsed = false;
     }
