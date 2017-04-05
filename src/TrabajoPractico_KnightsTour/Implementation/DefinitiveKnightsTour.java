@@ -57,6 +57,22 @@ public class DefinitiveKnightsTour {
         return false;
     }
 
+    public Spot getNextSpot(DynamicStack<Spot> anyStack , DynamicStack<Spot> nextStack) {
+        int nextSpotsRow, nextSpotsColumn;
+        Spot nextSpotInStack;
+        for (int possibleSpot = 0; possibleSpot < SIZE; possibleSpot++) {
+            nextSpotsRow = anyStack.peek().getPositionInRow() + MOVES_ALLOWED_IN_BOARD[possibleSpot].getPositionInRow();
+            nextSpotsColumn = anyStack.peek().getPositionInColumn() + MOVES_ALLOWED_IN_BOARD[possibleSpot].getPositionInColumn();
+            nextSpotInStack = new Spot(nextSpotsRow, nextSpotsColumn);
+            if (moveIsAllowed(nextSpotInStack, board) && !nextSpotInStack.wasUsed()) {
+                nextSpotInStack.setWasUsed(true);
+                nextSpotInStack.setValue(++moves);
+                spotsToIterate.add(nextSpotInStack);
+                nextStack.push(nextSpotInStack);
+            }
+        }
+    }
+
     public DynamicStack<Spot> getNextStackOfMoves() {
         DynamicStack<Spot> nextStack = new DynamicStack<>();
         int nextSpotsRow, nextSpotsColumn;
@@ -79,12 +95,6 @@ public class DefinitiveKnightsTour {
 
     public Spot getNextSpot() throws NullPointerException {
 
-        try {
-          getNextStackOfMoves();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        return getNextStackOfMoves().peek();
     }
 
     public void fillArrayList() throws NullPointerException {
