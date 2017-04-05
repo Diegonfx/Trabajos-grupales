@@ -1,17 +1,24 @@
 package TrabajoPractico_Sudoku;
 
 import javax.swing.*;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Tomas on 3/4/2017.
+ * Creates the menu for the sudoku solver.
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 
 public class SudokuMenu extends JFrame {
     private JTextField[][] board = new JTextField[9][9];
 
     public SudokuMenu(ActionListener solve, ActionListener clear){
+
         setTitle("Sudoku Solver");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 1000);
@@ -22,7 +29,7 @@ public class SudokuMenu extends JFrame {
         JPanel info = new JPanel();
         info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
 
-        JLabel title = new JLabel("Sudoku solver v2.0.1");
+        JLabel title = new JLabel("Sudoku solver v2.5.1");
         title.setAlignmentY(Component.TOP_ALIGNMENT);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setFont(new Font(title.getFont().getName(), Font.ROMAN_BASELINE, 20));
@@ -32,16 +39,28 @@ public class SudokuMenu extends JFrame {
         authors.setAlignmentX(Component.CENTER_ALIGNMENT );
         authors.setFont(new Font(title.getFont().getName(), Font.ROMAN_BASELINE, 20));
 
-
+        /**
+         * Sets every square inside the sudoku with its parameters, as well as restricting the amount of characters that can be
+         * introduced in to every square by the user to 1.
+         */
         for (int i = 0; i< 9; i++){
             for (int j = 0; j < 9; j++) {
                 board[i][j] = new JTextField();
+                AbstractDocument d = (AbstractDocument) board[i][j].getDocument();
+                d.setDocumentFilter(new DocumentFilter(){
+                    int max = 1;
+
+                    @Override
+                    public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                        int documentLength = fb.getDocument().getLength();
+                        if (documentLength - length + text.length() <= max)
+                            super.replace(fb, offset, length, text.toUpperCase(), attrs);
+                    }
+                });
                 board[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 board[i][j].setFont(new Font("Arial", Font.PLAIN, 20));
                 board[i][j].setBackground(Color.WHITE);
-                board[i][j].setOpaque(true);
                 board[i][j].setHorizontalAlignment(JTextField.CENTER);
-                board[i][j].setSize(50,50);
                 sudoku.add(board[i][j]);
             }
         }
@@ -63,7 +82,6 @@ public class SudokuMenu extends JFrame {
         info.add(Clear);
 
         JPanel mainPanel = new JPanel();
-
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.add(info);
         mainPanel.add(sudoku);
