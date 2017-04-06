@@ -13,7 +13,7 @@ public class KnightsTourController {
 
     private KnightsTourMenu view;
     private DefinitiveKnightsTour knightsTour;
-    private ImageIcon knight = new ImageIcon("/Users/DiegoMancini/IdeaProjects/Trabajos grupales/src/TrabajoPractico_KnightsTour/Swing/horseknight.png");
+    private ImageIcon knight = new ImageIcon("src/TrabajoPractico_KnightsTour/Swing/horseknight.png");
 
     public KnightsTourController() {
         view = new KnightsTourMenu(new Next()) ;
