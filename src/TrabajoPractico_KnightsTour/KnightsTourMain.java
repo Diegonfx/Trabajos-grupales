@@ -10,11 +10,7 @@ public class KnightsTourMain {
 
     public static void main(String[] args) {
 //        DefinitiveKnightsTour knightsTour = new DefinitiveKnightsTour();
-//        knightsTour.fillArrayList();
-//        for (int i = 0 ; i < knightsTour.getSpotsToIterate().size() ; i++) {
-//            System.out.println("VALUE: " + knightsTour.getSpotsToIterate().get(i).getValue()+" ||  SPOT: " + knightsTour.getSpotsToIterate().get(i).getName() + " ||  ROW: " + knightsTour.getSpotsToIterate().get(i).getPositionInRow() + " ||  COLUMN: " + knightsTour.getSpotsToIterate().get(i).getPositionInColumn());
-//        }
-//        jt.getMovements();
+//        knightsTour.next();
         new KnightsTourController();
     }
 

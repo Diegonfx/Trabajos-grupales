@@ -15,7 +15,7 @@ public class KnightsTourMenu extends JFrame {
     private final int amountOfSquares = 64;
     private JButton[][] knightsTourBoard = new JButton[8][8];
 
-    public KnightsTourMenu(ActionListener solve) {
+    public KnightsTourMenu(ActionListener next) {
         setTitle("Knights tour");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 1000);
@@ -24,7 +24,7 @@ public class KnightsTourMenu extends JFrame {
 
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(800, 800));
-        panel.setLayout(new GridLayout(9, 9));
+        panel.setLayout(new GridLayout(8, 8));
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.setAlignmentY(Component.CENTER_ALIGNMENT);
 
@@ -58,7 +58,7 @@ public class KnightsTourMenu extends JFrame {
         JButton solveKnightsTour = new JButton("Solve");
         solveKnightsTour.setAlignmentY(Component.BOTTOM_ALIGNMENT);
         solveKnightsTour.setAlignmentX(Component.CENTER_ALIGNMENT);
-        solveKnightsTour.addActionListener(solve);
+        solveKnightsTour.addActionListener(next);
         panel.add(solveKnightsTour);
 
         info.add(Box.createRigidArea(new Dimension(100, 50)));

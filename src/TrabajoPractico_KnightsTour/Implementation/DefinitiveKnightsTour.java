@@ -57,23 +57,19 @@ public class DefinitiveKnightsTour {
         return false;
     }
 
-    public Spot getNextSpot(DynamicStack<Spot> anyStack , DynamicStack<Spot> nextStack) {
-        int nextSpotsRow, nextSpotsColumn;
-        Spot nextSpotInStack;
+    public boolean hasMoves(Spot anySpot) {
         for (int possibleSpot = 0; possibleSpot < SIZE; possibleSpot++) {
-            nextSpotsRow = anyStack.peek().getPositionInRow() + MOVES_ALLOWED_IN_BOARD[possibleSpot].getPositionInRow();
-            nextSpotsColumn = anyStack.peek().getPositionInColumn() + MOVES_ALLOWED_IN_BOARD[possibleSpot].getPositionInColumn();
-            nextSpotInStack = new Spot(nextSpotsRow, nextSpotsColumn);
-            if (moveIsAllowed(nextSpotInStack, board) && !nextSpotInStack.wasUsed()) {
-                nextSpotInStack.setWasUsed(true);
-                nextSpotInStack.setValue(++moves);
-                spotsToIterate.add(nextSpotInStack);
-                nextStack.push(nextSpotInStack);
+            int nextSpotsRow = anySpot.getPositionInRow() + MOVES_ALLOWED_IN_BOARD[possibleSpot].getPositionInRow();
+            int nextSpotsColumn = currentSpot.getPositionInColumn() + MOVES_ALLOWED_IN_BOARD[possibleSpot].getPositionInColumn();
+            anySpot = new Spot(nextSpotsRow, nextSpotsColumn);
+            if (moveIsAllowed(anySpot, board) && !anySpot.wasUsed()) {
+                return true;
             }
         }
+        return false;
     }
 
-    public DynamicStack<Spot> getNextStackOfMoves() {
+    private DynamicStack<Spot> getNextStackOfMoves() {
         DynamicStack<Spot> nextStack = new DynamicStack<>();
         int nextSpotsRow, nextSpotsColumn;
         Spot nextSpotInStack;
@@ -93,8 +89,11 @@ public class DefinitiveKnightsTour {
         return nextStack;
     }
 
-    public Spot getNextSpot() throws NullPointerException {
-
+    public Spot next() {
+        currentSpot = spotsToIterate.get(0);
+        System.out.println("VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName() + " ||  ROW: " + currentSpot.getPositionInRow() + " ||  COLUMN: " + currentSpot.getPositionInColumn());
+        spotsToIterate.remove(0);
+        return currentSpot;
     }
 
     public void fillArrayList() throws NullPointerException {
@@ -118,7 +117,6 @@ public class DefinitiveKnightsTour {
                                 fourthStack.pop();
                             }
                             thirdStackOp();
-
                         }
                         secondStackOp();
                     }
@@ -130,15 +128,14 @@ public class DefinitiveKnightsTour {
             System.out.println("COMPLETE");
         }
     }
-
-    public void initialStackOp() {
+    private void initialStackOp() {
         initialStack.pop();
         currentSpot = null;
         if (initialStack.isEmpty()) {
 //            System.out.println("\nINITIAL STACK HAS NO MORE REMAINING MOVES");
         }
     }
-    public void firstStackOp() {
+    private void firstStackOp() {
         firstStack.peek().setWasUsed(false);
         firstStack.pop();
         if (!firstStack.isEmpty()) {
@@ -148,7 +145,7 @@ public class DefinitiveKnightsTour {
 //            System.out.println("\nFIRST STACK HAS NO MORE REMAINING MOVES");currentSpot = initialStack.peek();
         }
     }
-    public void secondStackOp() {
+    private void secondStackOp() {
         secondStack.peek().setWasUsed(false);
         secondStack.pop();
         if (!secondStack.isEmpty()) {
@@ -158,7 +155,7 @@ public class DefinitiveKnightsTour {
 //            System.out.println("\nSECOND STACK HAS NO MORE REMAINING MOVES");currentSpot = firstStack.peek();
         }
     }
-    public void thirdStackOp() {
+    private void thirdStackOp() {
 //        System.out.println("\nFOURTH STACK HAS NO MORE REMAINING MOVES");
         thirdStack.peek().setWasUsed(false);
         thirdStack.pop();
@@ -179,6 +176,15 @@ public class DefinitiveKnightsTour {
     }
     public List<Spot> getSpotsToIterate() {
         return spotsToIterate;
+    }
+
+    public Spot previous(Spot anySpot) {
+        Spot previous = new Spot();
+        for (int i = 0 ; i < spotsToIterate.size() ; i++) {
+            if (spotsToIterate.get(i).equals(anySpot)) {
+                previous = spotsToIterate.get(i-1);
+            }
+        } return previous;
     }
 
 //    public void getMovements() throws NullPointerException {
