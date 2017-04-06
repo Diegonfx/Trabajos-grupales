@@ -1,5 +1,7 @@
 package TrabajoPractico_KnightsTour.Swing;
 
+import TrabajoPractico_KnightsTour.Implementation.DefinitiveKnightsTour;
+import com.sun.deploy.panel.JSmartTextArea;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import com.sun.prism.paint.Color;
 
@@ -15,10 +17,10 @@ public class KnightsTourMenu extends JFrame {
     private final int amountOfSquares = 64;
     private JLabel[][] knightsTourBoard = new JLabel[8][8];
 
-    public KnightsTourMenu(ActionListener next) {
+    public KnightsTourMenu(ActionListener next, ActionListener clear) {
         setTitle("Knights tour");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 700);
+        setSize(800, 800);
         setExtendedState(MAXIMIZED_BOTH);
         setResizable(false);
 
@@ -27,6 +29,9 @@ public class KnightsTourMenu extends JFrame {
         panel.setLayout(new GridLayout(8, 8));
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.setAlignmentY(Component.CENTER_ALIGNMENT);
+
+        JPanel terminal = new JPanel();
+        terminal.setPreferredSize(new Dimension(400, 700));
 
         JPanel info = new JPanel();
         info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
@@ -55,14 +60,23 @@ public class KnightsTourMenu extends JFrame {
         ImageIcon knight = new ImageIcon("src/TrabajoPractico_KnightsTour/Swing/horseknight.png");
         knightsTourBoard[0][0].setIcon(knight);
 
-        JButton solveKnightsTour = new JButton("Solve");
+        JButton solveKnightsTour = new JButton("NEXT");
         solveKnightsTour.setAlignmentY(Component.BOTTOM_ALIGNMENT);
         solveKnightsTour.setAlignmentX(Component.CENTER_ALIGNMENT);
+        solveKnightsTour.setSize(50 , 20);
         solveKnightsTour.addActionListener(next);
         panel.add(solveKnightsTour);
 
-        info.add(Box.createRigidArea(new Dimension(100, 50)));
+        JButton clearKnightsTour = new JButton("CLEAR");
+        clearKnightsTour.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        clearKnightsTour.setAlignmentX(Component.CENTER_ALIGNMENT);
+        clearKnightsTour.setSize(50 , 20);
+        clearKnightsTour.addActionListener(clear);
+        panel.add(clearKnightsTour);
+
+        info.add(Box.createRigidArea(new Dimension(150, 30)));
         info.add(solveKnightsTour);
+        info.add(clearKnightsTour);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -82,4 +96,5 @@ public class KnightsTourMenu extends JFrame {
     public JLabel[][] getKnightsTourBoard() {
         return knightsTourBoard;
     }
+
 }

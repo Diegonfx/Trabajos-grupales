@@ -57,19 +57,8 @@ public class DefinitiveKnightsTour {
         return false;
     }
 
-    public boolean hasMoves(Spot anySpot) {
-        for (int possibleSpot = 0; possibleSpot < SIZE; possibleSpot++) {
-            int nextSpotsRow = anySpot.getPositionInRow() + MOVES_ALLOWED_IN_BOARD[possibleSpot].getPositionInRow();
-            int nextSpotsColumn = currentSpot.getPositionInColumn() + MOVES_ALLOWED_IN_BOARD[possibleSpot].getPositionInColumn();
-            anySpot = new Spot(nextSpotsRow, nextSpotsColumn);
-            if (moveIsAllowed(anySpot, board) && !anySpot.wasUsed()) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    private DynamicStack<Spot> getNextStackOfMoves() {
+    private DynamicStack<Spot> getNextStackOfMoves(int movement) {
         DynamicStack<Spot> nextStack = new DynamicStack<>();
         int nextSpotsRow, nextSpotsColumn;
         Spot nextSpotInStack;
@@ -79,7 +68,7 @@ public class DefinitiveKnightsTour {
             nextSpotInStack = new Spot(nextSpotsRow, nextSpotsColumn);
             if (moveIsAllowed(nextSpotInStack, board) && !nextSpotInStack.wasUsed()) {
                 nextSpotInStack.setWasUsed(true);
-                nextSpotInStack.setValue(++moves);
+                nextSpotInStack.setValue(movement);
                 board[nextSpotsRow][nextSpotsColumn] = nextSpotInStack;
                 spotsToIterate.add(nextSpotInStack);
                 nextStack.push(nextSpotInStack);
@@ -89,29 +78,96 @@ public class DefinitiveKnightsTour {
         return nextStack;
     }
 
+//    public List<List<Spot>> getNextPath() throws NullPointerException {
+//
+//            try {
+//                initialStack.push(currentSpot);
+//                currentSpot = initialStack.peek();
+//                while (!initialStack.isEmpty()) {
+//                    currentSpot = initialStack.peek();
+//                    firstStack = getNextStackOfMoves();
+//                    while (!firstStack.isEmpty()) {
+//                        currentSpot = firstStack.peek();
+//                        secondStack = getNextStackOfMoves();
+//                        while (!secondStack.isEmpty()) {
+//                            currentSpot = secondStack.peek();
+//                            thirdStack = getNextStackOfMoves();
+//                            while (!thirdStack.isEmpty()) {
+//                                currentSpot = thirdStack.peek();
+//                                fourthStack = getNextStackOfMoves();
+//                                while (!fourthStack.isEmpty()) {
+//                                    fourthStack.peek().setWasUsed(false);
+//                                    fourthStack.pop();
+//                                }
+//                                thirdStackOp();
+//                            }
+//                            secondStackOp();
+//                        }
+//                        firstStackOp();
+//                    }
+//                    initialStackOp();
+//                }
+//            } catch (NullPointerException asd) {
+//                System.out.println("COMPLETE");
+//            }
+//        }
+
+
     public Spot next() {
-        currentSpot = spotsToIterate.get(0);
-        System.out.println("VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName() + " ||  ROW: " + currentSpot.getPositionInRow() + " ||  COLUMN: " + currentSpot.getPositionInColumn());
-        spotsToIterate.remove(0);
+        int i = 0;
+        currentSpot = spotsToIterate.get(i);
+        if (currentSpot.getValue() == 0) {
+            System.out.println("Entro en stack 0 --> VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName() + " ||  ROW: " + currentSpot.getPositionInRow() + " ||  COLUMN: " + currentSpot.getPositionInColumn());
+        } if (currentSpot.getValue() == 1 ) {
+            System.out.println("Entro en stack 1 --> VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName() + " ||  ROW: " + currentSpot.getPositionInRow() + " ||  COLUMN: " + currentSpot.getPositionInColumn());
+        } if (currentSpot.getValue() == 2) {
+            System.out.println("Entro en stack2 --> VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName() + " ||  ROW: " + currentSpot.getPositionInRow() + " ||  COLUMN: " + currentSpot.getPositionInColumn());
+        } if (currentSpot.getValue() == 3) {
+            System.out.println("Entro en stack 3 --> VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName() + " ||  ROW: " + currentSpot.getPositionInRow() + " ||  COLUMN: " + currentSpot.getPositionInColumn());
+        } if (currentSpot.getValue() == 4) {
+            System.out.println("Movimientos posibles guardado en stack 4 --> VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName() + " ||  ROW: " + currentSpot.getPositionInRow() + " ||  COLUMN: " + currentSpot.getPositionInColumn());
+        }
+        if (spotsToIterate.get(i+1) == null) {
+            System.out.println("ENDGAME");
+        }
+        if (currentSpot.getValue() == 0 && spotsToIterate.get(i+1).getValue() == 1 ) {
+            System.out.println("Salgo de stack 0");
+        } else if (currentSpot.getValue() == 1 && spotsToIterate.get(i+1).getValue() == 2) {
+            System.out.println("Salgo de stack 1");
+        } else if (currentSpot.getValue() == 2 && spotsToIterate.get(i+1).getValue() == 3) {
+            System.out.println("Salgo de stack 2");
+        } else if (currentSpot.getValue() == 3 && spotsToIterate.get(i+1).getValue() == 4) {
+            System.out.println("Salgo de stack 3");
+        } else if (currentSpot.getValue() == 1 && spotsToIterate.get(i+1).getValue() == 0) {
+            System.out.println("Salgo de stack 1 y entro en stack 0");
+        } else if (currentSpot.getValue() == 2 && spotsToIterate.get(i+1).getValue() == 1) {
+            System.out.println("Salgo de stack 2 y entro en stack 1");
+        } else if (currentSpot.getValue() == 3 && spotsToIterate.get(i+1).getValue() == 2) {
+            System.out.println("Salgo de stack 3 y entro en stack 2");
+        } else if (currentSpot.getValue() == 4 && spotsToIterate.get(i+1).getValue() == 3) {
+            System.out.println("Salgo de stack 4 y entro en stack 1");
+        }
+        spotsToIterate.remove(i);
+        currentSpot = spotsToIterate.get(i);
         return currentSpot;
     }
 
-    public void fillArrayList() throws NullPointerException {
+    public Spot fillArrayList() throws NullPointerException {
         try {
             initialStack.push(currentSpot);
             currentSpot = initialStack.peek();
             while (!initialStack.isEmpty()) {
                 currentSpot = initialStack.peek();
-                firstStack = getNextStackOfMoves();
+                firstStack = getNextStackOfMoves(1);
                 while (!firstStack.isEmpty()) {
                     currentSpot = firstStack.peek();
-                    secondStack = getNextStackOfMoves();
+                    secondStack = getNextStackOfMoves(2);
                     while (!secondStack.isEmpty()) {
                         currentSpot = secondStack.peek();
-                        thirdStack = getNextStackOfMoves();
+                        thirdStack = getNextStackOfMoves(3);
                         while (!thirdStack.isEmpty()) {
                             currentSpot = thirdStack.peek();
-                            fourthStack = getNextStackOfMoves();
+                            fourthStack = getNextStackOfMoves(4);
                             while (!fourthStack.isEmpty()) {
                                 fourthStack.peek().setWasUsed(false);
                                 fourthStack.pop();
@@ -125,9 +181,10 @@ public class DefinitiveKnightsTour {
                 initialStackOp();
             }
         }catch (NullPointerException e) {
-            System.out.println("COMPLETE");
-        }
+            System.out.println("");
+        } return currentSpot;
     }
+
     private void initialStackOp() {
         initialStack.pop();
         currentSpot = null;
@@ -178,33 +235,31 @@ public class DefinitiveKnightsTour {
         return spotsToIterate;
     }
 
-    public Spot previous(Spot anySpot) {
-        Spot previous = new Spot();
-        for (int i = 0 ; i < spotsToIterate.size() ; i++) {
-            if (spotsToIterate.get(i).equals(anySpot)) {
-                previous = spotsToIterate.get(i-1);
-            }
-        } return previous;
+    public List<DynamicStack<Spot>> getListOfStacksWithMovements() {
+        return listOfStacksWithMovements;
     }
 
-//    public void getMovements() throws NullPointerException {
+    public Spot getCurrentSpot() {
+        return currentSpot;
+    }
+    //    public void getMovements() throws NullPointerException {
 //        try {
 ////            printBoard();
 //            initialStack.push(currentSpot);
 //            currentSpot = initialStack.peek();
 //            while (!initialStack.isEmpty()) {
 //                currentSpot = initialStack.peek();
-////                System.out.println("Entro en stack 0 --> Movimiento: " + initialStack.peek().getName() + " --> Value: " + initialStack.peek().getValue() + " --> Status: " + initialStack.peek().wasUsed());
+//                System.out.println("Entro en stack 0 --> Movimiento: " + initialStack.peek().getName() + " --> Value: " + initialStack.peek().getValue() + " --> Status: " + initialStack.peek().wasUsed());
 //                firstStack = getNextStackOfMoves();
 ////                printBoard();
 //                while (!firstStack.isEmpty()) {
 //                    currentSpot = firstStack.peek();
-////                    System.out.println("Entro en stack 1 --> Movimiento: " + firstStack.peek().getName() + " --> Value: " + firstStack.peek().getValue() + " --> Status: " + firstStack.peek().wasUsed());
+//                    System.out.println("Entro en stack 1 --> Movimiento: " + firstStack.peek().getName() + " --> Value: " + firstStack.peek().getValue() + " --> Status: " + firstStack.peek().wasUsed());
 //                    secondStack = getNextStackOfMoves();
 ////                    printBoard();
 //                    while (!secondStack.isEmpty()) {
 //                        currentSpot = secondStack.peek();
-////                        System.out.println("Entro en stack2 --> Movimiento:" + secondStack.peek().getName() + " --> Value: " + secondStack.peek().getValue() + " --> Status: " + firstStack.peek().wasUsed());
+//                        System.out.println("Entro en stack2 --> Movimiento:" + secondStack.peek().getName() + " --> Value: " + secondStack.peek().getValue() + " --> Status: " + firstStack.peek().wasUsed());
 //                        thirdStack = getNextStackOfMoves();
 ////                        printBoard();
 //                        while (!thirdStack.isEmpty()) {
@@ -212,8 +267,8 @@ public class DefinitiveKnightsTour {
 //                            fourthStack = getNextStackOfMoves();
 ////                            printBoard();
 //                            while (!fourthStack.isEmpty()) {
-////                                System.out.println("Entro en stack 3 --> Movimiento:" + thirdStack.peek().getName() + " --> Value: " + thirdStack.peek().getValue() + " -->Status: " + firstStack.peek().wasUsed());
-////                                System.out.println("Movimientos posibles guardado en stack 4 --> Movimiento:  " + fourthStack.peek().getName() + " --> Value: " + fourthStack.peek().getValue() + " --> Status: " + firstStack.peek().wasUsed());
+//                                System.out.println("Entro en stack 3 --> Movimiento:" + thirdStack.peek().getName() + " --> Value: " + thirdStack.peek().getValue() + " -->Status: " + firstStack.peek().wasUsed());
+//                                System.out.println("Movimientos posibles guardado en stack 4 --> Movimiento:  " + fourthStack.peek().getName() + " --> Value: " + fourthStack.peek().getValue() + " --> Status: " + firstStack.peek().wasUsed());
 //                                fourthStack.peek().setWasUsed(false);
 //                                fourthStack.pop();
 ////                                printBoard();
