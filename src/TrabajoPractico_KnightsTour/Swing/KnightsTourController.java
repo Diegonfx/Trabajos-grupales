@@ -25,8 +25,14 @@ public class KnightsTourController {
         public void actionPerformed(ActionEvent e) {
             knightsTour.fillArrayList();
 
+            knightsTour.next();
+            int a = 0, b = 0;
             view.getKnightsTourBoard()[0][0].setIcon(knight);
-            view.getKnightsTourBoard()[knightsTour.next().getPositionInRow()][knightsTour.next().getPositionInColumn()].setIcon(knight);
+            for (int i = 0; i < 1; i++){
+                a = knightsTour.getSpotsToIterate().get(i).getPositionInRow();
+                b = knightsTour.getSpotsToIterate().get(i).getPositionInColumn();
+            }
+            view.getKnightsTourBoard()[a][b].setIcon(knight);
 //                view.getKnightsTourBoard()[knightsTour.previous(knightsTour.next()).getPositionInRow()][knightsTour.previous(knightsTour.next()).getPositionInColumn()].setIcon(null);
         }
     }

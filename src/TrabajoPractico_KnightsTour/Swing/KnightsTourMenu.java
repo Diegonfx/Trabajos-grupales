@@ -13,17 +13,17 @@ import java.awt.event.ActionListener;
 public class KnightsTourMenu extends JFrame {
 
     private final int amountOfSquares = 64;
-    private JButton[][] knightsTourBoard = new JButton[8][8];
+    private JLabel[][] knightsTourBoard = new JLabel[8][8];
 
     public KnightsTourMenu(ActionListener next) {
         setTitle("Knights tour");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 1000);
+        setSize(700, 700);
         setExtendedState(MAXIMIZED_BOTH);
         setResizable(false);
 
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(800, 800));
+        panel.setPreferredSize(new Dimension(600, 600));
         panel.setLayout(new GridLayout(8, 8));
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.setAlignmentY(Component.CENTER_ALIGNMENT);
@@ -34,13 +34,13 @@ public class KnightsTourMenu extends JFrame {
 
         for (int row = 0; row < 8; row++) {
             for (int column = 0; column < 8; column++) {
-                knightsTourBoard[row][column] = new JButton();
+                knightsTourBoard[row][column] = new JLabel();
                 knightsTourBoard[row][column].setBorder(BorderFactory.createLineBorder(java.awt.Color.MAGENTA));
                 knightsTourBoard[row][column].setSize(40, 40);
                 knightsTourBoard[row][column].setOpaque(true);
                 knightsTourBoard[row][column].setAlignmentX(Component.CENTER_ALIGNMENT);
                 knightsTourBoard[row][column].setAlignmentY(Component.CENTER_ALIGNMENT);
-                panel.add(this.knightsTourBoard[row][column]);
+                panel.add(knightsTourBoard[row][column]);
 
                 java.awt.Color blackColor = java.awt.Color.black;
                 java.awt.Color whiteColor = java.awt.Color.white;
@@ -52,7 +52,7 @@ public class KnightsTourMenu extends JFrame {
             }
         }
 
-        ImageIcon knight = new ImageIcon("/Users/DiegoMancini/IdeaProjects/Trabajos grupales/src/TrabajoPractico_KnightsTour/Swing/horseknight.png");
+        ImageIcon knight = new ImageIcon("src/TrabajoPractico_KnightsTour/Swing/horseknight.png");
         knightsTourBoard[0][0].setIcon(knight);
 
         JButton solveKnightsTour = new JButton("Solve");
@@ -79,7 +79,7 @@ public class KnightsTourMenu extends JFrame {
         return amountOfSquares;
     }
 
-    public JButton[][] getKnightsTourBoard() {
+    public JLabel[][] getKnightsTourBoard() {
         return knightsTourBoard;
     }
 }
