@@ -1,14 +1,14 @@
-package TrabajoPractico_Morse.BinaryTreeImp;
+package TrabajoPractico_BinaryTree;
 
 /**
  * Created by Tomas on 26/3/2017.
  */
-public class TreeApi {
-    public <T> int size (BinaryTree<T> a){
+public class Ej13 {
+    public <T> int weight (BinaryTree<T> a){
         if(a.isEmpty())
             return 0;
         else
-            return 1 + size(a.getLeft())+size(a.getRight());
+            return 1 + weight(a.getLeft()) + weight(a.getRight());
     }
 
     public <T> int completeNodes(BinaryTree<T> a){
@@ -18,7 +18,19 @@ public class TreeApi {
             return completeNodes(a.getRight());
         if (a.getRight().isEmpty())
             return completeNodes(a.getLeft());
-        return 1+completeNodes(a.getRight())+completeNodes(a.getLeft());
+        return 1 + completeNodes(a.getRight()) + completeNodes(a.getLeft());
+    }
+
+    public <T> int leaves(BinaryTree<T> a){
+        if (a.isEmpty())
+            return 0;
+        if (a.getLeft().isEmpty() && a.getRight().isEmpty())
+            return 1;
+        return leaves(a.getLeft()) + leaves(a.getRight());
+    }
+
+    public <T> int height(BinaryTree<T> a){
+
     }
 
     public <T> void inorden(BinaryTree<T>  a){
