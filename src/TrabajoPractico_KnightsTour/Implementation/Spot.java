@@ -1,7 +1,10 @@
 package TrabajoPractico_KnightsTour.Implementation;
 
+
 /**
- * Created by DiegoMancini on 30/3/17.
+ * It represents a spot in the chess boar
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class Spot {
 
@@ -18,7 +21,6 @@ public class Spot {
         value = -1;
         wasUsed = false;
     }
-
     public Spot() {
         positionInRow = 0;
         positionInColumn = 0;
@@ -39,7 +41,7 @@ public class Spot {
     public int getPositionInColumn() {
         return positionInColumn;
     }
-   public String getName() {
+    public String getName() {
         return name;
     }
     public int getValue() {
@@ -179,11 +181,5 @@ public class Spot {
         } else if (row == 7 && column == 7) {
             name = "H8";
         } return name;
-    }
-    public void setPositionInRow(int positionInRow) {
-        this.positionInRow = positionInRow;
-    }
-    public void setPositionInColumn(int positionInColumn) {
-        this.positionInColumn = positionInColumn;
     }
 }

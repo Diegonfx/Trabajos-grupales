@@ -115,4 +115,39 @@ public class HuaweiPhone {
         appsInstalled.add(position , appName);
     }
 
+    /*
+    //    public List<List<Spot>> getNextPath() throws NullPointerException {
+//
+//            try {
+//                initialStack.push(currentSpot);
+//                currentSpot = initialStack.peek();
+//                while (!initialStack.isEmpty()) {
+//                    currentSpot = initialStack.peek();
+//                    firstStack = getNextStackOfMoves();
+//                    while (!firstStack.isEmpty()) {
+//                        currentSpot = firstStack.peek();
+//                        secondStack = getNextStackOfMoves();
+//                        while (!secondStack.isEmpty()) {
+//                            currentSpot = secondStack.peek();
+//                            thirdStack = getNextStackOfMoves();
+//                            while (!thirdStack.isEmpty()) {
+//                                currentSpot = thirdStack.peek();
+//                                fourthStack = getNextStackOfMoves();
+//                                while (!fourthStack.isEmpty()) {
+//                                    fourthStack.peek().setWasUsed(false);
+//                                    fourthStack.pop();
+//                                }
+//                                thirdStackOp();
+//                            }
+//                            secondStackOp();
+//                        }
+//                        firstStackOp();
+//                    }
+//                    initialStackOp();
+//                }
+//            } catch (NullPointerException asd) {
+//                System.out.println("COMPLETE");
+//            }
+//        }
+     */
 }

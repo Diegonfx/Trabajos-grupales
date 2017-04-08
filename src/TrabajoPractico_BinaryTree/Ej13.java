@@ -30,14 +30,33 @@ public class Ej13 {
     }
 
     public <T> int height(BinaryTree<T> a){
-
+        if (a.isEmpty()) {
+            return 0;
+        }
+        return 1 + Math.max(height(a.getLeft()), height(a.getRight()));
     }
 
-    public <T> void inorden(BinaryTree<T>  a){
+    public <T> void inOrden(BinaryTree<T>  a){
         if(!a.isEmpty()){
-            inorden(a.getLeft());
+            inOrden(a.getLeft());
             System.out.println(a.getRoot());
-            inorden(a.getRight());
+            inOrden(a.getRight());
+        }
+    }
+
+    public <T> void preOrden (BinaryTree<T> a){
+        if (!a.isEmpty()) {
+            System.out.print(a.getRoot());
+            preOrden(a.getLeft());
+            preOrden(a.getRight());
+        }
+    }
+
+    public <T> void postOrden (BinaryTree<T> a){
+        if (!a.isEmpty()) {
+            postOrden(a.getLeft());
+            postOrden(a.getRight());
+            System.out.print(a.getRoot());
         }
     }
 

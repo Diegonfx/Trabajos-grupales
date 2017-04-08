@@ -7,11 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by DiegoMancini on 31/3/17.
+ * It represents the knight's tour theory with its first possible jumps
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class DefinitiveKnightsTour {
 
-
+    /**
+     * MOVES_ALLOWED_IN_BOARD is an array of possible spots that you can go to, from an initial spot.
+     * SIZE is the amount of spots in an ROW x COLUMN way
+     * board represents the board
+     * currentSpot is the initial spot of the board at row 0 and column 0
+     * listOfStacksWithMovements is a list that contains all the potential stacks needed to complete an n based knight's tour
+     * spotsToIterate is a list that contains all the possible moves the knight can make from an initial position
+     * initialStack, firstStack, secondStack, thirdStack and fourthStack represent the number of jumps, with initialStack only containing the first spot
+     */
     private final static Spot[] MOVES_ALLOWED_IN_BOARD = {new Spot(2, 1), new Spot(1, 2), new Spot(-1, 2), new Spot(-2, 1),
             new Spot(-2, -1), new Spot(-1, -2), new Spot(1, -2), new Spot(2, -1)};
     private final static int SIZE = 8;
@@ -24,7 +34,6 @@ public class DefinitiveKnightsTour {
     private DynamicStack<Spot> thirdStack = new DynamicStack<>();
     private DynamicStack<Spot> fourthStack = new DynamicStack<>();
     private List<Spot> spotsToIterate;
-    private int moves = 0;
 
     public DefinitiveKnightsTour() {
         for (int j = 0; j < SIZE; j++) {
@@ -46,7 +55,13 @@ public class DefinitiveKnightsTour {
         listOfStacksWithMovements.add(fourthStack);
     }
 
-    public boolean moveIsAllowed(Spot anySpot, Spot[][] board) {
+    /**
+     * It checks if the spot's row and column value are between 0 and SIZE, and if that position was already used (it can't go throught it again in the same path)
+     * @param anySpot is the initial spot
+     * @param board the board we are trying to put the 'anySpot'
+     * @return true if that spot can be placed in the board
+     */
+    private boolean moveIsAllowed(Spot anySpot, Spot[][] board) {
         if (anySpot.getPositionInRow() >= 0 && anySpot.getPositionInRow() < SIZE) {
             if (anySpot.getPositionInColumn() >= 0 && anySpot.getPositionInColumn() < SIZE) {
                 if (!board[anySpot.getPositionInRow()][anySpot.getPositionInColumn()].wasUsed()) {
@@ -57,7 +72,12 @@ public class DefinitiveKnightsTour {
         return false;
     }
 
-
+    /**
+     * It gets the current position's row and column value, and tries all the possible combinations with MOVES_ALLOWED_IN_BOARD, and checks
+     * if that move is possible within the defined parameters.
+     * @param movement the number of the jump, it represents in which stack it will be stored
+     * @return a Dynamic stack with the spots it can go to from the current position.
+     */
     private DynamicStack<Spot> getNextStackOfMoves(int movement) {
         DynamicStack<Spot> nextStack = new DynamicStack<>();
         int nextSpotsRow, nextSpotsColumn;
@@ -66,66 +86,38 @@ public class DefinitiveKnightsTour {
             nextSpotsRow = currentSpot.getPositionInRow() + MOVES_ALLOWED_IN_BOARD[possibleSpot].getPositionInRow();
             nextSpotsColumn = currentSpot.getPositionInColumn() + MOVES_ALLOWED_IN_BOARD[possibleSpot].getPositionInColumn();
             nextSpotInStack = new Spot(nextSpotsRow, nextSpotsColumn);
-            if (moveIsAllowed(nextSpotInStack, board) && !nextSpotInStack.wasUsed()) {
+            if (moveIsAllowed(nextSpotInStack, board)) {
                 nextSpotInStack.setWasUsed(true);
                 nextSpotInStack.setValue(movement);
                 board[nextSpotsRow][nextSpotsColumn] = nextSpotInStack;
                 spotsToIterate.add(nextSpotInStack);
                 nextStack.push(nextSpotInStack);
-//                System.out.println(" || Value of spot: " + nextSpotInStack.getValue() + " || Name of spot in board: " + nextSpotInStack.getName());
             }
         }
         return nextStack;
     }
 
-//    public List<List<Spot>> getNextPath() throws NullPointerException {
-//
-//            try {
-//                initialStack.push(currentSpot);
-//                currentSpot = initialStack.peek();
-//                while (!initialStack.isEmpty()) {
-//                    currentSpot = initialStack.peek();
-//                    firstStack = getNextStackOfMoves();
-//                    while (!firstStack.isEmpty()) {
-//                        currentSpot = firstStack.peek();
-//                        secondStack = getNextStackOfMoves();
-//                        while (!secondStack.isEmpty()) {
-//                            currentSpot = secondStack.peek();
-//                            thirdStack = getNextStackOfMoves();
-//                            while (!thirdStack.isEmpty()) {
-//                                currentSpot = thirdStack.peek();
-//                                fourthStack = getNextStackOfMoves();
-//                                while (!fourthStack.isEmpty()) {
-//                                    fourthStack.peek().setWasUsed(false);
-//                                    fourthStack.pop();
-//                                }
-//                                thirdStackOp();
-//                            }
-//                            secondStackOp();
-//                        }
-//                        firstStackOp();
-//                    }
-//                    initialStackOp();
-//                }
-//            } catch (NullPointerException asd) {
-//                System.out.println("COMPLETE");
-//            }
-//        }
-
-
-    public Spot next() {
+    /**
+     * This method gathers information from the spotsToIterate list, and the current position. With that information, it specifies
+     * which position will be used by the currentSpot Spot. It then shows the information stored in the currentSpot,
+     * and the loop through the stacks defined by the value stored in that spot. It then stores that position in an auxiliary list
+     * that serves the purpose of checking which spot should be considered from the previous stack, as to define the next possible moves (FUNCTIONALITY DEBT)
+     * It then removes that spot from the original list, and defines the next position as the currentSpot.
+     */
+    public void next() {
+        List<Spot> wentThrough = new ArrayList<>();
         int i = 0;
         currentSpot = spotsToIterate.get(i);
         if (currentSpot.getValue() == 0) {
-            System.out.println("Entro en stack 0 --> VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName() + " ||  ROW: " + currentSpot.getPositionInRow() + " ||  COLUMN: " + currentSpot.getPositionInColumn());
+            System.out.println("Stack 0 --> VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName());
         } if (currentSpot.getValue() == 1 ) {
-            System.out.println("Entro en stack 1 --> VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName() + " ||  ROW: " + currentSpot.getPositionInRow() + " ||  COLUMN: " + currentSpot.getPositionInColumn());
+            System.out.println("Stack 1 --> VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName());
         } if (currentSpot.getValue() == 2) {
-            System.out.println("Entro en stack2 --> VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName() + " ||  ROW: " + currentSpot.getPositionInRow() + " ||  COLUMN: " + currentSpot.getPositionInColumn());
+            System.out.println("Stack2 --> VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName()) ;
         } if (currentSpot.getValue() == 3) {
-            System.out.println("Entro en stack 3 --> VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName() + " ||  ROW: " + currentSpot.getPositionInRow() + " ||  COLUMN: " + currentSpot.getPositionInColumn());
+            System.out.println("Stack 3 --> VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName());
         } if (currentSpot.getValue() == 4) {
-            System.out.println("Movimientos posibles guardado en stack 4 --> VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName() + " ||  ROW: " + currentSpot.getPositionInRow() + " ||  COLUMN: " + currentSpot.getPositionInColumn());
+            System.out.println("Stack 4 --> VALUE: " + currentSpot.getValue() + " ||  SPOT: " + currentSpot.getName());
         }
         if (spotsToIterate.get(i+1) == null) {
             System.out.println("ENDGAME");
@@ -138,21 +130,67 @@ public class DefinitiveKnightsTour {
             System.out.println("Salgo de stack 2");
         } else if (currentSpot.getValue() == 3 && spotsToIterate.get(i+1).getValue() == 4) {
             System.out.println("Salgo de stack 3");
+        } else if (currentSpot.getValue() == 4 && spotsToIterate.get(i+1).getValue() < 4) {
+            System.out.println("Salgo de stack 4");
+            for (int j = 0 ; j < wentThrough.size() ; j++) {
+                if (wentThrough.get(j).getValue() < 4) {
+                    System.out.println("Stack 3 --> VALUE: " + wentThrough.get(j).getValue() + " ||  SPOT: " + wentThrough.get(j).getName());
+                    wentThrough.remove(j);
+                    break;
+                }
+            }
         } else if (currentSpot.getValue() == 1 && spotsToIterate.get(i+1).getValue() == 0) {
             System.out.println("Salgo de stack 1 y entro en stack 0");
+            for (int j = wentThrough.size() ; j > 0 ; j--) {
+                if (wentThrough.get(j).getValue() == 0) {
+                    System.out.println("Stack 0 --> VALUE: " + wentThrough.get(j).getValue() + " ||  SPOT: " + wentThrough.get(j).getName());
+                    wentThrough.remove(j);
+                    break;
+                }
+            }
         } else if (currentSpot.getValue() == 2 && spotsToIterate.get(i+1).getValue() == 1) {
             System.out.println("Salgo de stack 2 y entro en stack 1");
+            for (int j = wentThrough.size() ; j > 0 ; j--) {
+                if (wentThrough.get(j).getValue() == 1) {
+                    System.out.println("Stack 1 --> VALUE: " + wentThrough.get(j).getValue() + " ||  SPOT: " + wentThrough.get(j).getName());
+                    wentThrough.remove(j);
+                    break;
+                }
+            }
         } else if (currentSpot.getValue() == 3 && spotsToIterate.get(i+1).getValue() == 2) {
             System.out.println("Salgo de stack 3 y entro en stack 2");
+            for (int j = wentThrough.size() ; j > 0 ; j--) {
+                if (wentThrough.get(j).getValue() == 2) {
+                    System.out.println("Stack 2--> VALUE: " + wentThrough.get(j).getValue() + " ||  SPOT: " + wentThrough.get(j).getName());
+                    wentThrough.remove(j);
+                    break;
+                }
+            }
         } else if (currentSpot.getValue() == 4 && spotsToIterate.get(i+1).getValue() == 3) {
-            System.out.println("Salgo de stack 4 y entro en stack 1");
+            System.out.println("Salgo de stack 4 y entro en stack 3");
+            for (int j = 0 ; j < wentThrough.size() ; j++) {
+                if (wentThrough.get(j).getValue() == 3) {
+                    System.out.println("Stack 3 --> VALUE: " + wentThrough.get(j).getValue() + " ||  SPOT: " + wentThrough.get(j).getName());
+                    wentThrough.remove(j);
+                    break;
+                }
+            }
         }
+        wentThrough.add(spotsToIterate.get(i));
         spotsToIterate.remove(i);
         currentSpot = spotsToIterate.get(i);
-        return currentSpot;
     }
 
-    public Spot fillArrayList() throws NullPointerException {
+    /**
+     * This method's purpose is to go through all the possible moves the knight can make from the initial spot, and fill the list 'spotsToIterate' with these spots.
+     * This will be accomplishd with the use of the method 'getNextStackOfMoves(assigning which stack it is with the index number)'
+     * Whenever the new stack is filled, the currentSpot is defined as the top (stack.peek) of that stack. Whenever the stack n+1 is empty by the continious popping,
+     * the stack n is popped and the currentSpot is assigned to its new peek. It will then get that currentSpot's new possible moves. The process will go on by checking
+     * which paths have already been used by the boolean status of the Spot, which determine its usability.
+     * It uses the private methods xStackOp(for operation) which determines if that stack is empty or not, and regarding that it will assign the new value of currentSpot.
+     * @throws NullPointerException when the last stack, 'initialStack' has been emptied and therefore no more spots to analyze.
+     */
+    public void fillArrayList() throws NullPointerException {
         try {
             initialStack.push(currentSpot);
             currentSpot = initialStack.peek();
@@ -181,8 +219,8 @@ public class DefinitiveKnightsTour {
                 initialStackOp();
             }
         }catch (NullPointerException e) {
-            System.out.println("");
-        } return currentSpot;
+            System.out.println("FINISHED");
+        }
     }
 
     private void initialStackOp() {
@@ -223,72 +261,10 @@ public class DefinitiveKnightsTour {
 //            System.out.println("\nTHIRD STACK HAS NO MORE REMAINING MOVES");currentSpot = secondStack.peek();
         }
     }
-    public void printBoard() {
-        for (int positionInRow = 0 ; positionInRow < SIZE ; positionInRow++) {
-            for (int positionInColumn = 0 ; positionInColumn < SIZE; positionInColumn++) {
-                System.out.print(board[positionInRow][positionInColumn].getValue() + " || ");
-            }
-            System.out.println();
-        }
-    }
     public List<Spot> getSpotsToIterate() {
         return spotsToIterate;
     }
-
-    public List<DynamicStack<Spot>> getListOfStacksWithMovements() {
-        return listOfStacksWithMovements;
-    }
-
     public Spot getCurrentSpot() {
         return currentSpot;
     }
-    //    public void getMovements() throws NullPointerException {
-//        try {
-////            printBoard();
-//            initialStack.push(currentSpot);
-//            currentSpot = initialStack.peek();
-//            while (!initialStack.isEmpty()) {
-//                currentSpot = initialStack.peek();
-//                System.out.println("Entro en stack 0 --> Movimiento: " + initialStack.peek().getName() + " --> Value: " + initialStack.peek().getValue() + " --> Status: " + initialStack.peek().wasUsed());
-//                firstStack = getNextStackOfMoves();
-////                printBoard();
-//                while (!firstStack.isEmpty()) {
-//                    currentSpot = firstStack.peek();
-//                    System.out.println("Entro en stack 1 --> Movimiento: " + firstStack.peek().getName() + " --> Value: " + firstStack.peek().getValue() + " --> Status: " + firstStack.peek().wasUsed());
-//                    secondStack = getNextStackOfMoves();
-////                    printBoard();
-//                    while (!secondStack.isEmpty()) {
-//                        currentSpot = secondStack.peek();
-//                        System.out.println("Entro en stack2 --> Movimiento:" + secondStack.peek().getName() + " --> Value: " + secondStack.peek().getValue() + " --> Status: " + firstStack.peek().wasUsed());
-//                        thirdStack = getNextStackOfMoves();
-////                        printBoard();
-//                        while (!thirdStack.isEmpty()) {
-//                            currentSpot = thirdStack.peek();
-//                            fourthStack = getNextStackOfMoves();
-////                            printBoard();
-//                            while (!fourthStack.isEmpty()) {
-//                                System.out.println("Entro en stack 3 --> Movimiento:" + thirdStack.peek().getName() + " --> Value: " + thirdStack.peek().getValue() + " -->Status: " + firstStack.peek().wasUsed());
-//                                System.out.println("Movimientos posibles guardado en stack 4 --> Movimiento:  " + fourthStack.peek().getName() + " --> Value: " + fourthStack.peek().getValue() + " --> Status: " + firstStack.peek().wasUsed());
-//                                fourthStack.peek().setWasUsed(false);
-//                                fourthStack.pop();
-////                                printBoard();
-//                            }
-//                            thirdStackOp();
-////                            printBoard();
-//                        }
-//                        secondStackOp();
-////                        printBoard();
-//                    }
-//                    firstStackOp();
-////                    printBoard();
-//                }
-//                initialStackOp();
-////                printBoard();
-//            }
-//        }catch (NullPointerException e) {
-//            System.out.println("COMPLETE");
-//        }
-//    }
-
-
 }

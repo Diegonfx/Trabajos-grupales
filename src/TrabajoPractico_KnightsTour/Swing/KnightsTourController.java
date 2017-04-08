@@ -11,8 +11,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 /**
- * Created by DiegoMancini on 5/4/17.
+ * It controlls the view of the knight's tour
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class KnightsTourController {
 
@@ -34,6 +37,7 @@ public class KnightsTourController {
                 a = knightsTour.getSpotsToIterate().get(i).getPositionInRow();
                 b = knightsTour.getSpotsToIterate().get(i).getPositionInColumn();
             }
+            knightsTour.next();
             view.getKnightsTourBoard()[a][b].setIcon(knight);
                 if (knightsTour.getSpotsToIterate().get(0).getValue() == 0 && knightsTour.getSpotsToIterate().get(1).getValue() == 1 ) {
                     view.getKnightsTourBoard()[knightsTour.getSpotsToIterate().get(1).getPositionInRow()][knightsTour.getSpotsToIterate().get(1).getPositionInColumn()].setBackground(Color.GREEN);
@@ -50,7 +54,6 @@ public class KnightsTourController {
                 } else if(knightsTour.getSpotsToIterate().get(0).getValue() == 1 && knightsTour.getSpotsToIterate().get(1).getValue() == 0) {
                     view.getKnightsTourBoard()[knightsTour.getSpotsToIterate().get(1).getPositionInRow()][knightsTour.getSpotsToIterate().get(1).getPositionInColumn()].setBackground(Color.GRAY);
                 }
-            knightsTour.next();
             }
         }
 
@@ -64,8 +67,6 @@ public class KnightsTourController {
             }
         }
     }
-
-
 }
 
 

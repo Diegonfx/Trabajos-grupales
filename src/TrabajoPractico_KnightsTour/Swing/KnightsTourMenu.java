@@ -10,11 +10,12 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * Created by DiegoMancini on 5/4/17.
+ * It represents the knight's tour view window
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class KnightsTourMenu extends JFrame {
 
-    private final int amountOfSquares = 64;
     private JLabel[][] knightsTourBoard = new JLabel[8][8];
 
     public KnightsTourMenu(ActionListener next, ActionListener clear) {
@@ -87,10 +88,6 @@ public class KnightsTourMenu extends JFrame {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
-    }
-
-    public int getAmountOfSquares() {
-        return amountOfSquares;
     }
 
     public JLabel[][] getKnightsTourBoard() {
