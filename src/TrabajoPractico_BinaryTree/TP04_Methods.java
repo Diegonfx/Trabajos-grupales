@@ -1,5 +1,7 @@
 package TrabajoPractico_BinaryTree;
 
+import TrabajoPractico4_Queue.DynamicQueue;
+
 /**
  * Created by DiegoMancini on 8/4/17.
  */
@@ -29,4 +31,7 @@ public class TP04_Methods {
         }
     }
 
+    public <T> void levels(BinaryTree<T> a){
+
+    }
 }

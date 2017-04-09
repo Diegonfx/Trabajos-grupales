@@ -40,8 +40,7 @@ public class Ej13 {
     }
 
     public int numberOfElementsAtLevel (BinaryTree t, int level){
-        int numberOfElements = numberOfElementsAtLevel(t, level , 0);
-        return numberOfElements;
+        return numberOfElementsAtLevel(t, level , 0);
     }
 
     private int numberOfElementsAtLevel(BinaryTree t, int level, int current){
