@@ -11,53 +11,12 @@ public class Ej13 {
             return 1 + weight(a.getLeft()) + weight(a.getRight());
     }
 
-    public <T> int completeNodes(BinaryTree<T> a){
-        if(a.isEmpty())
-            return 0;
-        if (a.getLeft().isEmpty())
-            return completeNodes(a.getRight());
-        if (a.getRight().isEmpty())
-            return completeNodes(a.getLeft());
-        return 1 + completeNodes(a.getRight()) + completeNodes(a.getLeft());
-    }
-
     public <T> int leaves(BinaryTree<T> a){
         if (a.isEmpty())
             return 0;
         if (a.getLeft().isEmpty() && a.getRight().isEmpty())
             return 1;
         return leaves(a.getLeft()) + leaves(a.getRight());
-    }
-
-    public <T> int height(BinaryTree<T> a){
-        if (a.isEmpty()) {
-            return 0;
-        }
-        return 1 + Math.max(height(a.getLeft()), height(a.getRight()));
-    }
-
-    public <T> void inOrden(BinaryTree<T>  a){
-        if(!a.isEmpty()){
-            inOrden(a.getLeft());
-            System.out.println(a.getRoot());
-            inOrden(a.getRight());
-        }
-    }
-
-    public <T> void preOrden (BinaryTree<T> a){
-        if (!a.isEmpty()) {
-            System.out.print(a.getRoot());
-            preOrden(a.getLeft());
-            preOrden(a.getRight());
-        }
-    }
-
-    public <T> void postOrden (BinaryTree<T> a){
-        if (!a.isEmpty()) {
-            postOrden(a.getLeft());
-            postOrden(a.getRight());
-            System.out.print(a.getRoot());
-        }
     }
 
     public <T> int ocurrencias(BinaryTree<T> a, Object o){
@@ -68,5 +27,42 @@ public class Ej13 {
         else
             return ocurrencias(a.getLeft(),o)+ocurrencias(a.getRight(),o);
     }
+
+
+    public <T> int completeNodes(BinaryTree<T> a){
+        if(a.isEmpty())
+            return 0;
+        if (a.getLeft().isEmpty())
+            return completeNodes(a.getRight());
+        if (a.getRight().isEmpty())
+            return completeNodes(a.getLeft());
+        return 1 + completeNodes(a.getRight()) + completeNodes(a.getLeft());
+    }
+
+    public int numberOfElementsAtLevel (BinaryTree t, int level){
+        int numberOfElements = numberOfElementsAtLevel(t, level , 0);
+        return numberOfElements;
+    }
+
+    private int numberOfElementsAtLevel(BinaryTree t, int level, int current){
+        int numberOfElements = 0;
+        if(t.isEmpty()) {
+            return numberOfElements;
+        }
+        if(current==level){
+            numberOfElements =  1;
+        } else {
+            numberOfElements = numberOfElementsAtLevel(t.getLeft(),level,current+1) + numberOfElementsAtLevel(t.getRight(),level,current+1);
+        }
+        return numberOfElements;
+    }
+
+    public <T> int height(BinaryTree<T> a){
+        if (a.isEmpty()) {
+            return 0;
+        }
+        return 1 + Math.max(height(a.getLeft()), height(a.getRight()));
+    }
+
 }
 
