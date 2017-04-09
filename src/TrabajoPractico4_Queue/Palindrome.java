@@ -13,8 +13,7 @@ public class Palindrome {
     public static boolean isPalindrome() {
         boolean result = true;
         String wordToAnalyze = Scanner.getString("Ingrese una palabra a analizar: ");
-        wordToAnalyze = wordToAnalyze.toLowerCase();
-        char[] listOfLetters = wordToAnalyze.toCharArray();
+        char[] listOfLetters = wordToAnalyze.toLowerCase().toCharArray();
         for (int i = 0 ; i < listOfLetters.length ; i++) {
             queueOfCharacters.enqueue(listOfLetters[i]);
             stackOfCharacters.push(listOfLetters[i]);

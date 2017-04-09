@@ -52,9 +52,7 @@ public class StaticQueue<T> {
         return data[front];
     }
     public boolean isEmpty() {
-        if (size == 0 ) {
-            return true;
-        } return false;
+        return size == 0;
     }
     public void empty() {
         size = 0;
@@ -101,7 +99,7 @@ public class StaticQueue<T> {
      * @return the size of the value
      */
     private int increment(int size) {
-        if (++size == data.length) {
+        if (++size == data.length-1) {
             size = 0;
         } return size;
     }
