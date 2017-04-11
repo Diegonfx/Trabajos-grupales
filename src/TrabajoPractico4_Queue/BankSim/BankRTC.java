@@ -78,7 +78,7 @@ public class BankRTC {
             entranceQueue.enqueue(clientsEntering[i]);
         }
     }
-    private void distributeClients() {
+    public void distributeClients() {
         for (int i = 0 ; i < listOfQueues.size() ; i++) {
             while (!entranceQueue.isEmpty()) {
             DynamicQueue<Client> queueToAssignClient = getShortestQueue();
@@ -104,6 +104,35 @@ public class BankRTC {
         }
     }
 
+    public void cashiersFullWaiting() {
+
+        if (!cashiersAreFree) {
+            int minCashier1 = cashiersList.get(0).getMinimumTime();
+            int maxCashier1 = cashiersList.get(0).getMaximumTime();
+            int minCashier2 = cashiersList.get(1).getMinimumTime();
+            int maxCashier2 = cashiersList.get(1).getMaximumTime();
+            int minCashier3 = cashiersList.get(1).getMinimumTime();
+            int maxCashier3 = cashiersList.get(1).getMaximumTime();
+            while (minCashier1 <= maxCashier1) {
+                minCashier1++;
+                if (minCashier1 == maxCashier3) {
+                    cashiersList.get(0).finishWithClient();
+                }
+            }
+            while (minCashier2 <= maxCashier2) {
+                minCashier2++;
+                if (minCashier2 == maxCashier2) {
+                    cashiersList.get(1).finishWithClient();
+                }
+            }
+            while (minCashier3 <= maxCashier3) {
+                minCashier3++;
+                if (minCashier3 == maxCashier3) {
+                    cashiersList.get(2).finishWithClient();
+                }
+            }
+        }
+    }
     //GETTERS AND SETTERS METHODS
         public List<Cashier> getCashiersList() {
         return cashiersList;

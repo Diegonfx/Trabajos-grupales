@@ -28,9 +28,7 @@ public class Cashier {
         anyClient.setTimeWithCashier(attendingTime);
     }
 
-    public void finishWithClient(Client anyClient) {
-        anyClient.setExitTime(rtc.getCurrentTime());
-        anyClient.setAttended(false);
+    public void finishWithClient() {
         isAttending = false;
         attendingTime = 0;
     }
@@ -60,4 +58,5 @@ public class Cashier {
     public void setAttending(boolean attending) {
         isAttending = attending;
     }
+
 }
