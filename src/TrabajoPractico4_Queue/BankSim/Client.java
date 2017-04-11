@@ -1,4 +1,4 @@
-package TrabajoPractico4_Queue;
+package TrabajoPractico4_Queue.BankSim;
 
 /**
  * Created by DiegoMancini on 7/4/17.
@@ -6,10 +6,10 @@ package TrabajoPractico4_Queue;
 public class Client {
 
     private String name;
-    private double enterTime;
-    private double exitTime;
-    private double attendedTime;
-    private double timeWithCashier;
+    private int enterTime;
+    private int exitTime;
+    private int attendedTime;
+    private int timeWithCashier;
     private boolean isAttended;
 
     public Client(String name) {
@@ -21,10 +21,10 @@ public class Client {
         isAttended = false;
     }
 
-    public double getTimeWithCashier() {
+    public int getTimeWithCashier() {
         return timeWithCashier;
     }
-    public void setTimeWithCashier(double timeWithCashier) {
+    public void setTimeWithCashier(int timeWithCashier) {
         this.timeWithCashier = timeWithCashier;
     }
     public String getName() {
@@ -33,21 +33,21 @@ public class Client {
     public double getEnterTime() {
         return enterTime;
     }
-    public void setEnterTime(double enterTime) {
+    public void setEnterTime(int enterTime) {
         this.enterTime = enterTime;
     }
-    public double getExitTime() {
+    public int getExitTime() {
         return exitTime;
     }
-    public void setExitTime(double exitTime) {
+    public void setExitTime(int exitTime) {
         this.exitTime = exitTime;
     }
-    public double getAttendedTime() {
+    public int getAttendedTime() {
         return attendedTime;
     }
-    public double timeInQueue() { return attendedTime - enterTime;}
-    public double timeInBank() { return exitTime - enterTime ; }
-    public void setAttendedTime(double timeWithCashier) {
+    public int timeInQueue() { return attendedTime - enterTime;}
+    public int timeInBank() { return exitTime - enterTime ; }
+    public void setAttendedTime(int timeWithCashier) {
         this.attendedTime = timeWithCashier;
     }
     public boolean isAttended() {

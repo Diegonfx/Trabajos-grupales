@@ -1,18 +1,17 @@
-package TrabajoPractico4_Queue;
+package TrabajoPractico4_Queue.BankSim;
 
-/**
- * Created by DiegoMancini on 7/4/17.
- */
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Cashier {
 
     private String name;
-    private double attendingTime;
+    private int attendingTime;
     private boolean isAttending;
-    private double minimumTime;
-    private double maximumTime;
+    private int minimumTime;
+    private int maximumTime;
     private BankRTC rtc;
 
-    public Cashier(String name, double minimumTime, double maximumTime , BankRTC rtc) {
+    public Cashier(String name, int minimumTime, int maximumTime , BankRTC rtc) {
         this.name = name;
         this.minimumTime = minimumTime;
         this.maximumTime = maximumTime;
@@ -25,7 +24,7 @@ public class Cashier {
         anyClient.setAttendedTime(rtc.getCurrentTime());
         anyClient.setAttended(true);
         isAttending = true;
-        attendingTime = doubleRandomInclusive(getMaximumTime() , getMinimumTime());
+        attendingTime = ThreadLocalRandom.current().nextInt(minimumTime , maximumTime);
         anyClient.setTimeWithCashier(attendingTime);
     }
 
@@ -43,29 +42,22 @@ public class Cashier {
     public String getName() {
         return name;
     }
-    public double getAttendingTime() {
+    public int getAttendingTime() {
         return attendingTime;
     }
     public boolean isAttending() {
         return isAttending;
     }
-    public double getMinimumTime() {
+    public int getMinimumTime() {
         return minimumTime;
     }
-    public double getMaximumTime() {
+    public int getMaximumTime() {
         return maximumTime;
     }
-    public void setAttendingTime(double attendingTime) {
+    public void setAttendingTime(int attendingTime) {
         this.attendingTime = attendingTime;
     }
     public void setAttending(boolean attending) {
         isAttending = attending;
-    }
-    private double doubleRandomInclusive(double max, double min) {
-        double r = Math.random();
-        if (r < 0.5) {
-            return ((1 - Math.random()) * (max - min) + min);
-        }
-        return (Math.random() * (max - min) + min);
     }
 }
