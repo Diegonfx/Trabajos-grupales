@@ -1,7 +1,9 @@
 package TrabajoPractico4_Queue;
 
 /**
- * Created by DiegoMancini on 7/4/17.
+ * Class that creates a queue (static).
+ * @author Diego Mancini
+ * @author Tomas Iturralde
  */
 public class StaticQueue<T> {
 

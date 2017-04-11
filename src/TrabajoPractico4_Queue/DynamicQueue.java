@@ -2,24 +2,11 @@ package TrabajoPractico4_Queue;
 
 
 /**
- * Created by DiegoMancini on 7/4/17.
+ * Class that creates a queue (dynamic).
+ * @author Diego Mancini
+ * @author Tomas Iturralde
  */
 public class DynamicQueue<T> {
-
-    private class Node<T>{
-        private Node next;
-        private T element;
-
-        private Node(T t){
-            element = t;
-        }
-        private T getElement(){
-            return element;
-        }
-        private Node getNext(){
-            return next;
-        }
-    }
     private Node<T> front;
     private Node<T> backend;
     private int size;
@@ -30,6 +17,7 @@ public class DynamicQueue<T> {
         size = 0;
     }
 
+    @SuppressWarnings("unchecked")
     public void enqueue(T object) {
         if (isEmpty()) {
             backend = front = new Node<>(object);
@@ -38,6 +26,8 @@ public class DynamicQueue<T> {
             size++;
         }
     }
+
+    @SuppressWarnings("unchecked")
     public T dequeue() {
         if (isEmpty()) {
             throw new RuntimeException("DATA dequeue");
@@ -72,4 +62,23 @@ public class DynamicQueue<T> {
         return backend;
     }
     public Node<T> getFrontNode() { return front; }
+
+    /**
+     * Private Class used to create nodes for the dynamic queue to use.
+     * @param <Q> type of data the node uses.
+     */
+    private class Node<Q>{
+        private Node next;
+        private Q element;
+
+        private Node(Q t){
+            element = t;
+        }
+        private Q getElement(){
+            return element;
+        }
+        private Node getNext(){
+            return next;
+        }
+    }
 }

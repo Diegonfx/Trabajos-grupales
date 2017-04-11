@@ -48,24 +48,22 @@ public class TP04_Methods {
         }
     }
 
-    private <T> void byLevel(BinaryTree<T> a,ArrayList<T> level){
-        for(int i = 1; i <= a.height(); i++){
-            if(!a.getLeft().isEmpty()){
-                level.add(a.getLeft().getRootElement());
-                System.out.println(a.getLeft().getRootElement());
-            }
-            if(!a.getRight().isEmpty()){
-                level.add(a.getRight().getRootElement());
-                System.out.println(a.getRight().getRootElement());
-            }
-        }
+    private <T> void elementsAtALevel(BinaryTree<T> a, int level, ArrayList<T> elements){
+        if (a.isEmpty())
+            return;
+        if (level == 1)
+            elements.add(a.getRootElement());
 
-        byLevel(a,level);
+        elementsAtALevel(a.getLeft(), level-1, elements);
+        elementsAtALevel(a.getRight(), level-1, elements);
     }
 
-    public <T> void byLevel (BinaryTree<T> a) {
+    public <T> ArrayList byLevel (BinaryTree<T> a) {
         ArrayList<T> list = new ArrayList<>();
-        byLevel(a, list);
+        for (int i = 1; i <= a.height() + 1; i++){
+            elementsAtALevel(a,i,list);
+        }
+        return list;
     }
 
     public <T> void serializeBinary(BinaryTree<T> a,String fileName){

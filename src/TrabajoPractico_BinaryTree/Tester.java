@@ -26,6 +26,7 @@ public class Tester {
         BinaryTree<Integer> tree12 = new BinaryTree<>(1,tree32,tree42);
         BinaryTree<Integer> root2 = new BinaryTree<>(0,tree12,tree22);
 
+        System.out.println(api.byLevel(root));
         api.serializeBinary(root,"C:\\Users\\Tomas\\Documents\\prueba arbol.txt");
         System.out.println("Des-serializamos el arbol y lo comparamos consigo mismo, para comprobar que funciona: ");
         System.out.println(ej14.equalTrees(root, api.deserializeBinary("C:\\Users\\Tomas\\Documents\\prueba arbol.txt")));
