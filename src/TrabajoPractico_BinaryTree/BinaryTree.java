@@ -1,9 +1,13 @@
 package TrabajoPractico_BinaryTree;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Tomas on 26/3/2017.
  */
-public class BinaryTree <T>{
+public class BinaryTree <T> implements Serializable{
     private DoubleNode<T> root;
 
     public BinaryTree(){
@@ -80,8 +84,28 @@ public class BinaryTree <T>{
             root.postOrden();
         }
     }
-    public <T> void byLevels() {
+    private <T> void byLevel(BinaryTree<T> a,List<BinaryTree<T>> level){
 
+        if(level.isEmpty()) return;
+
+        List<BinaryTree<T>> list = new ArrayList<BinaryTree<T>>();
+        for(BinaryTree<T> tree: level){
+            if(!tree.getLeft().isEmpty()){
+                list.add(tree.getLeft());
+                System.out.println(tree.getLeft().getRoot());
+            }
+            if(!tree.getRight().isEmpty()){
+                list.add(tree.getRight());
+                System.out.println(tree.getRight().getRoot());
+            }
+        }
+
+        byLevel(a,list);
+    }
+
+    public <T> void byLevel (BinaryTree<T> a) {
+        ArrayList<BinaryTree<T>> list = new ArrayList<>();
+        byLevel(a, list);
     }
 
 }

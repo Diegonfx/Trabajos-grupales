@@ -1,9 +1,11 @@
 package TrabajoPractico_BinaryTree;
 
+import java.io.Serializable;
+
 /**
  * Created by DiegoMancini on 8/4/17.
  */
-public class DoubleNode<Q> {
+public class DoubleNode<Q> implements Serializable{
 
     Q elem;
     DoubleNode<Q> right, left;

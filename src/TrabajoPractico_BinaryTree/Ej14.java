@@ -1,13 +1,12 @@
 package TrabajoPractico_BinaryTree;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by Tomas on 6/4/2017.
  */
 public class Ej14 {
-    private Ej13 ej13_Methods = new Ej13();
+    Ej13 ej13_Methods = new Ej13();
 
     public int summation(BinaryTree<Integer> a){
         if (a.isEmpty())
@@ -75,24 +74,32 @@ public class Ej14 {
     }
 
     public void showFrontier(BinaryTree a){
-        if (!isALeaf(a))
-            System.out.println("Empty");
-        System.out.println("Hoja con el elemento: " + a.getRootElement());
-
+        if(!a.isEmpty()){
+            if(a.getLeft().isEmpty() && a.getRight().isEmpty()){
+                System.out.println("Elemento de la frontera: " + a.getRootElement());
+            }
+            showFrontier(a.getLeft());
+            showFrontier(a.getRight());
+        }
     }
 
-    private boolean isALeaf(BinaryTree a){
-        if (a.isEmpty())
-            return true;
-        if (a.getLeft().isEmpty() && a.getRight().isEmpty())
-            return true;
-        return isALeaf(a.getLeft()) && isALeaf(a.getRight());
+    private boolean isALeaf(BinaryTree a) {
+        return a.getLeft().isEmpty() && a.getRight().isEmpty();
     }
 
-    public <T> ArrayList<T> frontier(BinaryTree<T> a){
+    private void frontier(BinaryTree a, ArrayList frontier){
+        if(!a.isEmpty()){
+            if(a.getLeft().isEmpty() && a.getRight().isEmpty()){
+                frontier.add(a.getRootElement());
+            }
+            frontier(a.getLeft(), frontier);
+            frontier(a.getRight(), frontier);
+        }
+    }
+
+    public ArrayList frontier(BinaryTree a){
         ArrayList frontier = new ArrayList();
-        if (isALeaf(a))
-            frontier.add(a.getRootElement());
+        frontier(a,frontier);
         return frontier;
     }
 
