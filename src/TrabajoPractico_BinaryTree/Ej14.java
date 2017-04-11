@@ -18,7 +18,7 @@ public class Ej14 {
         if (a.isEmpty())
             return 0;
         if ((a.getRootElement() % 3) != 0)
-            return 0;
+            return summationOf3(a.getLeft()) + summationOf3(a.getRight());
         return a.getRootElement() + summationOf3(a.getLeft()) + summationOf3(a.getRight());
     }
 

@@ -7,7 +7,6 @@ import java.util.ArrayList;
  */
 public class Tester {
     public static void main(String[] args){
-
         Ej13 ej13 = new Ej13();
         Ej14 ej14 = new Ej14();
         TP04_Methods api = new TP04_Methods();
@@ -27,37 +26,20 @@ public class Tester {
         BinaryTree<Integer> tree12 = new BinaryTree<>(1,tree32,tree42);
         BinaryTree<Integer> root2 = new BinaryTree<>(0,tree12,tree22);
 
-        ArrayList<BinaryTree<Integer>> list = new ArrayList<>();
-        list.add(root);
-        System.out.println("Representacion del arbol: " + "\n    0" + "\n  1   2" + "\n 3 4 5 6");
-        System.out.println("Recorrido preorden: ");
-        api.preOrden(root);
-        System.out.println("\n");
-        System.out.println("Recorrido inorden: ");
-        api.inOrden(root);
-        System.out.println("\n");
-        System.out.println("Recorrido postorden: ");
-        api.postOrden(root);
-        System.out.println("\n");
-        System.out.println("Recorrido por nivel: ");
-        api.byLevel(root);
-        System.out.println("\n");
-
         api.serializeBinary(root,"C:\\Users\\Tomas\\Documents\\prueba arbol.txt");
-        System.out.println("Para comprobar la serializacion, deserializamos el arbol y lo comparamos con el mismo: ");
-        System.out.println(ej14.equalTrees(api.deserializeBinary("C:\\Users\\Tomas\\Documents\\prueba arbol.txt"),root));
-
-        System.out.println("Es semejante al arbol 2? " + ej14.similarTrees(root, root2));
-        System.out.println("Es isomorfo al arbol 2? " + ej14.isomorphicTrees(root,root2));
-
-        System.out.println("Numero de Hojas: " + ej13.leaves(root));
+        System.out.println("Des-serializamos el arbol y lo comparamos consigo mismo, para comprobar que funciona: ");
+        System.out.println(ej14.equalTrees(root, api.deserializeBinary("C:\\Users\\Tomas\\Documents\\prueba arbol.txt")));
+        System.out.println("Son semejantes el arbol 1 y el arbol 2? " + ej14.similarTrees(root, root2));
+        System.out.println("Son isomorfos el arbol 1 y el arbol 2? " + ej14.isomorphicTrees(root,root2));
+        System.out.println("Numero de Hojas en el arbol 1: " + ej13.leaves(root));
         System.out.println("Cantidad de elementos en nivel 1: " + ej13.numberOfElementsAtLevel(root,1));
-        System.out.println("Numero de ocurrencias de 0: " + ej13.ocurrencias(root,1));
-        System.out.println("Altura del arbol: " + ej13.height(root));
-        System.out.println("Suma de elementos del arbol: " + ej14.summation(root));
-        System.out.println("El arbol es completo? " + ej14.treeIsComplete(root));
-        System.out.println("El arbol es estable? " + ej14.treeIsStable(root));
-        System.out.println("El arbol esta lleno? " + ej14.treeIsFull(root));
+        System.out.println("Numero de ocurrencias de 0 en el arbol 1: " + ej13.ocurrencias(root,0));
+        System.out.println("Altura del arbol 1: " + ej13.height(root));
+        System.out.println("Suma de elementos del arbol 1: " + ej14.summation(root));
+        System.out.println("Suma de elementos multiplos de 3 del arbol 1: " + ej14.summationOf3(root));
+        System.out.println("El arbol 1 es completo? " + ej14.treeIsComplete(root));
+        System.out.println("El arbol 1 es estable? " + ej14.treeIsStable(root));
+        System.out.println("El arbol 1 esta lleno? " + ej14.treeIsFull(root));
         ej14.showFrontier(root);
         System.out.print("Elementos de la frontera: ");
         ArrayList<Integer> myList = ej14.frontier(root);

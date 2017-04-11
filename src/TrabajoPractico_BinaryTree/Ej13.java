@@ -19,13 +19,13 @@ public class Ej13 {
         return leaves(a.getLeft()) + leaves(a.getRight());
     }
 
-    public <T> int ocurrencias(BinaryTree<T> a, Object o){
+    public <T> int ocurrencias(BinaryTree<T> a, T o){
         if(a.isEmpty())
             return 0;
-        if(a.getRoot().equals(o))
-            return 1 + ocurrencias(a.getLeft(),o)+ocurrencias(a.getRight(),o);
+        if(a.getRootElement().equals(o))
+            return 1 + ocurrencias(a.getLeft(),o)+ ocurrencias(a.getRight(),o);
         else
-            return ocurrencias(a.getLeft(),o)+ocurrencias(a.getRight(),o);
+            return ocurrencias(a.getLeft(),o)+ ocurrencias(a.getRight(),o);
     }
 
 

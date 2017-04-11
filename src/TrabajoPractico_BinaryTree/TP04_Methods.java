@@ -49,7 +49,7 @@ public class TP04_Methods {
             }
         }
 
-        //byLevel(a,list);
+        byLevel(a,list);
     }
 
     public <T> void byLevel (BinaryTree<T> a) {
