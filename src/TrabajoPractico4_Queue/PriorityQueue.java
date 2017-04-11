@@ -3,7 +3,7 @@ package TrabajoPractico4_Queue;
 import java.util.EmptyStackException;
 
 /**
- * Class that creates a priority queue.
+ * Implementation of the ADT PriorityQueue.
  * @author Diego Mancini
  * @author Tomas Iturralde
  */
