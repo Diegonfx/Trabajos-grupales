@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class Ej14 {
     Ej13 ej13_Methods = new Ej13();
+    TP04_Methods methods = new TP04_Methods();
 
     public int summation(BinaryTree<Integer> a){
         if (a.isEmpty())
@@ -27,11 +28,19 @@ public class Ej14 {
     }
 
     public boolean similarTrees(BinaryTree a , BinaryTree b) {
-        return sameElements(a,b) && !sameStructure(a,b);
+        ArrayList treeA = new ArrayList();
+        ArrayList treeB = new ArrayList();
+        treeA = methods.inOrdenS(a);
+        treeB = methods.inOrdenS(b);
+        for (int i = 0; i < treeA.size(); i++){
+            if (!treeB.containsAll(treeA))
+                return false;
+        }
+        return true;
     }
 
     public boolean isomorphicTrees(BinaryTree a, BinaryTree b){
-        return !sameElements(a,b) && sameStructure(a,b);
+        return sameStructure(a,b);
     }
 
     public boolean treeIsComplete(BinaryTree a){

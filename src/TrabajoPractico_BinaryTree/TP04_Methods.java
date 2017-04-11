@@ -12,14 +12,29 @@ public class TP04_Methods {
     public <T> void inOrden(BinaryTree<T>  a){
         if(!a.isEmpty()){
             inOrden(a.getLeft());
-            System.out.println(a.getRoot());
+            System.out.println(a.getRootElement());
             inOrden(a.getRight());
         }
     }
 
+    private <T> ArrayList inOrdenS(BinaryTree<T> a, ArrayList<T> list){
+        if (!a.isEmpty()){
+            inOrdenS(a.getLeft(), list);
+            list.add(a.getRootElement());
+            inOrdenS(a.getRight(), list);
+        }
+        return list;
+    }
+
+    public <T> ArrayList inOrdenS(BinaryTree<T> a){
+      ArrayList list = new ArrayList();
+      inOrdenS(a,list);
+      return list;
+    }
+
     public <T> void preOrden (BinaryTree<T> a){
         if (!a.isEmpty()) {
-            System.out.print(a.getRoot());
+            System.out.print(a.getRootElement());
             preOrden(a.getLeft());
             preOrden(a.getRight());
         }
@@ -29,31 +44,27 @@ public class TP04_Methods {
         if (!a.isEmpty()) {
             postOrden(a.getLeft());
             postOrden(a.getRight());
-            System.out.print(a.getRoot());
+            System.out.print(a.getRootElement());
         }
     }
 
-    private <T> void byLevel(BinaryTree<T> a,List<BinaryTree<T>> level){
-        if(level.isEmpty())
-            return;
-
-        List<BinaryTree<T>> list = new ArrayList<>();
-        for(BinaryTree<T> tree: level){
-            if(!tree.getLeft().isEmpty()){
-                list.add(tree.getLeft());
-                System.out.println(tree.getLeft().getRoot());
+    private <T> void byLevel(BinaryTree<T> a,ArrayList<T> level){
+        for(int i = 1; i <= a.height(); i++){
+            if(!a.getLeft().isEmpty()){
+                level.add(a.getLeft().getRootElement());
+                System.out.println(a.getLeft().getRootElement());
             }
-            if(!tree.getRight().isEmpty()){
-                list.add(tree.getRight());
-                System.out.println(tree.getRight().getRoot());
+            if(!a.getRight().isEmpty()){
+                level.add(a.getRight().getRootElement());
+                System.out.println(a.getRight().getRootElement());
             }
         }
 
-        byLevel(a,list);
+        byLevel(a,level);
     }
 
     public <T> void byLevel (BinaryTree<T> a) {
-        ArrayList<BinaryTree<T>> list = new ArrayList<>();
+        ArrayList<T> list = new ArrayList<>();
         byLevel(a, list);
     }
 
