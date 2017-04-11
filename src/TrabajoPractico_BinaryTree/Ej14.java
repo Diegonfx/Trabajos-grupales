@@ -7,6 +7,7 @@ import java.util.Random;
  * Created by Tomas on 6/4/2017.
  */
 public class Ej14 {
+    private Ej13 ej13_Methods = new Ej13();
 
     public int summation(BinaryTree<Integer> a){
         if (a.isEmpty())
@@ -35,7 +36,8 @@ public class Ej14 {
     }
 
     public boolean treeIsComplete(BinaryTree a){
-
+        if (a.isEmpty()) return true;
+        return (ej13_Methods.height(a.getLeft()) == ej13_Methods.height(a.getRight()) && treeIsComplete(a.getLeft()) && treeIsComplete(a.getRight()));
     }
 
     public boolean treeIsFull(BinaryTree a){
@@ -56,6 +58,20 @@ public class Ej14 {
         if (a.getRootElement() < a.getLeft().getRootElement() || a.getRootElement() < a.getRight().getRootElement())
             return false;
         return treeIsStable(a.getLeft()) && treeIsStable(a.getRight());
+    }
+
+    public boolean occursBinaryTree(BinaryTree a , BinaryTree b) {
+        boolean result = false;
+        if (equalTrees(a, b)) {
+            result = true;
+        }
+        if (!a.getLeft().isEmpty() && !b.getRight().isEmpty()) {
+            if ((occursBinaryTree(a.getLeft(), b) || occursBinaryTree(a.getRight(), b))) {
+                result = true;
+            } else {
+                result = false;
+            }
+        } return result;
     }
 
     public void showFrontier(BinaryTree a){

@@ -6,9 +6,7 @@ import java.util.EmptyStackException;
  * Created by DiegoMancini on 8/4/17.
  */
 public class PriorityQueue<T> {
-
     private DynamicQueue<T> [] arrayOfQueuesByPriority;
-
     public PriorityQueue(int amountOfPriority) {
         arrayOfQueuesByPriority = new DynamicQueue[amountOfPriority];
         for (int i = 0 ; i < arrayOfQueuesByPriority.length ; i++) {
@@ -23,16 +21,12 @@ public class PriorityQueue<T> {
     }
     public T dequeue() {
         for (int i = 0 ; i < arrayOfQueuesByPriority.length ; i++) {
-            if (!arrayOfQueuesByPriority[i].isEmpty()) {
-                return arrayOfQueuesByPriority[i].dequeue();
-            }
+            if (!arrayOfQueuesByPriority[i].isEmpty()) { return arrayOfQueuesByPriority[i].dequeue(); }
         } throw new EmptyStackException();
     }
     public boolean isEmpty() {
         for (int i = 0; i < arrayOfQueuesByPriority.length; i++) {
-            if (!arrayOfQueuesByPriority[i].isEmpty()) {
-                return false;
-            }
+            if (!arrayOfQueuesByPriority[i].isEmpty()) { return false; }
         } return true;
     }
     public DynamicQueue<T> getQueueByPriority(int priority) {
