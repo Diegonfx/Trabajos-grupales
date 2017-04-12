@@ -44,7 +44,7 @@ public class BankRTC {
         openingTime = 0;
         currentTime = 0;
         closingTime = 18000;
-        bankIsOpen = true;
+        bankIsOpen = false;
         this.usedStrategy = usedStrategy;
     }
 
@@ -65,8 +65,8 @@ public class BankRTC {
             e.printStackTrace();
         } return result;
     }
-    private void clientEnters() {
-        int randomNumberOfClients = ThreadLocalRandom.current().nextInt(0 , 3);
+    public void clientEnters() {
+        int randomNumberOfClients = ThreadLocalRandom.current().nextInt(5 , 10);
         Client[] clientsEntering = new Client[randomNumberOfClients];
         if (randomNumberOfClients == 0) {
             System.out.println("NO CLIENTS HAVE ENTERED");
@@ -79,31 +79,27 @@ public class BankRTC {
         }
     }
     public void distributeClients() {
-        for (int i = 0 ; i < listOfQueues.size() ; i++) {
-            while (!entranceQueue.isEmpty()) {
             DynamicQueue<Client> queueToAssignClient = getShortestQueue();
             queueToAssignClient.enqueue(entranceQueue.dequeue());
-            }
-        }
     }
     public void clientLeaves(Client anyClient) {
         anyClient.setExitTime(currentTime);
-        listOfClients.remove(anyClient);
         entranceQueue.dequeue();
     }
-    private void opens() {
+    public void opens() {
         bankIsOpen = true;
         clientEnters();
     }
+    public void closes() {
+        bankIsOpen = false;
+    }
     public void operate() {
-        opens();
         if (usedStrategy.isUsingStrategyA()) {
             usedStrategy.useStrategy(this , entranceQueue);
         } else if (usedStrategy.isUsingStrategyB()) {
             usedStrategy.useStrategy(this , entranceQueue);
         }
     }
-
     public void cashiersFullWaiting() {
 
         if (!cashiersAreFree) {
@@ -134,7 +130,7 @@ public class BankRTC {
         }
     }
     //GETTERS AND SETTERS METHODS
-        public List<Cashier> getCashiersList() {
+    public List<Cashier> getCashiersList() {
         return cashiersList;
     }
     public List<Client> getListOfClients() {
@@ -175,13 +171,21 @@ public class BankRTC {
             bankIsOpen = false;
         }
     }
-    public boolean isBankIsOpen() {
+    public boolean isOpen() {
         return bankIsOpen;
     }
+
+    public void setCurrentTime(int currentTime) {
+        this.currentTime = currentTime;
+    }
+
     public Strategy getUsedStrategy() {
         return usedStrategy;
     }
     public void setUsedStrategy(Strategy usedStrategy) {
         this.usedStrategy = usedStrategy;
+    }
+    public void setBankIsOpen(boolean bankIsOpen) {
+        this.bankIsOpen = bankIsOpen;
     }
 }

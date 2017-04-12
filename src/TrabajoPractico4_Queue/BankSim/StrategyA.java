@@ -32,6 +32,7 @@ public class StrategyA implements Strategy {
     @Override
     public void useStrategy(BankRTC bankRTC, DynamicQueue<Client> clientsQueue) {
         while (!clientsQueue.isEmpty()) {
+
             if (!bankRTC.getCashiersAreFree()) {
                 bankRTC.cashiersFullWaiting();
             }
@@ -42,6 +43,7 @@ public class StrategyA implements Strategy {
                 int timeWithCashier = bankRTC.getCashiersList().get(random).getAttendingTime();
                 clientsQueue.getFront().setAttendedTime(bankRTC.getCurrentTime());
                 clientsQueue.getFront().setTimeWithCashier(timeWithCashier);
+                bankRTC.clientLeaves(clientsQueue.getFront());
             } else
                 for (int i = 0 ; i < bankRTC.getCashiersList().size() ; i++) {
                     if (!bankRTC.getCashiersList().get(i).isAttending()) {
@@ -51,6 +53,7 @@ public class StrategyA implements Strategy {
                         int timeWithCashier = bankRTC.getCashiersList().get(i).getAttendingTime();
                         clientsQueue.getFront().setAttendedTime(bankRTC.getCurrentTime());
                         clientsQueue.getFront().setTimeWithCashier(timeWithCashier);
+                        bankRTC.clientLeaves(clientsQueue.getFront());
                     }
                 }
         }

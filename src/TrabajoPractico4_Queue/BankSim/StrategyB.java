@@ -32,28 +32,33 @@ public class StrategyB implements Strategy {
     @Override
     public void useStrategy(BankRTC bankRTC, DynamicQueue<Client> clientsQueue) {
         while (!clientsQueue.isEmpty()) {
-            bankRTC.distributeClients();
 
             if (!bankRTC.getCashiersAreFree()) {
                 bankRTC.cashiersFullWaiting();
             }
-
             if (bankRTC.getCashiersAreFree()) {
+                for (int i = 0 ; i < 10 ; i++) {
+                    bankRTC.distributeClients();
+                }
                 int random = ThreadLocalRandom.current().nextInt(0 , 3) ;
-                bankRTC.getCashiersList().get(random).attendClient(clientsQueue.getFront());
+                bankRTC.getCashiersList().get(random).attendClient(bankRTC.getListOfQueues().get(random).getFront());
                 bankRTC.getCashiersList().get(random).setAttending(true);
                 int timeWithCashier = bankRTC.getCashiersList().get(random).getAttendingTime();
-                clientsQueue.getFront().setAttendedTime(bankRTC.getCurrentTime());
-                clientsQueue.getFront().setTimeWithCashier(timeWithCashier);
+                bankRTC.getListOfQueues().get(random).getFront().setAttendedTime(bankRTC.getCurrentTime());
+                bankRTC.getListOfQueues().get(random).getFront().setTimeWithCashier(timeWithCashier);
+                bankRTC.clientLeaves(bankRTC.getListOfQueues().get(random).getFront());
             } else
                 for (int i = 0 ; i < bankRTC.getCashiersList().size() ; i++) {
                     if (!bankRTC.getCashiersList().get(i).isAttending()) {
-                        bankRTC.getCashiersList().get(i).attendClient(clientsQueue.getFront());
-                        bankRTC.getCashiersList().get(i).attendClient(clientsQueue.getFront());
+                        for (int j = 0 ; j < 10 ; j++) {
+                            bankRTC.distributeClients();
+                        }
+                        bankRTC.getCashiersList().get(i).attendClient(bankRTC.getListOfQueues().get(i).getFront());
                         bankRTC.getCashiersList().get(i).setAttending(true);
                         int timeWithCashier = bankRTC.getCashiersList().get(i).getAttendingTime();
-                        clientsQueue.getFront().setAttendedTime(bankRTC.getCurrentTime());
-                        clientsQueue.getFront().setTimeWithCashier(timeWithCashier);
+                        bankRTC.getListOfQueues().get(i).getFront().setAttendedTime(bankRTC.getCurrentTime());
+                        bankRTC.getListOfQueues().get(i).getFront().setTimeWithCashier(timeWithCashier);
+                        bankRTC.clientLeaves(bankRTC.getListOfQueues().get(i).getFront());
                     }
                 }
         }
