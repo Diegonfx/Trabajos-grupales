@@ -30,7 +30,7 @@ public class Client {
     public String getName() {
         return name;
     }
-    public double getEnterTime() {
+    public int getEnterTime() {
         return enterTime;
     }
     public void setEnterTime(int enterTime) {

@@ -41,7 +41,7 @@ public class StrategyA implements Strategy {
                 bankRTC.getCashiersList().get(random).attendClient(clientsQueue.getFront());
                 bankRTC.getCashiersList().get(random).setAttending(true);
                 int timeWithCashier = bankRTC.getCashiersList().get(random).getAttendingTime();
-                clientsQueue.getFront().setAttendedTime(bankRTC.getCurrentTime());
+                clientsQueue.getFront().setAttendedTime(clientsQueue.getFront().getEnterTime() - clientsQueue.getFront().getTimeWithCashier());
                 clientsQueue.getFront().setTimeWithCashier(timeWithCashier);
                 bankRTC.clientLeaves(clientsQueue.getFront());
             } else
@@ -51,7 +51,7 @@ public class StrategyA implements Strategy {
                         bankRTC.getCashiersList().get(i).attendClient(clientsQueue.getFront());
                         bankRTC.getCashiersList().get(i).setAttending(true);
                         int timeWithCashier = bankRTC.getCashiersList().get(i).getAttendingTime();
-                        clientsQueue.getFront().setAttendedTime(bankRTC.getCurrentTime());
+                        clientsQueue.getFront().setAttendedTime(clientsQueue.getFront().getEnterTime() - clientsQueue.getFront().getTimeWithCashier());
                         clientsQueue.getFront().setTimeWithCashier(timeWithCashier);
                         bankRTC.clientLeaves(clientsQueue.getFront());
                     }

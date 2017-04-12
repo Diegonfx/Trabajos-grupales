@@ -66,11 +66,8 @@ public class BankRTC {
         } return result;
     }
     public void clientEnters() {
-        int randomNumberOfClients = ThreadLocalRandom.current().nextInt(5 , 10);
+        int randomNumberOfClients = ThreadLocalRandom.current().nextInt(0 , 5);
         Client[] clientsEntering = new Client[randomNumberOfClients];
-        if (randomNumberOfClients == 0) {
-            System.out.println("NO CLIENTS HAVE ENTERED");
-        }
         for (int i = 0 ; i < clientsEntering.length ; i++) {
             clientsEntering[i] = new Client("Client number: " + ++clientNumber);
             clientsEntering[i].setEnterTime(currentTime);
@@ -83,7 +80,7 @@ public class BankRTC {
             queueToAssignClient.enqueue(entranceQueue.dequeue());
     }
     public void clientLeaves(Client anyClient) {
-        anyClient.setExitTime(currentTime);
+        anyClient.setExitTime(currentTime + anyClient.getTimeWithCashier());
         entranceQueue.dequeue();
     }
     public void opens() {

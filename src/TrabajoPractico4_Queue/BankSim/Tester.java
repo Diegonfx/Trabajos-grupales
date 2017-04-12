@@ -16,6 +16,7 @@ public class Tester {
         bankRTC_SimulationA.clientEnters();
         bankRTC_SimulationA.clientEnters();
         bankRTC_SimulationA.clientEnters();
+
         for (int i = 0 ; i <= 18000 ; i++) {
             bankRTC_SimulationA.setCurrentTime(++currentTime_A);
             timeSinceLastClient++;
@@ -59,10 +60,10 @@ public class Tester {
 //        }
 
         for (int i = 0; i < bankRTC_SimulationA.getListOfClients().size(); i++) {
-            System.out.println(" Name of client: " + bankRTC_SimulationA.getListOfClients().get(i).getName() +
+            System.out.println("\n" + bankRTC_SimulationA.getListOfClients().get(i).getName() +
                     "\n Time it was attended: " + bankRTC_SimulationA.getListOfClients().get(i).getAttendedTime() +
                     "\n Time it entered the bank: " + bankRTC_SimulationA.getListOfClients().get(i).getEnterTime() +
-                    "\n Time it left the bank: " + bankRTC_SimulationA.getListOfClients().get(i).getExitTime() +
+                    "\n Time it left the bank: " + bankRTC_SimulationA.getListOfClients().get(i).getExitTime() + timeAfterClose +
                     "\n Time it spent with cashier: " + bankRTC_SimulationA.getListOfClients().get(i).getTimeWithCashier());
         }
 
