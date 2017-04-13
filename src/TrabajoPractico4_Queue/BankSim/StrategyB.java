@@ -44,11 +44,8 @@ public class StrategyB implements Strategy {
                 bankRTC.getCashiersList().get(random).attendClient(bankRTC.getListOfQueues().get(random).getFront());
                 bankRTC.getCashiersList().get(random).setAttending(true);
                 int timeWithCashier = bankRTC.getCashiersList().get(random).getAttendingTime();
-                if (bankRTC.getListOfQueues().get(random).getFront().getEnterTime()-bankRTC.getListOfQueues().get(random).getFront().getTimeWithCashier() < 0) {
-                    bankRTC.getListOfQueues().get(random).getFront().setAttendedTime(0);
-                }else {
-                    bankRTC.getListOfQueues().get(random).getFront().setAttendedTime(bankRTC.getListOfQueues().get(random).getFront().getEnterTime()-bankRTC.getListOfQueues().get(random).getFront().getTimeWithCashier());
-                }                bankRTC.getListOfQueues().get(random).getFront().setTimeWithCashier(timeWithCashier);
+                bankRTC.getListOfQueues().get(random).getFront().setAttendedTime(bankRTC.getListOfQueues().get(random).getFront().getEnterTime()-bankRTC.getListOfQueues().get(random).getFront().getTimeWithCashier());
+                bankRTC.getListOfQueues().get(random).getFront().setTimeWithCashier(timeWithCashier);
                 bankRTC.clientLeaves(bankRTC.getListOfQueues().get(random).getFront());
             } else
                 for (int i = 0 ; i < bankRTC.getCashiersList().size() ; i++) {
