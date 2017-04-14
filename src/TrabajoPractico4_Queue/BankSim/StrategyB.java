@@ -1,5 +1,7 @@
 package TrabajoPractico4_Queue.BankSim;
 
+
+
 import TrabajoPractico4_Queue.DynamicQueue;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -47,24 +49,25 @@ public class StrategyB implements Strategy {
                 bankRTC.getListOfQueues().get(random).getFront().setAttendedTime(bankRTC.getListOfQueues().get(random).getFront().getEnterTime()-bankRTC.getListOfQueues().get(random).getFront().getTimeWithCashier());
                 bankRTC.getListOfQueues().get(random).getFront().setTimeWithCashier(timeWithCashier);
                 bankRTC.clientLeaves(bankRTC.getListOfQueues().get(random).getFront());
-            } else
-                for (int i = 0 ; i < bankRTC.getCashiersList().size() ; i++) {
+            } else {
+                for (int i = 0; i < bankRTC.getCashiersList().size(); i++) {
                     if (!bankRTC.getCashiersList().get(i).isAttending()) {
-                        for (int j = 0 ; j < 10 ; j++) {
+                        for (int j = 0; j < 10; j++) {
                             bankRTC.distributeClients();
                         }
                         bankRTC.getCashiersList().get(i).attendClient(bankRTC.getListOfQueues().get(i).getFront());
                         bankRTC.getCashiersList().get(i).setAttending(true);
                         int timeWithCashier = bankRTC.getCashiersList().get(i).getAttendingTime();
-                        if (bankRTC.getListOfQueues().get(i).getFront().getEnterTime()-bankRTC.getListOfQueues().get(i).getFront().getTimeWithCashier() < 0) {
+                        if (bankRTC.getListOfQueues().get(i).getFront().getEnterTime() - bankRTC.getListOfQueues().get(i).getFront().getTimeWithCashier() < 0) {
                             bankRTC.getListOfQueues().get(i).getFront().setAttendedTime(0);
-                        }else {
-                            bankRTC.getListOfQueues().get(i).getFront().setAttendedTime(bankRTC.getListOfQueues().get(i).getFront().getEnterTime()-bankRTC.getListOfQueues().get(i).getFront().getTimeWithCashier());
+                        } else {
+                            bankRTC.getListOfQueues().get(i).getFront().setAttendedTime(bankRTC.getListOfQueues().get(i).getFront().getEnterTime() - bankRTC.getListOfQueues().get(i).getFront().getTimeWithCashier());
                         }
                         bankRTC.getListOfQueues().get(i).getFront().setTimeWithCashier(timeWithCashier);
                         bankRTC.clientLeaves(bankRTC.getListOfQueues().get(i).getFront());
                     }
                 }
+            }
         }
     }
 }
