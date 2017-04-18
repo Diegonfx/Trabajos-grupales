@@ -20,6 +20,22 @@ public class Tournament {
         this.matchesList = matchesList;
     }
 
+    public void printTable() {
+        System.out.println("TOURNAMENT '' " + this.getName() + " '' CURRENT TABLE");
+        System.out.print(" - Team ---- Points ---- Matches ---- \n");
+        Collections.sort(teamsList , Collections.reverseOrder());
+        System.out.println("    " + teamsList.get(0).getName() +  "        " + teamsList.get(0).getPoints() + "           " + teamsList.get(0).getMatchesPlayed());
+        for (int i = 1; i < teamsList.size(); i++) {
+            System.out.println("    " + teamsList.get(i).getName() +  "         " + teamsList.get(i).getPoints() + "           " + teamsList.get(i).getMatchesPlayed());
+        }
+        System.out.println("\nRESULTS MEANING: --> ||| HOME TEAM WON = 1  |||  AWAY TEAM WON = -1  |||  TEAMS DRAW = 0 \n");
+        int position = 1;
+        for (int i = 0 ; i < matchesList.size() ; i++) {
+            System.out.println("Match " + position + ": (H) " + matchesList.get(i).getHomeTeam().getName() + " x " + matchesList.get(i).getAwayTeam().getName() + " (A) " + "----> RESULT = " + matchesList.get(i).getResult());
+            position++;
+        }
+    }
+
     //GETTERS AND SETTERS
     public String getName() {
         return name;
@@ -38,22 +54,6 @@ public class Tournament {
     }
     public void setMatchesList(List<Match> matchesList) {
         this.matchesList = matchesList;
-    }
-
-    public void printTable() {
-        System.out.println("TOURNAMENT '' " + this.getName() + " '' CURRENT TABLE");
-        System.out.print(" - Team ---- Points ---- Matches ---- \n");
-        Collections.sort(teamsList , Collections.reverseOrder());
-        System.out.println("    " + teamsList.get(0).getName() +  "        " + teamsList.get(0).getPoints() + "           " + teamsList.get(0).getMatchesPlayed());
-        for (int i = 1; i < teamsList.size(); i++) {
-            System.out.println("    " + teamsList.get(i).getName() +  "         " + teamsList.get(i).getPoints() + "           " + teamsList.get(i).getMatchesPlayed());
-        }
-        System.out.println("\nRESULTS MEANING: --> ||| HOME TEAM WON = 1  |||  AWAY TEAM WON = -1  |||  TEAMS DRAW = 0 \n");
-        int position = 1;
-        for (int i = 0 ; i < matchesList.size() ; i++) {
-            System.out.println("Match " + position + ": (H) " + matchesList.get(i).getHomeTeam().getName() + " x " + matchesList.get(i).getAwayTeam().getName() + " (A) " + "----> RESULT = " + matchesList.get(i).getResult());
-            position++;
-        }
     }
 
 }

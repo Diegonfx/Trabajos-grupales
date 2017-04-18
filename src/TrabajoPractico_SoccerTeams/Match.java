@@ -1,5 +1,7 @@
 package TrabajoPractico_SoccerTeams;
 
+import TrabajoPractico3.Stacks.StaticStack.StaticStack;
+
 /**
  * Created by DiegoMancini on 12/4/17.
  */
@@ -8,20 +10,20 @@ public class Match {
     private Team homeTeam;
     private Team awayTeam;
     private int result;
-    private final static int WIN = 1;
-    private final static int DRAW = 0;
-    private final static int LOSE = -1;
-    private boolean homeTeamWon;
-    private boolean awayTeamWon;
+    private boolean won;
     private boolean teamsDraw;
+    private StaticStack<Outcome> stackOfResults;
 
     public Match(Team homeTeam, Team awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
-        result = DRAW;
-        homeTeamWon = false;
-        awayTeamWon = false;
+        result = 0;
+        won = false;
         teamsDraw = true;
+        stackOfResults = new StaticStack<>(3);
+        stackOfResults.push(new AwayTeamWon());
+        stackOfResults.push(new MatchDraw());
+        stackOfResults.push(new HomeTeamWon());
     }
 
     //GETTERS AND SETTERS
@@ -37,17 +39,11 @@ public class Match {
     public void setResult(int result) {
         this.result = result;
     }
-    public boolean isHomeTeamWon() {
-        return homeTeamWon;
+    public boolean hasWon() {
+        return won;
     }
-    public void setHomeTeamWon(boolean homeTeamWon) {
-        this.homeTeamWon = homeTeamWon;
-    }
-    public boolean isAwayTeamWon() {
-        return awayTeamWon;
-    }
-    public void setAwayTeamWon(boolean awayTeamWon) {
-        this.awayTeamWon = awayTeamWon;
+    public void setWon(boolean result) {
+        this.won = result;
     }
     public boolean isTeamsDraw() {
         return teamsDraw;
@@ -55,5 +51,7 @@ public class Match {
     public void setTeamsDraw(boolean teamsDraw) {
         this.teamsDraw = teamsDraw;
     }
-
+    public StaticStack<Outcome> getStackOfResults() {
+        return stackOfResults;
+    }
 }
