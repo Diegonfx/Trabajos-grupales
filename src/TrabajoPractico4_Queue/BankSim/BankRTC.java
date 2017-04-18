@@ -83,6 +83,7 @@ public class BankRTC {
         anyClient.setExitTime(currentTime + anyClient.getTimeWithCashier());
         entranceQueue.dequeue();
     }
+
     public void opens() {
         bankIsOpen = true;
         clientEnters();
@@ -90,13 +91,11 @@ public class BankRTC {
     public void closes() {
         bankIsOpen = false;
     }
+
     public void operate() {
-        if (usedStrategy.isUsingStrategyA()) {
-            usedStrategy.useStrategy(this , entranceQueue);
-        } else if (usedStrategy.isUsingStrategyB()) {
-            usedStrategy.useStrategy(this , entranceQueue);
-        }
+        usedStrategy.useStrategy(this , entranceQueue);
     }
+
     public void cashiersFullWaiting() {
 
         if (!cashiersAreFree) {

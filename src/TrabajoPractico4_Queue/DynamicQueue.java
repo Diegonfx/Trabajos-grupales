@@ -29,7 +29,7 @@ public class DynamicQueue<T> {
 
     @SuppressWarnings("unchecked")
     public T dequeue() {
-        if (isEmpty()) {
+        if (this.isEmpty()) {
             throw new RuntimeException("DATA dequeue");
         } else {
             T returnValue = front.element;
