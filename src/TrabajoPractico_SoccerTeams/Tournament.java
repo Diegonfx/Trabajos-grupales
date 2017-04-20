@@ -1,8 +1,6 @@
 package TrabajoPractico_SoccerTeams;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -24,9 +22,9 @@ public class Tournament {
         System.out.println("TOURNAMENT '' " + this.getName() + " '' CURRENT TABLE");
         System.out.print(" - Team ---- Points ---- Matches ---- \n");
         Collections.sort(teamsList , Collections.reverseOrder());
-        System.out.println("    " + teamsList.get(0).getName() +  "        " + teamsList.get(0).getPoints() + "           " + teamsList.get(0).getMatchesPlayed());
+        System.out.println("    " + teamsList.get(0).getName() +  "        " + teamsList.get(0).getPoints());
         for (int i = 1; i < teamsList.size(); i++) {
-            System.out.println("    " + teamsList.get(i).getName() +  "         " + teamsList.get(i).getPoints() + "           " + teamsList.get(i).getMatchesPlayed());
+            System.out.println("    " + teamsList.get(i).getName() +  "         " + teamsList.get(i).getPoints());
         }
         System.out.println("\nRESULTS MEANING: --> ||| HOME TEAM WON = 1  |||  AWAY TEAM WON = -1  |||  TEAMS DRAW = 0 \n");
         int position = 1;

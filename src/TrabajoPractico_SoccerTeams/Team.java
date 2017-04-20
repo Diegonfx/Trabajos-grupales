@@ -7,7 +7,6 @@ public class Team implements Comparable<Team> {
 
     private String name;
     private int points;
-    private int matchesPlayed;
 //    private int matchesWon;
 //    private int matchesLost;
 //    private int matchesDrawn;
@@ -15,10 +14,9 @@ public class Team implements Comparable<Team> {
 //    private boolean drawMatch;
 //    private boolean lostMatch;
 
-    public Team(String name , int points , int matchesPlayed) {
+    public Team(String name , int points) {
         this.name = name;
         this.points = points;
-        this.matchesPlayed = matchesPlayed;
 //        matchesDrawn = 0;
 //        matchesLost = 0;
 //        matchesWon = 0;
@@ -55,12 +53,6 @@ public class Team implements Comparable<Team> {
         this.points = points;
     }
 
-    public int getMatchesPlayed() {
-        return matchesPlayed;
-    }
-    public void setMatchesPlayed(int matchesPlayed) {
-        this.matchesPlayed = matchesPlayed;
-    }
 
 //    public int getMatchesWon() {
 //        return matchesWon;

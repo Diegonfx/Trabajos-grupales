@@ -1,0 +1,133 @@
+package TrabajoPractico_BinarySearchTree;
+
+/**
+ * Implementation of a Binary Search Tree.
+ * @author Tomas Iturralde
+ * @author Diego Mancini
+ */
+public class BinaryTree<T> {
+    private DoubleNode<T> root;
+
+    public BinaryTree(){
+        root = null;
+    }
+
+    public T getRootElement(){
+        return root.elem;
+    }
+
+    public boolean isEmpty(){
+        return root == null;
+    }
+
+    public BinaryTree<T> getLeft(){
+        BinaryTree<T> t = new BinaryTree<>();
+        t.root = root.left;
+        return t;
+    }
+
+    public BinaryTree<T> getRight(){
+        BinaryTree<T> t = new BinaryTree<>();
+        t.root = root.right;
+        return t;
+
+    }
+
+    public boolean exists(Comparable x){
+        return exists(root, x);
+    }
+
+    public T getMin(){
+        return getMin(root).elem;
+    }
+
+    public T getMax(){
+        return getMax(root).elem;
+    }
+
+    public T search(Comparable x){
+        return search(root, x).elem;
+    }
+
+    public void insert(Comparable x){
+        root = insert(root, x);
+    }
+
+    public void delete(Comparable x){
+        root = delete(root, x);
+    }
+
+    @SuppressWarnings("unchecked")
+    private boolean exists(DoubleNode<T> t, Comparable x) {
+        if (t == null)
+            return false;
+        if (x.compareTo(t.elem) == 0)
+            return true;
+        else if (x.compareTo( t.elem)< 0)
+            return exists(t.left, x);
+        else
+            return exists(t.right, x);
+    }
+
+    private DoubleNode<T> getMin(DoubleNode<T> t){
+        if (t.left == null)
+            return t;
+        else
+            return getMin(t.left);
+    }
+
+    private DoubleNode<T> getMax(DoubleNode<T> t){
+        if (t.right == null)
+            return t;
+        else
+            return getMax(t.right);
+    }
+
+    @SuppressWarnings("unchecked")
+    private DoubleNode<T> search(DoubleNode<T> t, Comparable x){
+        if (x.compareTo(t.elem) == 0)
+            return t;
+        else if (x.compareTo(t.elem) < 0)
+            return search(t.left, x);
+        else
+            return search(t.right, x);
+    }
+
+    @SuppressWarnings("unchecked")
+    private DoubleNode<T> insert (DoubleNode<T> t, Comparable x) {
+        if (t == null){
+            t = new DoubleNode<>();
+            t.elem = (T)x;
+        }
+        else if (x.compareTo(t.elem) < 0)
+            t.left = insert(t.left, x);
+        else
+            t.right = insert(t.right, x);
+        return t;
+    }
+
+    @SuppressWarnings("unchecked")
+    private DoubleNode<T> delete (DoubleNode<T> t, Comparable x) {
+        if (x.compareTo(t.elem) < 0)
+            t.left = delete(t.left, x);
+        else if (x.compareTo(t.elem) > 0)
+            t.right = delete(t.right, x);
+        else if (t.left != null && t.right != null ) {
+            t.elem = getMin(t.right).elem;
+            t.right = deleteMin(t.right);
+        }
+        else if (t.left != null)
+            t = t.left;
+        else
+            t =t.right;
+        return t;
+    }
+
+    private DoubleNode<T> deleteMin(DoubleNode<T> t){
+        if (t.left != null)
+            t.left = deleteMin(t.left);
+        else
+            t = t.right;
+        return t;
+    }
+}
