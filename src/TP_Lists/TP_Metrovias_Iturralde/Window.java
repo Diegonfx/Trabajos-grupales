@@ -1,4 +1,4 @@
-package TP_Lists;
+package TP_Lists.TP_Metrovias_Iturralde;
 
 import TrabajoPractico4_Queue.DynamicQueue;
 
@@ -53,6 +53,15 @@ public class Window {
                 clientsServed++;
                 totalIncome += 0.7;
             }
+        }freeTime += 10;
+    }
+
+    public void serveCustomersAtEnd(int currentTime){
+        if (!line.isEmpty()) {
+            clientTotalTime += currentTime - line.getFront().getInitTime();
+            line.dequeue();
+            clientsServed++;
+            totalIncome += 0.7;
         }freeTime += 10;
     }
 
