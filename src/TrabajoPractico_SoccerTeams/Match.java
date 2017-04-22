@@ -10,20 +10,16 @@ public class Match {
     private Team homeTeam;
     private Team awayTeam;
     private int result;
-    private boolean won;
-    private boolean teamsDraw;
-    private StaticStack<Outcome> stackOfResults;
+    private StaticStack<Integer> stackOfResults;
 
     public Match(Team homeTeam, Team awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         result = 0;
-        won = false;
-        teamsDraw = true;
         stackOfResults = new StaticStack<>(3);
-        stackOfResults.push(new AwayTeamWon());
-        stackOfResults.push(new MatchDraw());
-        stackOfResults.push(new HomeTeamWon());
+        stackOfResults.push(-1);
+        stackOfResults.push(0);
+        stackOfResults.push(1);
     }
 
     //GETTERS AND SETTERS
@@ -39,19 +35,7 @@ public class Match {
     public void setResult(int result) {
         this.result = result;
     }
-    public boolean hasWon() {
-        return won;
-    }
-    public void setWon(boolean result) {
-        this.won = result;
-    }
-    public boolean isTeamsDraw() {
-        return teamsDraw;
-    }
-    public void setTeamsDraw(boolean teamsDraw) {
-        this.teamsDraw = teamsDraw;
-    }
-    public StaticStack<Outcome> getStackOfResults() {
+    public StaticStack<Integer> getStackOfResults() {
         return stackOfResults;
     }
 }
