@@ -1,29 +1,18 @@
 package TrabajoPractico_SoccerTeams;
 
 /**
- * Created by DiegoMancini on 12/4/17.
+ * Implementation of a team.
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class Team implements Comparable<Team> {
 
     private String name;
     private int points;
-//    private int matchesWon;
-//    private int matchesLost;
-//    private int matchesDrawn;
-//    private boolean wonMatch;
-//    private boolean drawMatch;
-//    private boolean lostMatch;
 
     public Team(String name , int points) {
         this.name = name;
         this.points = points;
-//        matchesDrawn = 0;
-//        matchesLost = 0;
-//        matchesWon = 0;
-//        wonMatch = false;
-//        drawMatch = true;
-//        lostMatch = false;
-
     }
 
     @Override
@@ -52,48 +41,4 @@ public class Team implements Comparable<Team> {
     public void setPoints(int points) {
         this.points = points;
     }
-
-
-//    public int getMatchesWon() {
-//        return matchesWon;
-//    }
-//    public void setMatchesWon(int matchesWon) {
-//        this.matchesWon = matchesWon;
-//    }
-//
-//    public int getMatchesLost() {
-//        return matchesLost;
-//    }
-//    public void setMatchesLost(int matchesLost) {
-//        this.matchesLost = matchesLost;
-//    }
-//
-//    public int getMatchesDrawn() {
-//        return matchesDrawn;
-//    }
-//    public void setMatchesDrawn(int matchesDrawn) {
-//        this.matchesDrawn = matchesDrawn;
-//    }
-
-//    public boolean isWonMatch() {
-//        return wonMatch;
-//    }
-//    public void setWonMatch(boolean wonMatch) {
-//        this.wonMatch = wonMatch;
-//    }
-//
-//    public boolean isDrawMatch() {
-//        return drawMatch;
-//    }
-//    public void setDrawMatch(boolean drawMatch) {
-//        this.drawMatch = drawMatch;
-//    }
-//
-//    public boolean isLostMatch() {
-//        return lostMatch;
-//    }
-//    public void setLostMatch(boolean lostMatch) {
-//        this.lostMatch = lostMatch;
-//    }
-
 }

@@ -3,7 +3,9 @@ package TrabajoPractico_SoccerTeams;
 import TrabajoPractico3.Stacks.StaticStack.StaticStack;
 
 /**
- * Created by DiegoMancini on 12/4/17.
+ * Implementation of a match between two teams (Home and Away)
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class Match {
 

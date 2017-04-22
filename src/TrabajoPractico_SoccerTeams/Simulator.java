@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Created by DiegoMancini on 13/4/17.
+ * Tester for the tournament solver.
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class Simulator {
 
