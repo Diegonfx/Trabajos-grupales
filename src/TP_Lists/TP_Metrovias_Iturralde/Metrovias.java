@@ -22,27 +22,24 @@ public class Metrovias {
     }
 
     public void simulation(){
-        for (int i = 0; i < 57570; i += 10){
+        for (int i = 0; i < 57600; i += 10){
             StaticList<Client> clients = createCustomers(i);
             accommodateCustomers(clients);
             for (int j = 0; j < windowsOpen.size(); j++) {
                 windowsOpen.goTo(j);
+                if (i >= 57570)
+                    windowsOpen.getActual().serveCustomersAtEnd(i);
                 windowsOpen.getActual().serveCustomers(i);
-            }
-        }
-        for (int i = 0; i < 30; i+= 10) {
-            StaticList<Client> clients = createCustomers(i);
-            accommodateCustomers(clients);
-            for (int j = 0; j < windowsOpen.size(); j++) {
-                windowsOpen.goTo(j);
-                windowsOpen.getActual().serveCustomersAtEnd(i);
             }
         }
     }
 
     private StaticList<Client> createCustomers(int initialTime){
         StaticList<Client> newClients = new StaticList<>(5);
-        for (int i = 0; i < newClients.size(); i++) {
+        newClients.goTo(0);
+        Client firstClient = new Client(initialTime);
+        newClients.insertPrev(firstClient);
+        for (int i = 0; i < 4; i++) {
             Client newClient = new Client(initialTime);
             newClients.insertNext(newClient);
         }
@@ -52,7 +49,7 @@ public class Metrovias {
     private void accommodateCustomers(StaticList<Client> clients){
         for (int i = 0; i < clients.size(); i++) {
             clients.goTo(i);
-            int randomWindow = ThreadLocalRandom.current().nextInt(0, windowsOpen.size() + 1);
+            int randomWindow = ThreadLocalRandom.current().nextInt(0, windowsOpen.size());
             windowsOpen.goTo(randomWindow);
             windowsOpen.getActual().getLine().enqueue(clients.getActual());
         }

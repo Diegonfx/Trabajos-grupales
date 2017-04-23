@@ -10,10 +10,12 @@ public class Simulator {
 
         for (int i = 0; i < metrovias.getWindowsOpen().size(); i++) {
             metrovias.getWindowsOpen().goTo(i);
-            System.out.println("El tiempo medio de la fila " + i + " es de: " + metrovias.getWindowsOpen().getActual().averageTime());
-            System.out.println("El monto total recaudado por la fila " + i + " es de: " + metrovias.getWindowsOpen().getActual().getTotalIncome());
-            System.out.println("El tiempo ocioso de la fila " + i + " es de: " + metrovias.getWindowsOpen().getActual().getFreeTime());
+            System.out.println("El tiempo medio de la fila " + i + " es de: " + metrovias.getWindowsOpen().getActual().averageTime() + " segundos");
+            System.out.println("El monto total recaudado por la fila " + i + " es de: " + metrovias.getWindowsOpen().getActual().getTotalIncome() + " pesos");
+            System.out.println("El tiempo ocioso de la fila " + i + " es de: " + metrovias.getWindowsOpen().getActual().getFreeTime() + " segundos");
+            System.out.println("La cantidad de personas servidas por la fila " + i + " es de: " + metrovias.getWindowsOpen().getActual().getClientsServed());
             System.out.println("--------------");
         }
+
     }
 }

@@ -29,8 +29,8 @@ public class Window {
     public int getFreeTime() {
         return freeTime;
     }
-    public double getTotalIncome() {
-        return totalIncome;
+    public float getTotalIncome() {
+        return (float)totalIncome;
     }
     public int getClientsServed() {
         return clientsServed;
@@ -48,6 +48,19 @@ public class Window {
     public void serveCustomers(int currentTime){
         if (!line.isEmpty()) {
             if (willServeCustomer()) {
+                clientTotalTime += (currentTime - line.getFront().getInitTime());
+                line.dequeue();
+                clientsServed++;
+                totalIncome += 0.7;
+            }
+        }
+        else
+            freeTime += 10;
+    }
+
+    public void serveCustomersAtEnd(int currentTime){
+        if (!line.isEmpty()) {
+            while (!line.isEmpty()){
                 clientTotalTime += currentTime - line.getFront().getInitTime();
                 line.dequeue();
                 clientsServed++;
@@ -56,16 +69,7 @@ public class Window {
         }freeTime += 10;
     }
 
-    public void serveCustomersAtEnd(int currentTime){
-        if (!line.isEmpty()) {
-            clientTotalTime += currentTime - line.getFront().getInitTime();
-            line.dequeue();
-            clientsServed++;
-            totalIncome += 0.7;
-        }freeTime += 10;
-    }
-
     public int averageTime(){
-        return clientTotalTime/clientsServed;
+        return (clientTotalTime/clientsServed);
     }
 }
