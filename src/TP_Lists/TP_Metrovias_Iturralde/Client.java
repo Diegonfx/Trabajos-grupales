@@ -1,7 +1,8 @@
 package TP_Lists.TP_Metrovias_Iturralde;
 
 /**
- * Created by Tomas on 19/4/2017.
+ * Implementation of a client.
+ * @author Tomas Iturralde
  */
 public class Client {
     private int initTime;

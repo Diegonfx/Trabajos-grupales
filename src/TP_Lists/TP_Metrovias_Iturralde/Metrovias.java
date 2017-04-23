@@ -4,7 +4,8 @@ import TP_Lists.Listas.StaticList;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Created by Tomas on 19/4/2017.
+ * Implementation of a train station run by Metrovias.
+ * @author Tomas Iturralde
  */
 public class Metrovias {
     StaticList<Window> windowsOpen;
@@ -34,6 +35,11 @@ public class Metrovias {
         }
     }
 
+    /**
+     * Creates 5 new customers who enter the station.
+     * @param initialTime of the customers who enter the station.
+     * @return a list with the 5 new customers.
+     */
     private StaticList<Client> createCustomers(int initialTime){
         StaticList<Client> newClients = new StaticList<>(5);
         newClients.goTo(0);
@@ -46,6 +52,10 @@ public class Metrovias {
         return newClients;
     }
 
+    /**
+     * randomly accommodate every client that enter the station in one of the available lines.
+     * @param clients who enter the station.
+     */
     private void accommodateCustomers(StaticList<Client> clients){
         for (int i = 0; i < clients.size(); i++) {
             clients.goTo(i);

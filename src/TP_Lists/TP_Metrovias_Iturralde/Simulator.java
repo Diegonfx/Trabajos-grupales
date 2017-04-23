@@ -1,7 +1,8 @@
 package TP_Lists.TP_Metrovias_Iturralde;
 
 /**
- * Created by Tomas on 22/4/2017.
+ * Simulation of a regular day at a train station run by Metrovias.
+ * @author Tomas Iturralde
  */
 public class Simulator {
     public static void main(String[] args) {

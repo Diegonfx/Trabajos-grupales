@@ -1,11 +1,11 @@
 package TP_Lists.TP_Metrovias_Iturralde;
 
 import TrabajoPractico4_Queue.DynamicQueue;
-
 import java.util.Random;
 
 /**
- * Created by Tomas on 19/4/2017.
+ * Implementation of a window on a train station.
+ * @author Tomas Iturralde
  */
 public class Window {
     private DynamicQueue<Client> line = new DynamicQueue<>();
@@ -39,12 +39,21 @@ public class Window {
         return clientTotalTime;
     }
 
+    /**
+     * Probability of a window serving a customer.
+     * 30% the customer will be served, 70% it won't.
+     * @return true if the customer will be served, false if otherwise.
+     */
     private boolean willServeCustomer(){
         Random random = new Random();
         float probability = random.nextFloat();
         return probability > 0 && probability <= 0.3;
     }
 
+    /**
+     * Method which based on the porbability of serving will serve the first customer on line.
+     * @param currentTime of the day when the customer will be served.
+     */
     public void serveCustomers(int currentTime){
         if (!line.isEmpty()) {
             if (willServeCustomer()) {
@@ -58,6 +67,10 @@ public class Window {
             freeTime += 10;
     }
 
+    /**
+     * During the last 30 secs. every customer will be served no matter what.
+     * @param currentTime of the day when the customer will be served.
+     */
     public void serveCustomersAtEnd(int currentTime){
         if (!line.isEmpty()) {
             while (!line.isEmpty()){
@@ -69,6 +82,9 @@ public class Window {
         }freeTime += 10;
     }
 
+    /**
+     * @return Average waiting time on line
+     */
     public int averageTime(){
         return (clientTotalTime/clientsServed);
     }
