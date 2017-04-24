@@ -1,7 +1,9 @@
 package TrabajoPractico_BinarySearchTree;
 
 /**
- * Created by Tomas on 15/4/2017.
+ * Tester for the Light Bulb exercise.
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class Tester {
     public static void main(String[] args) {
@@ -17,6 +19,6 @@ public class Tester {
         root.insert(lightBulb3);
         root.insert(lightBulb2);
         root.insert(lightBulb1);
-
+        root.inOrden();
     }
 }

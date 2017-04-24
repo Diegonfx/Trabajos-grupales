@@ -16,6 +16,16 @@ public class BinaryTree<T> {
         return root.elem;
     }
 
+    public void inOrden(){
+        if (root.getLeft()!=null) {
+            getLeft().inOrden();
+        }
+        System.out.println(getRootElement());
+        if (root.getRight()!=null) {
+            getRight().inOrden();
+        }
+    }
+
     public boolean isEmpty(){
         return root == null;
     }

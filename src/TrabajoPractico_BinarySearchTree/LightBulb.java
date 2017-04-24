@@ -5,7 +5,7 @@ package TrabajoPractico_BinarySearchTree;
  * @author Tomas Iturralde
  * @author Diego Mancini
  */
-public class LightBulb implements Comparable{
+public class LightBulb implements Comparable<LightBulb>{
     private String bulbCode;
     private int watts;
     private String bulbType;
@@ -46,11 +46,7 @@ public class LightBulb implements Comparable{
     }
 
     @Override
-    public int compareTo(Object o) {
-       return compareTop((LightBulb) o);
-    }
-
-    private int compareTop(LightBulb o) {
+    public int compareTo(LightBulb o) {
         if (Integer.parseInt(bulbCode) > Integer.parseInt(o.bulbCode))
             return 1;
         else if (Integer.parseInt(bulbCode) < Integer.parseInt(o.bulbCode))
