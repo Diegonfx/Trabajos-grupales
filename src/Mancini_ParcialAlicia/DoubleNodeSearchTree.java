@@ -1,34 +1,34 @@
-package TrabajoPractico_BinarySearchTree;
+package Mancini_ParcialAlicia;
 
 /**
  * Implemetation of a Double Node.
  * @author Tomas Iturralde
  * @author Diego Mancini
  */
-public class DoubleNode<Q> {
+public class DoubleNodeSearchTree<Q> {
     Q elem;
-    DoubleNode<Q> right, left;
+    DoubleNodeSearchTree<Q> right, left;
 
-    public DoubleNode() {
+    public DoubleNodeSearchTree() {
         this(null , null , null);
     }
-    public DoubleNode(Q o){
+    public DoubleNodeSearchTree(Q o){
         elem = o;
     }
-    public DoubleNode(Q o, DoubleNode<Q> left, DoubleNode<Q> right){
+    public DoubleNodeSearchTree(Q o, DoubleNodeSearchTree<Q> left, DoubleNodeSearchTree<Q> right){
         elem = o;
         this.right = right;
         this.left = left;
     }
 
-    public static <T> int size(DoubleNode<T> root) {
+    public static <T> int size(DoubleNodeSearchTree<T> root) {
         if (root == null) {
             return 0;
         } else {
             return 1+size(root.left) + size(root.right);
         }
     }
-    public static <T> int height(DoubleNode<T> root) {
+    public static <T> int height(DoubleNodeSearchTree<T> root) {
         if (root == null) {
             return -1;
         } else {
@@ -42,16 +42,16 @@ public class DoubleNode<Q> {
     public void setElem(Q elem) {
         this.elem = elem;
     }
-    public DoubleNode<Q> getRight() {
+    public DoubleNodeSearchTree<Q> getRight() {
         return right;
     }
-    public void setRight(DoubleNode<Q> right) {
+    public void setRight(DoubleNodeSearchTree<Q> right) {
         this.right = right;
     }
-    public DoubleNode<Q> getLeft() {
+    public DoubleNodeSearchTree<Q> getLeft() {
         return left;
     }
-    public void setLeft(DoubleNode<Q> left) {
+    public void setLeft(DoubleNodeSearchTree<Q> left) {
         this.left = left;
     }
 
@@ -86,8 +86,8 @@ public class DoubleNode<Q> {
     /**
      * @return a reference to a node that is the root of a duplicate of the binary tree, whose root is in the actual node
      */
-    public DoubleNode<Q> duplicate() {
-        DoubleNode<Q> root = new DoubleNode<Q>(elem , null , null) ;
+    public DoubleNodeSearchTree<Q> duplicate() {
+        DoubleNodeSearchTree<Q> root = new DoubleNodeSearchTree<Q>(elem , null , null) ;
         if (left != null) {                  // Si hay un subarbol izquierdo
             root.left = left.duplicate();    // Duplicar; asociar
         }
