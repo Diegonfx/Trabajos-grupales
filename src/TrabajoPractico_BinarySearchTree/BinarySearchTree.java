@@ -5,10 +5,10 @@ package TrabajoPractico_BinarySearchTree;
  * @author Tomas Iturralde
  * @author Diego Mancini
  */
-public class BinaryTree<T> {
-    private DoubleNode<T> root;
+public class BinarySearchTree<T> {
+    private DoubleNodeSearchTree<T> root;
 
-    public BinaryTree(){
+    public BinarySearchTree(){
         root = null;
     }
 
@@ -30,14 +30,14 @@ public class BinaryTree<T> {
         return root == null;
     }
 
-    public BinaryTree<T> getLeft(){
-        BinaryTree<T> t = new BinaryTree<>();
+    public BinarySearchTree<T> getLeft(){
+        BinarySearchTree<T> t = new BinarySearchTree<>();
         t.root = root.left;
         return t;
     }
 
-    public BinaryTree<T> getRight(){
-        BinaryTree<T> t = new BinaryTree<>();
+    public BinarySearchTree<T> getRight(){
+        BinarySearchTree<T> t = new BinarySearchTree<>();
         t.root = root.right;
         return t;
 
@@ -68,7 +68,7 @@ public class BinaryTree<T> {
     }
 
     @SuppressWarnings("unchecked")
-    private boolean exists(DoubleNode<T> t, Comparable x) {
+    private boolean exists(DoubleNodeSearchTree<T> t, Comparable x) {
         if (t == null)
             return false;
         if (x.compareTo(t.elem) == 0)
@@ -79,14 +79,14 @@ public class BinaryTree<T> {
             return exists(t.right, x);
     }
 
-    private DoubleNode<T> getMin(DoubleNode<T> t){
+    private DoubleNodeSearchTree<T> getMin(DoubleNodeSearchTree<T> t){
         if (t.left == null)
             return t;
         else
             return getMin(t.left);
     }
 
-    private DoubleNode<T> getMax(DoubleNode<T> t){
+    private DoubleNodeSearchTree<T> getMax(DoubleNodeSearchTree<T> t){
         if (t.right == null)
             return t;
         else
@@ -94,7 +94,7 @@ public class BinaryTree<T> {
     }
 
     @SuppressWarnings("unchecked")
-    private DoubleNode<T> search(DoubleNode<T> t, Comparable x){
+    private DoubleNodeSearchTree<T> search(DoubleNodeSearchTree<T> t, Comparable x){
         if (x.compareTo(t.elem) == 0)
             return t;
         else if (x.compareTo(t.elem) < 0)
@@ -104,9 +104,9 @@ public class BinaryTree<T> {
     }
 
     @SuppressWarnings("unchecked")
-    private DoubleNode<T> insert (DoubleNode<T> t, Comparable x) {
+    private DoubleNodeSearchTree<T> insert (DoubleNodeSearchTree<T> t, Comparable x) {
         if (t == null){
-            t = new DoubleNode<>();
+            t = new DoubleNodeSearchTree<>();
             t.elem = (T)x;
         }
         else if (x.compareTo(t.elem) < 0)
@@ -117,7 +117,7 @@ public class BinaryTree<T> {
     }
 
     @SuppressWarnings("unchecked")
-    private DoubleNode<T> delete (DoubleNode<T> t, Comparable x) {
+    private DoubleNodeSearchTree<T> delete (DoubleNodeSearchTree<T> t, Comparable x) {
         if (x.compareTo(t.elem) < 0)
             t.left = delete(t.left, x);
         else if (x.compareTo(t.elem) > 0)
@@ -133,11 +133,15 @@ public class BinaryTree<T> {
         return t;
     }
 
-    private DoubleNode<T> deleteMin(DoubleNode<T> t){
+    private DoubleNodeSearchTree<T> deleteMin(DoubleNodeSearchTree<T> t){
         if (t.left != null)
             t.left = deleteMin(t.left);
         else
             t = t.right;
         return t;
+    }
+
+    public DoubleNodeSearchTree<T> getRoot() {
+        return root;
     }
 }
