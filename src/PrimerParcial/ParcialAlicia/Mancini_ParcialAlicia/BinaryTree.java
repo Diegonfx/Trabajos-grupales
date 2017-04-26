@@ -1,4 +1,4 @@
-package Mancini_ParcialAlicia;
+package PrimerParcial.ParcialAlicia.Mancini_ParcialAlicia;
 
 import java.io.Serializable;
 import java.util.ArrayList;

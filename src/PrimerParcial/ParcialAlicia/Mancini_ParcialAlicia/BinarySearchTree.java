@@ -1,4 +1,4 @@
-package Mancini_ParcialAlicia;
+package PrimerParcial.ParcialAlicia.Mancini_ParcialAlicia;
 
 /**
  * Implementation of a Binary Search Tree.
