@@ -69,7 +69,7 @@ public class BankRTC {
         int randomNumberOfClients = ThreadLocalRandom.current().nextInt(0 , 5);
         Client[] clientsEntering = new Client[randomNumberOfClients];
         for (int i = 0 ; i < clientsEntering.length ; i++) {
-            clientsEntering[i] = new Client("Client number: " + ++clientNumber);
+            clientsEntering[i] = new Client("Voter number: " + ++clientNumber);
             clientsEntering[i].setEnterTime(currentTime);
             listOfClients.add(clientsEntering[i]);
             entranceQueue.enqueue(clientsEntering[i]);

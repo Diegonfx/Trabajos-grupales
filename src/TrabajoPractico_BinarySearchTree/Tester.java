@@ -13,7 +13,7 @@ public class Tester {
         LightBulb lightBulb4 = new LightBulb("27846",70,"medio",lightBulb3);
         LightBulb lightBulb5 = new LightBulb("36128",90,"alto", lightBulb4);
 
-        BinaryTree<LightBulb> root = new BinaryTree<>();
+        BinarySearchTree<LightBulb> root = new BinarySearchTree<>();
         root.insert(lightBulb5);
         root.insert(lightBulb4);
         root.insert(lightBulb3);

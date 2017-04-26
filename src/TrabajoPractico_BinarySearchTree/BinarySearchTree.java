@@ -5,10 +5,10 @@ package TrabajoPractico_BinarySearchTree;
  * @author Tomas Iturralde
  * @author Diego Mancini
  */
-public class BinaryTree<T> {
+public class BinarySearchTree<T> {
     private DoubleNode<T> root;
 
-    public BinaryTree(){
+    public BinarySearchTree(){
         root = null;
     }
 
@@ -30,14 +30,14 @@ public class BinaryTree<T> {
         return root == null;
     }
 
-    public BinaryTree<T> getLeft(){
-        BinaryTree<T> t = new BinaryTree<>();
+    public BinarySearchTree<T> getLeft(){
+        BinarySearchTree<T> t = new BinarySearchTree<>();
         t.root = root.left;
         return t;
     }
 
-    public BinaryTree<T> getRight(){
-        BinaryTree<T> t = new BinaryTree<>();
+    public BinarySearchTree<T> getRight(){
+        BinarySearchTree<T> t = new BinarySearchTree<>();
         t.root = root.right;
         return t;
 
