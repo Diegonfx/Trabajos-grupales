@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- * Created by Tomas on 25/4/2017.
+ * Created by Tomas on 25/4/2017
  */
 public class MainSimulator {
     public static void main(String[] args) {
