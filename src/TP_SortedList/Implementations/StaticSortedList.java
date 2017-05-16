@@ -5,17 +5,18 @@ package TP_SortedList.Implementations;
  */
 public class StaticSortedList<T extends Comparable<T>> implements SortedList<T>{
     private static final int DEFAULT_CAPACITY = 10;
-    private T[] data;
+    private Comparable[] data;
     private int window;
     private int size;
     private final int capacity;
+
     public StaticSortedList() {
         this(DEFAULT_CAPACITY);
     }
 
     @SuppressWarnings("unchecked")
     public StaticSortedList(int capacity) {
-        this.data = (T[])new Object[capacity];
+        this.data = new Comparable[capacity];
         this.capacity = capacity;
         this.window = 0;
         this.size = 0;
@@ -26,22 +27,28 @@ public class StaticSortedList<T extends Comparable<T>> implements SortedList<T>{
         this.window = window;
         this.size = size;
         this.capacity = capacity;
-        this.data = (T[])data;
+        this.data = (Comparable [])data;
     }
 
     @Override
     public void insert(T obj) {
-        binaryInsert(obj,data,0,size);
+        binaryInsert(obj,data,0,size-1);
     }
 
-    private void binaryInsert(T k, T[] list, int first, int last){
+    @SuppressWarnings("unchecked")
+    private void binaryInsert(Comparable k, Comparable[] list, int first, int last){
         if (first > last) {
             goTo(first);
             insertPrev(k);
-        } else {
+        } else if (isVoid()) {
+            data[0] = k;
+            size++;
+        }
+        else {
             int middle = (first + last)/2;
             int tempResult = k.compareTo(list[middle]);
             if (tempResult == 0) {
+                goTo(middle);
                 insertNext(k);
             } else if (tempResult < 0) {
                 binaryInsert(k , list , first , middle-1);
@@ -51,14 +58,14 @@ public class StaticSortedList<T extends Comparable<T>> implements SortedList<T>{
         }
     }
 
-    private void insertPrev(T obj) {
+    private void insertPrev(Comparable obj) {
         if (size == data.length) enlarge();
         for (int i = data.length - 1; i > window; i--) data[i] = data[i - 1];
         data[window] = obj;
         size++;
     }
 
-    private void insertNext(T obj) {
+    private void insertNext(Comparable obj) {
         if (size == data.length) enlarge();
         if (!isVoid()) window++;
         insertPrev(obj);
@@ -70,7 +77,8 @@ public class StaticSortedList<T extends Comparable<T>> implements SortedList<T>{
         remove();
     }
 
-    private int binarySearch(T k, T[] list, int first, int last){
+    @SuppressWarnings("unchecked")
+    private int binarySearch(Comparable k, Comparable[] list, int first, int last){
         if (first > last) {
             return -1;
         } else {
@@ -141,8 +149,30 @@ public class StaticSortedList<T extends Comparable<T>> implements SortedList<T>{
     }
     @SuppressWarnings("unchecked")
     private void enlarge() {
-        T[] tempObjects = (T[]) new Object[data.length + DEFAULT_CAPACITY];
+        Comparable[] tempObjects = (Comparable []) new Object[data.length + DEFAULT_CAPACITY];
         for (int i = 0; i < data.length; i++) tempObjects[i] = data[i];
         data = tempObjects;
+    }
+
+    public static void main(String[] args) {
+        StaticSortedList<Integer> list = new StaticSortedList<>();
+        list.insert(2);
+        list.insert(1);
+        list.insert(7);
+        list.insert(3);
+        list.insert(1);
+        list.insert(9);
+        list.insert(4);
+        list.insert(9);
+        list.insert(2);
+        list.insert(5);
+        list.insert(8);
+
+        for (int i = 0; i < list.size(); i++){
+            list.goTo(i);
+            System.out.println(list.getActual());
+        }
+
+
     }
 }
