@@ -1,16 +1,12 @@
-package TP_SortedList.Implementations;
+package Mancini_ParcialCassol.Listas;
 
-import TP_Lists.Listas.GeneralList;
 
-/**
- * Created by Tomas on 10/5/2017.
- */
-public class DynamicSortedList<T> implements SortedList<T> {
+public class DynamicList<T> implements List<T> {
     private Node<T> head, window, sentinel;
     private int size;
-    public DynamicSortedList(){
-        head = new Node<T>();
-        sentinel = new Node<T>();
+    public DynamicList(){
+        head = new Node<>();
+        sentinel = new Node<>();
         head.next = sentinel;
         window = head;
         size = 0;
@@ -40,7 +36,19 @@ public class DynamicSortedList<T> implements SortedList<T> {
     public GeneralList<T> clone() {
         return null;
     }
-
+    @Override
+    public void insertPrev(T obj) {
+        if (!isVoid()) {
+            goBack();
+        }
+        insertNext(obj);
+    }
+    @Override
+    public void insertNext(T obj) {
+        window.next = new Node<>(obj, window.next);
+        window = window.next;
+        size++;
+    }
     @Override
     public void goNext() {
         if(window.next == sentinel) throw new IndexOutOfBoundsException("Reached the end of this List");
@@ -78,26 +86,9 @@ public class DynamicSortedList<T> implements SortedList<T> {
     public int size() {
         return size;
     }
-
-    public void removeS(T element){
-        for (int i = 0; i < size; i++) {
-            goTo(i);
-            if (window.obj.equals(element)) {
-                remove();
-            }
-        }
-    }
-
-    @Override
-    public void insert(T obj) {
-        window.next = new Node<>(obj, window.next);
-        window = window.next;
-        size++;
-    }
-
     private static class Node<E> {
         E obj;
-        DynamicSortedList.Node<E> next;
+        Node<E> next;
         Node() {
             obj = null;
             next = null;
