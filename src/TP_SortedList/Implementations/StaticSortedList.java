@@ -3,7 +3,9 @@ package TP_SortedList.Implementations;
 import java.io.Serializable;
 
 /**
- * Created by Tomas on 10/5/2017.
+ * Implementation of a sorted list (static version).
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class StaticSortedList<T extends Comparable<T>> implements SortedList<T>, Serializable{
     private static final int DEFAULT_CAPACITY = 10;
@@ -37,6 +39,14 @@ public class StaticSortedList<T extends Comparable<T>> implements SortedList<T>,
         binaryInsert(obj,data,0,size-1);
     }
 
+    /**
+     * private method which uses the binary search to insert an object into the sorted list
+     * (the object will be inserted in its right position, no further sorting will be needed).
+     * @param k object to be inserted.
+     * @param list list (already sorted) which will recieve the object.
+     * @param first position in the list.
+     * @param last position in the list.
+     */
     @SuppressWarnings("unchecked")
     private void binaryInsert(Comparable k, Comparable[] list, int first, int last){
         if (first > last) {
@@ -60,6 +70,9 @@ public class StaticSortedList<T extends Comparable<T>> implements SortedList<T>,
         }
     }
 
+    /**
+     * @param obj to be inserted before the window.
+     */
     private void insertPrev(Comparable obj) {
         if (size == data.length) enlarge();
         for (int i = data.length - 1; i > window; i--) data[i] = data[i - 1];
@@ -67,6 +80,9 @@ public class StaticSortedList<T extends Comparable<T>> implements SortedList<T>,
         size++;
     }
 
+    /**
+     * @param obj to be inserted after the window.
+     */
     private void insertNext(Comparable obj) {
         if (size == data.length) enlarge();
         if (!isVoid()) window++;
@@ -74,13 +90,22 @@ public class StaticSortedList<T extends Comparable<T>> implements SortedList<T>,
     }
 
     public void removeS(T element){
-        int indexToRemove = binarySearch(element, data, 0, size);
+        int indexToRemove = binaryRemove(element, data, 0, size);
         goTo(indexToRemove);
         remove();
     }
 
+    /**
+     * private method which uses the binary search to return the position of an element to be deleted
+     * in the list(no further sorting will be needed).
+     * @param k element to be deleted.
+     * @param list list which will lose the element.
+     * @param first position in the list.
+     * @param last position in the list.
+     * @return the position of the element to be deleted.
+     */
     @SuppressWarnings("unchecked")
-    private int binarySearch(Comparable k, Comparable[] list, int first, int last){
+    private int binaryRemove(Comparable k, Comparable[] list, int first, int last){
         if (first > last) {
             return -1;
         } else {
@@ -89,9 +114,9 @@ public class StaticSortedList<T extends Comparable<T>> implements SortedList<T>,
             if (tempResult == 0) {
                 return middle;
             } else if (tempResult < 0) {
-                return binarySearch(k , list , first , middle-1);
+                return binaryRemove(k , list , first , middle-1);
             } else {
-                return binarySearch(k , list , middle+1 , last);
+                return binaryRemove(k , list , middle+1 , last);
             }
         }
     }
@@ -154,27 +179,5 @@ public class StaticSortedList<T extends Comparable<T>> implements SortedList<T>,
         Comparable[] tempObjects = (Comparable []) new Object[data.length + DEFAULT_CAPACITY];
         for (int i = 0; i < data.length; i++) tempObjects[i] = data[i];
         data = tempObjects;
-    }
-
-    public static void main(String[] args) {
-        StaticSortedList<Integer> list = new StaticSortedList<>();
-        list.insert(2);
-        list.insert(1);
-        list.insert(7);
-        list.insert(3);
-        list.insert(1);
-        list.insert(9);
-        list.insert(4);
-        list.insert(9);
-        list.insert(2);
-        list.insert(5);
-        list.insert(8);
-
-        for (int i = 0; i < list.size(); i++){
-            list.goTo(i);
-            System.out.println(list.getActual());
-        }
-
-
     }
 }

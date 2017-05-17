@@ -3,7 +3,9 @@ package TP_SortedList.TP_06;
 import java.io.Serializable;
 
 /**
- * Created by Tomas on 16/5/2017.
+ * Implementation of a bus.
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class Bus implements Comparable<Bus>, Serializable{
     private int lineNumber;

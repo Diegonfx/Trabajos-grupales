@@ -1,12 +1,13 @@
 package TP_SortedList.TP_06;
 
 import TP_SortedList.Implementations.DynamicSortedList;
-
 import java.io.*;
 import java.util.Scanner;
 
 /**
- * Created by Tomas on 16/5/2017.
+ * Main simulator for the bus system.
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class Simulator {
     public Simulator() {
@@ -46,11 +47,11 @@ public class Simulator {
                     break;
 
                 case 6:
-                    serializeBinary(buses, "serializedList.txt");
+                    serializeBinary(buses, "src\\TP_SortedList\\TP_06\\serializedList.txt");
                     break;
 
                 case 7:
-                    deserializeBinary("serializedList.txt");
+                    deserializeBinary("src\\TP_SortedList\\TP_06\\serializedList.txt");
                     break;
 
                 default:

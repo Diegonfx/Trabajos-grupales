@@ -1,13 +1,13 @@
 package TP_SortedList.Implementations;
 
-import TP_Lists.Listas.DynamicList;
 import TP_Lists.Listas.GeneralList;
-
 import java.io.Serializable;
 import java.util.Iterator;
 
 /**
- * Created by Tomas on 10/5/2017.
+ * Implementation of a sorted list (dynamic version).
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class DynamicSortedList<T extends Comparable<T>> implements Iterable<T> , Serializable, SortedList<T>  {
 
@@ -15,6 +15,10 @@ public class DynamicSortedList<T extends Comparable<T>> implements Iterable<T> ,
     private ListNode<T> tail;
     private ListNode<T> current;
     private int length;
+
+    /**
+     * private class to iterate the sorted list.
+     */
     private class SortedListIterator implements Iterator<T> {
 
         public SortedListIterator() {
@@ -69,20 +73,14 @@ public class DynamicSortedList<T extends Comparable<T>> implements Iterable<T> ,
 
     @Override
     public void insert(T obj) {
-        if(this.isEmpty()){
-            this.insertAfter(obj);
-            return;
+        ListNode<T> newNode = new ListNode<>(obj);
+        first();
+        while (current.next != tail && current.next.element.compareTo(obj) < 0){
+            current = current.next;
         }
-
-        this.first();
-        while (this.next() && (obj.compareTo(this.getActual()) >= 0));
-
-
-        if(obj.compareTo(this.getActual())>=0){
-            this.insertAfter(obj);
-        }else {
-            this.insertBefore(obj);
-        }
+        newNode.next = current.next;
+        current.next = newNode;
+        length++;
     }
 
     @Override
@@ -176,6 +174,9 @@ public class DynamicSortedList<T extends Comparable<T>> implements Iterable<T> ,
         return false;
     }
 
+    /**
+     * @param x object to be inserted before the window.
+     */
     private void insertBefore(T x){
         if (isEmpty()){
             insertEmpty(x);
@@ -188,6 +189,9 @@ public class DynamicSortedList<T extends Comparable<T>> implements Iterable<T> ,
         length++;
     }
 
+    /**
+     * @param x object to be inserted after the window.
+     */
     private void insertAfter(T x){
         if (isEmpty()) {
             insertEmpty(x);
@@ -220,28 +224,4 @@ public class DynamicSortedList<T extends Comparable<T>> implements Iterable<T> ,
     public boolean isEmpty(){
         return (length == 0);
     }
-
-    public static void main(String[] args) {
-
-        DynamicSortedList<Integer> list = new DynamicSortedList<>();
-
-        list.insert(10);
-        list.insert(8);
-        list.insert(4);
-        list.insert(3);
-        list.insert(9);
-        //Si agregas uno mayor que el primero, crashea. Despues corre bien sino
-        //list.insert(100);
-
-
-
-        for (int i = 0; i < list.size(); i++){
-            list.goTo(i);
-            System.out.println(list.getActual());
-        }
-
-
-    }
-
-
 }
