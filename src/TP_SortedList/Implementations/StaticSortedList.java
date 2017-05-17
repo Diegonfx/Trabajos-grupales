@@ -1,9 +1,11 @@
 package TP_SortedList.Implementations;
 
+import java.io.Serializable;
+
 /**
  * Created by Tomas on 10/5/2017.
  */
-public class StaticSortedList<T extends Comparable<T>> implements SortedList<T>{
+public class StaticSortedList<T extends Comparable<T>> implements SortedList<T>, Serializable{
     private static final int DEFAULT_CAPACITY = 10;
     private Comparable[] data;
     private int window;

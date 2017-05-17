@@ -2,6 +2,7 @@ package TP_SortedList.TP_06;
 
 import TP_SortedList.Implementations.DynamicSortedList;
 
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -45,11 +46,11 @@ public class Simulator {
                     break;
 
                 case 6:
-
+                    serializeBinary(buses, "serializedList.txt");
                     break;
 
                 case 7:
-
+                    deserializeBinary("serializedList.txt");
                     break;
 
                 default:
@@ -117,6 +118,40 @@ public class Simulator {
                         ", disponibilidad para discapacitados: " + list.getActual().isAllowsDisabled());
             }
         }
+    }
+
+    public <T extends Comparable<T>> void serializeBinary(DynamicSortedList<T> list,String fileName){
+        try {
+            File file = new File(fileName);
+
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+
+            oos.writeObject(list);
+            System.out.println("Serialized");
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T extends Comparable<T>> DynamicSortedList<T> deserializeBinary(String fileName){
+        ObjectInputStream ois;
+        try{
+            ois = new ObjectInputStream(new FileInputStream(fileName));
+            Object obj = ois.readObject();
+
+            if(obj instanceof DynamicSortedList){
+                System.out.println("Deserialized");
+                return (DynamicSortedList<T>) obj;
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        throw new RuntimeException();
     }
 
     public static void main(String[] args) {

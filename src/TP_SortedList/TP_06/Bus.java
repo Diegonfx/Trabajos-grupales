@@ -1,9 +1,11 @@
 package TP_SortedList.TP_06;
 
+import java.io.Serializable;
+
 /**
  * Created by Tomas on 16/5/2017.
  */
-public class Bus implements Comparable<Bus>{
+public class Bus implements Comparable<Bus>, Serializable{
     private int lineNumber;
     private int internNumber;
     private int seats;

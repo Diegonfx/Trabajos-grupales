@@ -2,10 +2,12 @@ package TP_SortedList.Implementations;
 
 import TP_Lists.Listas.GeneralList;
 
+import java.io.Serializable;
+
 /**
  * Created by Tomas on 10/5/2017.
  */
-public class DynamicSortedList<T> implements SortedList<T> {
+public class DynamicSortedList<T> implements SortedList<T>, Serializable {
     private Node<T> head, window, sentinel;
     private int size;
     public DynamicSortedList(){
