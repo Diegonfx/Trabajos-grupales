@@ -222,18 +222,18 @@ public class DynamicSortedList<T extends Comparable<T>> implements Iterable<T> ,
     }
 
     public static void main(String[] args) {
+
         DynamicSortedList<Integer> list = new DynamicSortedList<>();
-        list.insert(2);
-        list.insert(1);
-        list.insert(7);
-        list.insert(3);
-        list.insert(1);
-        list.insert(9);
-        list.insert(4);
-        list.insert(9);
-        list.insert(2);
-        list.insert(5);
+
+        list.insert(10);
         list.insert(8);
+        list.insert(4);
+        list.insert(3);
+        list.insert(9);
+        //Si agregas uno mayor que el primero, crashea. Despues corre bien sino
+        //list.insert(100);
+
+
 
         for (int i = 0; i < list.size(); i++){
             list.goTo(i);
