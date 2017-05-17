@@ -9,8 +9,8 @@ public class DynamicSortedList<T> implements SortedList<T> {
     private Node<T> head, window, sentinel;
     private int size;
     public DynamicSortedList(){
-        head = new Node<T>();
-        sentinel = new Node<T>();
+        head = new Node<>();
+        sentinel = new Node<>();
         head.next = sentinel;
         window = head;
         size = 0;
