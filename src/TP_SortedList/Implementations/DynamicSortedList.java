@@ -1,119 +1,247 @@
 package TP_SortedList.Implementations;
 
+import TP_Lists.Listas.DynamicList;
 import TP_Lists.Listas.GeneralList;
 
 import java.io.Serializable;
+import java.util.Iterator;
 
 /**
  * Created by Tomas on 10/5/2017.
  */
-public class DynamicSortedList<T> implements SortedList<T>, Serializable {
-    private Node<T> head, window, sentinel;
-    private int size;
+public class DynamicSortedList<T extends Comparable<T>> implements Iterable<T> , Serializable, SortedList<T>  {
+
+    private ListNode<T> head;
+    private ListNode<T> tail;
+    private ListNode<T> current;
+    private int length;
+    private class SortedListIterator implements Iterator<T> {
+
+        public SortedListIterator() {
+        DynamicSortedList.this.first();
+        }
+
+        @Override
+        public boolean hasNext() {
+            return DynamicSortedList.this.hasNext();
+        }
+
+        @Override
+        public T next() {
+            DynamicSortedList.this.current = current.next;
+            return DynamicSortedList.this.getActual();
+        }
+
+        @Override
+        public void remove() {
+            DynamicSortedList.this.remove();
+        }
+    }
+
     public DynamicSortedList(){
-        head = new Node<>();
-        sentinel = new Node<>();
-        head.next = sentinel;
-        window = head;
-        size = 0;
-    }
-    @Override
-    public T getActual() {
-        return window.obj;
-    }
-    @Override
-    public int getActualPosition() {
-        int pos = 0;
-        if (!isVoid()) {
-            Node<T> aux = head;
-            for (; aux.next != window; pos++) aux = aux.next;
-        }
-        return pos;
-    }
-    @Override
-    public boolean isVoid() {
-        return head.next == sentinel;
-    }
-    @Override
-    public boolean endList() {
-        return window.next == sentinel;
-    }
-    @Override
-    public GeneralList<T> clone() {
-        return null;
+        head = new ListNode<>();
+        tail = new ListNode<>();
+        head.next = tail;
+        tail.before = head;
+        length = 0;
     }
 
-    @Override
-    public void goNext() {
-        if(window.next == sentinel) throw new IndexOutOfBoundsException("Reached the end of this List");
-        window = window.next;
-    }
-    @Override
-    public void goPrev() {
-        if(window == head.next) throw new IndexOutOfBoundsException("Reached the beginning of this List");
-        goBack();
-    }
-    private void goBack(){
-        Node<T> aux = head;
-        while(window != aux.next){
-            aux = aux.next;
+    public boolean contains(T object){
+        this.first();
+        while (this.next() && (object.compareTo(this.getActual()) >= 0)){
+            if(this.getActual().equals(object)){
+                return true;
+            }
         }
-        window = aux;
-    }
-    @Override
-    public void goTo(int index) {
-        window = head.next;
-        for(int i = 0; i < index; i++){
-            window = window.next;
-        }
-    }
-    @Override
-    public void remove() {
-        if(isVoid()) throw new NullPointerException("This List is empty");
-        goBack();
-        window.next = window.next.next;
-        window = window.next;
-        if(window == sentinel) goBack();
-        size--;
-    }
-    @Override
-    public int size() {
-        return size;
+        return false;
     }
 
-    public void removeS(T element){
-        for (int i = 0; i < size; i++) {
-            goTo(i);
-            if (window.obj.equals(element)) {
-                remove();
+    public void remove(T object){
+        if(contains(object)){
+            this.first();
+            while (this.next()&&(object.compareTo(this.getActual()) >= 0)){
+                if(this.getActual().equals(object)){
+                    this.remove();
+                }
             }
         }
     }
 
     @Override
     public void insert(T obj) {
-        window.next = new Node<>(obj, window.next);
-        window = window.next;
-        size++;
+        if(this.isEmpty()){
+            this.insertAfter(obj);
+            return;
+        }
+
+        this.first();
+        while (this.next() && (obj.compareTo(this.getActual()) >= 0));
+
+
+        if(obj.compareTo(this.getActual())>=0){
+            this.insertAfter(obj);
+        }else {
+            this.insertBefore(obj);
+        }
     }
 
-    private static class Node<E> {
-        E obj;
-        DynamicSortedList.Node<E> next;
-        Node() {
-            obj = null;
-            next = null;
+    @Override
+    public void goNext() {
+        if(current.next == tail) throw new IndexOutOfBoundsException("Reached the end of this List");
+        current = current.next;
+    }
+
+    @Override
+    public void goPrev() {
+        if(current == head.next) throw new IndexOutOfBoundsException("Reached the beginning of this List");
+        goBack();
+    }
+    private void goBack(){
+        ListNode<T> aux = head;
+        while(current != aux.next){
+            aux = aux.next;
         }
-        Node(E o) {
-            obj = o;
-            next = null;
-        }
-        Node(E o, Node<E> next) {
-            this(o);
-            this.next = next;
-        }
-        boolean hasNoObj() {
-            return obj == null;
+        current = aux;
+    }
+
+    @Override
+    public void goTo(int n) {
+        current = head.next;
+        for(int i = 0; i < n; i++){
+            current = current.next;
         }
     }
+
+    @Override
+    public T getActual() {
+        return current.element;
+    }
+
+    @Override
+    public int getActualPosition() {
+        int pos = 0;
+        if (!isVoid()) {
+            ListNode<T> aux = head;
+            for (; aux.next != current; pos++) aux = aux.next;
+        }
+        return pos;
+    }
+
+    @Override
+    public int size() {
+        return length;
+    }
+
+    @Override
+    public boolean isVoid() {
+        return head.next == tail;
+    }
+
+    @Override
+    public boolean endList() {
+        return current.next == tail;
+    }
+
+    @Override
+    public GeneralList<T> clone() {
+        return null;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new SortedListIterator();
+    }
+
+    public void first(){
+        current = head;
+    }
+
+    public boolean before(){
+        if (current != current.next){
+            current = current.before;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean next(){
+        current = current.next;
+        return hasNext();
+    }
+
+    public boolean hasNext(){
+        if(current != current.before){
+            return true;
+        }
+        return false;
+    }
+
+    private void insertBefore(T x){
+        if (isEmpty()){
+            insertEmpty(x);
+            return;
+        }
+
+        ListNode<T> aux = new ListNode<>(x, current.before, current);
+        current.before.next = aux;
+        current.before = aux;
+        length++;
+    }
+
+    private void insertAfter(T x){
+        if (isEmpty()) {
+            insertEmpty(x);
+            return;
+        }
+
+        ListNode<T> aux = new ListNode<>(x, current, current.next);
+        current.next.before = aux;
+        current.next = aux;
+
+
+        length++;
+    }
+
+    private void insertEmpty(T x) {
+        ListNode<T> aux = new ListNode<>(x, head, tail);
+        head.next = aux;
+        tail.before = aux;
+        length++;
+    }
+
+    @Override
+    public void remove(){
+        current = current.before;
+        current.next.next.before = current;
+        current.next = current.next.next;
+        length--;
+    }
+
+    public boolean isEmpty(){
+        return (length == 0);
+    }
+
+    public static void main(String[] args) {
+        DynamicSortedList<Integer> list = new DynamicSortedList<>();
+        list.insert(2);
+        list.insert(1);
+        list.insert(7);
+        list.insert(3);
+        list.insert(1);
+        list.insert(9);
+        list.insert(4);
+        list.insert(9);
+        list.insert(2);
+        list.insert(5);
+        list.insert(8);
+
+        for (int i = 0; i < list.size(); i++){
+            list.goTo(i);
+            System.out.println(list.getActual());
+        }
+
+
+    }
+
+
 }

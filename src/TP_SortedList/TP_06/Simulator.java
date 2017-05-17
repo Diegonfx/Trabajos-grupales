@@ -12,7 +12,7 @@ public class Simulator {
     public Simulator() {
         DynamicSortedList<Bus> buses = new DynamicSortedList<>();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("1 - Ingresar nuevo colectivo a la lista");
+        System.out.println("\n\n1 - Ingresar nuevo colectivo a la lista");
         System.out.println("2 - Eliminar colectivo de la lista");
         System.out.println("3 - Obtener informe");
         System.out.println("4 - Colectivos aptos para discapacitados");
@@ -30,7 +30,7 @@ public class Simulator {
                     break;
 
                 case 2:
-                    buses.removeS(createBus());
+                    buses.remove(createBus());
                     break;
 
                 case 3:
@@ -56,7 +56,7 @@ public class Simulator {
                 default:
                     break;
             }
-            System.out.println("1 - Ingresar nuevo colectivo a la lista");
+            System.out.println("\n1 - Ingresar nuevo colectivo a la lista");
             System.out.println("2 - Eliminar colectivo de la lista");
             System.out.println("3 - Obtener informe");
             System.out.println("4 - Colectivos aptos para discapacitados");
@@ -86,7 +86,7 @@ public class Simulator {
     }
 
     private void printList(DynamicSortedList<Bus> list){
-        System.out.println("Informe de colectivos: ");
+        System.out.println("\nInforme de colectivos: ");
         for (int i = 0; i < list.size(); i++){
             list.goTo(i);
             System.out.println("Numero de linea: " + list.getActual().getLineNumber() +
@@ -97,7 +97,7 @@ public class Simulator {
     }
 
     private void printDisabledList(DynamicSortedList<Bus> list){
-        System.out.println("Informe de colectivos con disponibilidad para discapacitados: ");
+        System.out.println("\nInforme de colectivos con disponibilidad para discapacitados: ");
         for (int i = 0; i < list.size(); i++){
             list.goTo(i);
             if (list.getActual().isAllowsDisabled()) {
@@ -109,7 +109,7 @@ public class Simulator {
     }
 
     private void printSeatsList(DynamicSortedList<Bus> list){
-        System.out.println("Informe de colectivos con asientos para 27 o mas personas: ");
+        System.out.println("\nInforme de colectivos con asientos para 27 o mas personas: ");
         for (int i = 0; i < list.size(); i++){
             list.goTo(i);
             if (list.getActual().getSeats() >= 27) {

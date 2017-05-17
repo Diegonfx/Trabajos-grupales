@@ -4,6 +4,7 @@ package TP_Lists.Listas;
 public class DynamicList<T> implements List<T> {
     private Node<T> head, window, sentinel;
     private int size;
+
     public DynamicList(){
         head = new Node<>();
         sentinel = new Node<>();
@@ -86,6 +87,8 @@ public class DynamicList<T> implements List<T> {
     public int size() {
         return size;
     }
+
+
     private static class Node<E> {
         E obj;
         Node<E> next;
