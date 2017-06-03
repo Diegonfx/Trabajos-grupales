@@ -15,6 +15,7 @@ public class Tree234 {
         Node2 node2 = new Node2();
         node2.data1 = o;
         root = node2;
+        root.x = 400;
     }
 
     public Node getRoot() {
