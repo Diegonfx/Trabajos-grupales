@@ -1,12 +1,5 @@
 package Arbol234;
 
-/**
- * Created by IntelliJ IDEA.
- * User: guest
- * Date: 02-jun-2006
- * Time: 14:15:42
- * To change this template use File | Settings | File Templates.
- */
 public class Tree234 {
 
     private Node root;

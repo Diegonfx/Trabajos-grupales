@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * Main simulator for the bus system.
+ * Main Simulator for the bus system.
  * @author Tomas Iturralde
  * @author Diego Mancini
  */

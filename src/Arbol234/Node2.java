@@ -1,12 +1,5 @@
 package Arbol234;
 
-/**
- * Created by IntelliJ IDEA.
- * User: guest
- * Date: 02-jun-2006
- * Time: 14:17:16
- * To change this template use File | Settings | File Templates.
- */
 public class Node2 extends Node{
     Object data1;
     private Node left;

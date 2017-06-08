@@ -1,12 +1,5 @@
 package Arbol234;
 
-/**
- * Created by IntelliJ IDEA.
- * User: guest
- * Date: 02-jun-2006
- * Time: 14:15:51
- * To change this template use File | Settings | File Templates.
- */
 public abstract class Node {
     private Node father;
     public int type;
