@@ -3,26 +3,23 @@ package TP_Swing;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by Tomas on 11/6/2017.
  */
 public class QueueController {
     private QueueView queueView;
-    private StaticQueue<Integer> queue;
+    private StaticQueueInteger queue;
 
     public QueueController(){
-        queue = new StaticQueue<>(10);
-        queueView = new QueueView(new Queue(), new Dequeue(), new EmptyQueue());
+        queue = new StaticQueueInteger();
+        queueView = new QueueView(new Queue(), new Dequeue(), new EmptyQueue() , new MultiplierFactor());
     }
 
     public class Queue implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            int random = ThreadLocalRandom.current().nextInt(0, 1000);
-            queue.enqueue(random);
-
+            queue.enqueue();
         }
     }
 
@@ -30,7 +27,6 @@ public class QueueController {
         @Override
         public void actionPerformed(ActionEvent e) {
             queue.dequeue();
-
         }
     }
 
@@ -38,7 +34,13 @@ public class QueueController {
         @Override
         public void actionPerformed(ActionEvent e) {
             queue.empty();
+        }
+    }
 
+    public class MultiplierFactor implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+//            queue.setMultiplierFactor();
         }
     }
 }

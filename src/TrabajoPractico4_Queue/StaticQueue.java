@@ -1,5 +1,7 @@
 package TrabajoPractico4_Queue;
 
+import java.util.Random;
+
 /**
  * Class that creates a queue (static).
  * @author Diego Mancini
@@ -37,6 +39,22 @@ public class StaticQueue<T> {
             quantity++;
         }
     }
+
+    public void enqueueInteger(int customGrowSize) {
+        Random r = new Random();
+        int low = 0;
+        int high = 1001;
+        Integer result = r.nextInt(high-low) + low;
+        if (size == data.length) {
+            customGrow(customGrowSize);
+        } else {
+            backend = increment(backend);
+            data[backend] = (T) result;
+            size++;
+            quantity++;
+        }
+    }
+
     public T dequeue() {
         if (isEmpty()) {
             throw new RuntimeException("Array is empty");
@@ -47,21 +65,29 @@ public class StaticQueue<T> {
         quantity--;
         return returnValue;
     }
+
     public T getFront() {
         if (isEmpty()) {
             throw new RuntimeException("Array is empty");
         }
         return data[front];
     }
+
+    public T getActual() {
+        return data[quantity];
+    }
+
     public boolean isEmpty() {
         return size == 0;
     }
+
     public void empty() {
         size = 0;
         front = 0;
         backend = front-1;
         quantity = 0;
     }
+
     public T[] getData() {
         return data;
     }
@@ -83,6 +109,17 @@ public class StaticQueue<T> {
      */
     private void doubleQueue() {
         T[] newArray = (T[]) new Object[data.length * 2];
+        for (int i = 0; i < size; i++ ) {
+            front = increment(front);
+            newArray[i] = data[front];
+        }
+        data = newArray;
+        front = 0;
+        backend = size-1;
+    }
+
+    private void customGrow(Integer factor) {
+        T[] newArray = (T[]) new Object[data.length * factor];
         for (int i = 0; i < size; i++ ) {
             front = increment(front);
             newArray[i] = data[front];
