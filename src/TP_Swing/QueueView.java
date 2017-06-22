@@ -8,7 +8,8 @@ import java.awt.event.ActionListener;
  * Created by Tomas on 11/6/2017.
  */
 public class QueueView extends JFrame {
-    private JPanel[] theQueue = new JPanel[10];
+    private StaticQueueSwing theQueue = new StaticQueueSwing();
+    private JTextField[] numbers = new JTextField[3];
 
     public QueueView(ActionListener queue, ActionListener dequeue, ActionListener emptyQueue , ActionListener multiplierFactor){
         setTitle("Queue Model");
@@ -16,71 +17,82 @@ public class QueueView extends JFrame {
         setSize(1000, 1000);
 
         JPanel aQueue = new JPanel();
-        aQueue.setSize(1000 , 200);
+        aQueue.setSize(1000 , 1000);
         aQueue.setAlignmentX(Component.CENTER_ALIGNMENT);
         aQueue.setAlignmentY(Component.CENTER_ALIGNMENT);
         aQueue.setLayout(new GridLayout(0,10));
+        for (int i = 0; i < theQueue.getTheQueue().length; i++) {
+            aQueue.add(theQueue.getTheQueue()[i]);
+        }
 
         JPanel info = new JPanel();
         info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
+        info.setSize(1000, 1000);
 
-//        JLabel title = new JLabel("Static Queue");
-//        title.setAlignmentY(Component.TOP_ALIGNMENT);
-//        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        title.setFont(new Font(title.getFont().getName(), Font.ROMAN_BASELINE, 20));
-//
-//        JLabel authors = new JLabel("Tomas Iturralde, Diego Mancini");
-//        authors.setAlignmentY(Component.TOP_ALIGNMENT);
-//        authors.setAlignmentX(Component.CENTER_ALIGNMENT );
-//        authors.setFont(new Font(title.getFont().getName(), Font.ROMAN_BASELINE, 20));
-
-        for (int i = 0; i < 10; i++){
-            theQueue[i] = new JPanel();
-            theQueue[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            theQueue[i].setFont(new Font("Arial", Font.PLAIN, 20));
-            theQueue[i].setBackground(Color.WHITE);
-            theQueue[i].setSize(50 , 50);
-            aQueue.add(theQueue[i]);
-        }
+        JPanel buttons = new JPanel();
+        buttons.setLayout(new GridLayout(0,3));
+        buttons.setSize(1000,1000);
 
         JButton enqueue = new JButton("Enqueue");
         enqueue.setAlignmentX(Component.CENTER_ALIGNMENT);
         enqueue.setAlignmentY(Component.CENTER_ALIGNMENT);
         enqueue.addActionListener(queue);
+        buttons.add(enqueue);
 
         JButton deQueue = new JButton("Dequeue");
         deQueue.setAlignmentX(Component.CENTER_ALIGNMENT);
         deQueue.setAlignmentY(Component.CENTER_ALIGNMENT);
         deQueue.addActionListener(dequeue);
+        buttons.add(deQueue);
 
         JButton empty = new JButton("Clear Queue");
         empty.setAlignmentX(Component.CENTER_ALIGNMENT);
         empty.setAlignmentY(Component.CENTER_ALIGNMENT);
         empty.addActionListener(emptyQueue);
+        buttons.add(empty);
 
         JButton applyMultiplier = new JButton("Apply Multiplier");
         applyMultiplier.setAlignmentX(Component.CENTER_ALIGNMENT);
         applyMultiplier.setAlignmentY(Component.CENTER_ALIGNMENT);
-        applyMultiplier.addActionListener(emptyQueue);
+        applyMultiplier.addActionListener(multiplierFactor);
 
-        JTextField number = new JTextField();
-        number.setSize(30 , 5);
-        number.setAlignmentX(Component.CENTER_ALIGNMENT);
-        number.setAlignmentY(Component.CENTER_ALIGNMENT);
-        number.addActionListener(multiplierFactor);
+        JPanel multiplier = new JPanel();
+        multiplier.setLayout(new GridLayout(0,3));
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = new JTextField();
+            numbers[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            numbers[i].setFont(new Font("Arial", Font.PLAIN, 20));
+            numbers[i].setBackground(Color.WHITE);
+            numbers[i].setHorizontalAlignment(JTextField.CENTER);
+            numbers[i].setSize(50,50);
+            multiplier.add(numbers[i]);
+        }
 
-//        info.add(Box.createRigidArea(new Dimension(200, 50)));
-//        info.add(title);
-//        info.add(Box.createRigidArea(new Dimension(200, 50)));
-//        info.add(authors);
+        JPanel labels = new JPanel();
+        labels.setLayout(new GridLayout(0,3));
+        labels.setSize(1000,1000);
+
+        JLabel enqueued = new JLabel("Dato encolado:");
+        enqueued.setFont(new Font(enqueued.getFont().getName(), Font.ROMAN_BASELINE, 20));
+        labels.add(enqueued);
+
+        JLabel multiply = new JLabel("Multiplicador:");
+        multiply.setFont(new Font(multiply.getFont().getName(), Font.ROMAN_BASELINE, 20));
+        labels.add(multiply);
+
+        JLabel dequeued = new JLabel("Dato desencolado:");
+        dequeued.setFont(new Font(dequeued.getFont().getName(), Font.ROMAN_BASELINE, 20));
+        labels.add(dequeued);
+
         info.add(Box.createRigidArea(new Dimension(500, 50)));
-        info.add(enqueue);
-        info.add(deQueue);
-        info.add(empty);
-        info.add(number);
+        info.add(buttons);
+        info.add(Box.createRigidArea(new Dimension(50,50)));
+        info.add(labels);
+        info.add(multiplier);
         info.add(applyMultiplier);
 
         JPanel mainPanel = new JPanel();
+        mainPanel.setSize(1500,1500);
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.add(aQueue);
         mainPanel.add(info);
@@ -89,5 +101,12 @@ public class QueueView extends JFrame {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public StaticQueueSwing getTheQueue() {
+        return theQueue;
+    }
+    public JTextField[] getNumbers() {
+        return numbers;
     }
 }

@@ -30,13 +30,9 @@ public class StaticQueueInteger {
         multiplierFactor = 2;
     }
 
-    public void enqueue() {
-        Random r = new Random();
-        int low = 0;
-        int high = 1001;
-        int result = r.nextInt(high-low) + low;
+    public void enqueue(int result) {
         if (size == data.length) {
-            doubleQueue();
+            growQueue();
         } else {
             backend = increment(backend);
             data[backend] = result;
@@ -57,7 +53,7 @@ public class StaticQueueInteger {
     }
 
 
-    private void doubleQueue() {
+    public void growQueue() {
         int[] newArray = new int[data.length * multiplierFactor];
         for (int i = 0; i < size; i++ ) {
             front = increment(front);
