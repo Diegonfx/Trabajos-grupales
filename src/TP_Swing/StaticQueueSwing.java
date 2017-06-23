@@ -11,10 +11,9 @@ public class StaticQueueSwing {
     private int size;
     private int front;
     private int backend;
-    private int initialCapacity = 10;
     private int quantity;
+    private int length;
     private int multiplierFactor;
-
 
     public StaticQueueSwing(){
         for (int i = 0; i < 10; i++){
@@ -23,8 +22,8 @@ public class StaticQueueSwing {
             theQueue[i].setFont(new Font("Arial", Font.PLAIN, 20));
             theQueue[i].setBackground(Color.WHITE);
             theQueue[i].setSize(50 , 50);
-
         }
+        length = 10;
         size = 0;
         front = 0;
         backend = front - 1;
@@ -35,6 +34,13 @@ public class StaticQueueSwing {
         return theQueue;
     }
 
+    public boolean isFull() {
+        if (size  == length) {
+            return true;
+        } else
+            return false;
+    }
+
     public int enqueue(int number){
         if (size == theQueue.length) {
             growQueue();
@@ -43,6 +49,7 @@ public class StaticQueueSwing {
             theQueue[backend].setText("" + number);
             size++;
             quantity++;
+            theQueue[backend].setBackground(Color.CYAN);
         }
         return number;
     }
@@ -54,6 +61,7 @@ public class StaticQueueSwing {
         size--;
         String returnValue = theQueue[front].getText();
         theQueue[front].setText("");
+        theQueue[front].setBackground(Color.RED);
         front = increment(front);
         quantity--;
         return returnValue;
@@ -68,6 +76,7 @@ public class StaticQueueSwing {
     public void empty(){
         for (int i = 0; i < theQueue.length; i++) {
             theQueue[i].setText("");
+            theQueue[i].setBackground(Color.WHITE);
         }
         size = 0;
         front = 0;
@@ -96,8 +105,33 @@ public class StaticQueueSwing {
             front = increment(front);
             newArray[i].setText(theQueue[front].getText());
         }
+        length = newArray.length;
         theQueue = newArray;
         front = 0;
         backend = size-1;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public int getFront() {
+        return front;
+    }
+
+    public int getBackend() {
+        return backend;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public int getMultiplierFactor() {
+        return multiplierFactor;
     }
 }

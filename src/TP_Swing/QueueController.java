@@ -1,6 +1,8 @@
 package TP_Swing;
 
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.ThreadLocalRandom;
@@ -10,10 +12,10 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class QueueController {
     private QueueView queueView;
-    private StaticQueueInteger queue;
+    private StaticQueueSwing queue;
 
     public QueueController(){
-        queue = new StaticQueueInteger();
+        queue = new StaticQueueSwing();
         queueView = new QueueView(new Queue(), new Dequeue(), new EmptyQueue() , new MultiplierFactor());
     }
 
@@ -24,6 +26,16 @@ public class QueueController {
             queue.enqueue(number);
             queueView.getTheQueue().enqueue(number);
             queueView.getNumbers()[0].setText("" + number);
+            if (queueView.getTheQueue().isFull()) {
+                for (int i = 0 ; i < queueView.getTheQueue().getMultiplierFactor() * 10 - 10; i++) {
+                    JTextPane theQueue = new JTextPane();
+                    theQueue.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    theQueue.setFont(new Font("Arial", Font.PLAIN, 20));
+                    theQueue.setBackground(Color.WHITE);
+                    theQueue.setSize(50 , 50);
+                    queueView.getaQueue().add(theQueue);
+                }
+            }
         }
     }
 

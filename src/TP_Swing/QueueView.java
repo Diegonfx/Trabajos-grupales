@@ -9,21 +9,22 @@ import java.awt.event.ActionListener;
  */
 public class QueueView extends JFrame {
     private StaticQueueSwing theQueue = new StaticQueueSwing();
-    private JTextField[] numbers = new JTextField[3];
+    private JTextPane[] numbers = new JTextPane[3];
+    private JPanel aQueue = new JPanel();
 
     public QueueView(ActionListener queue, ActionListener dequeue, ActionListener emptyQueue , ActionListener multiplierFactor){
         setTitle("Queue Model");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 1000);
 
-        JPanel aQueue = new JPanel();
         aQueue.setSize(1000 , 1000);
         aQueue.setAlignmentX(Component.CENTER_ALIGNMENT);
         aQueue.setAlignmentY(Component.CENTER_ALIGNMENT);
-        aQueue.setLayout(new GridLayout(0,10));
+        aQueue.setLayout(new GridLayout(0,theQueue.getLength()));
         for (int i = 0; i < theQueue.getTheQueue().length; i++) {
             aQueue.add(theQueue.getTheQueue()[i]);
         }
+
 
         JPanel info = new JPanel();
         info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
@@ -59,11 +60,11 @@ public class QueueView extends JFrame {
         JPanel multiplier = new JPanel();
         multiplier.setLayout(new GridLayout(0,3));
         for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = new JTextField();
+            numbers[i] = new JTextPane();
             numbers[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
             numbers[i].setFont(new Font("Arial", Font.PLAIN, 20));
             numbers[i].setBackground(Color.WHITE);
-            numbers[i].setHorizontalAlignment(JTextField.CENTER);
+//            numbers[i].setHorizontalAlignment(JTextField.CENTER);
             numbers[i].setSize(50,50);
             multiplier.add(numbers[i]);
         }
@@ -106,7 +107,15 @@ public class QueueView extends JFrame {
     public StaticQueueSwing getTheQueue() {
         return theQueue;
     }
-    public JTextField[] getNumbers() {
+    public JTextPane[] getNumbers() {
         return numbers;
+    }
+
+    public JPanel getaQueue() {
+        return aQueue;
+    }
+
+    public void setaQueue(JPanel aQueue) {
+        this.aQueue = aQueue;
     }
 }
