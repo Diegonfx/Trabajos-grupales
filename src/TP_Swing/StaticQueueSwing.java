@@ -7,7 +7,7 @@ import java.awt.*;
  * Created by Tomas on 21/6/2017.
  */
 public class StaticQueueSwing {
-    private JTextPane[] theQueue = new JTextPane[40];
+    private JTextPane[] theQueue = new JTextPane[20];
     private int size;
     private int front;
     private int backend;
@@ -16,14 +16,14 @@ public class StaticQueueSwing {
 
 
     public StaticQueueSwing(){
-        for (int i = 0; i < 40; i++){
+        for (int i = 0; i < 20; i++){
             theQueue[i] = new JTextPane();
             theQueue[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
             theQueue[i].setFont(new Font("Arial", Font.PLAIN, 20));
             theQueue[i].setBackground(Color.WHITE);
-            theQueue[i].setSize(10 , 10);
+            theQueue[i].setSize(40 , 40);
         }
-        length = 40;
+        length = 20;
         size = 0;
         front = 0;
         backend = front - 1;
@@ -83,13 +83,13 @@ public class StaticQueueSwing {
     }
 
     public void growQueue() {
-            JTextPane[] newArray = new JTextPane[theQueue.length * 2];
+            JTextPane[] newArray = new JTextPane[theQueue.length + 5];
             for (int i = 0; i < newArray.length; i++) {
                 newArray[i] = new JTextPane();
                 newArray[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 newArray[i].setFont(new Font("Arial", Font.PLAIN, 20));
                 newArray[i].setBackground(Color.WHITE);
-                newArray[i].setSize(40, 50);
+                newArray[i].setSize(50, 50);
 
             }
             for (int i = 0; i < size; i++) {

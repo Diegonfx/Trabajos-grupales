@@ -22,30 +22,32 @@ public class QueueController {
     public class Queue implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            int number = randomNumberGenerator();
-            if (queueView.getTheQueue().getBackend() != -1){
-                deletePointer(queueView.getTheQueue().getBackend());
-            }
-
-            queue.enqueue(number);
-            queueView.getTheQueue().enqueue(number);
-            setFrontPointer(queueView.getTheQueue().getFront());
-            setBackPointer(queueView.getTheQueue().getBackend());
-            queueView.getNumbers()[0].setText("" + number);
-
-            if (queueView.getTheQueue().getBackend() == 9) {
-                for (int i = 0; i < 10; i++) {
-                    queueView.getTheQueue().getTheQueue()[i+10].setVisible(true);
-                    queueView.getPointersFoto()[i+10].setVisible(true);
-                    queueView.getPointers()[i+10].setVisible(true);
+            if (queueView.getTheQueue().getQuantity() != 20) {
+                int number = randomNumberGenerator();
+                if (queueView.getTheQueue().getBackend() != -1) {
+                    deletePointer(queueView.getTheQueue().getBackend());
                 }
-            }
 
-            if (queueView.getTheQueue().getBackend() == 19) {
-                for (int i = 0; i < 20; i++) {
-                    queueView.getTheQueue().getTheQueue()[i+20].setVisible(true);
-                    queueView.getPointersFoto()[i+20].setVisible(true);
-                    queueView.getPointers()[i+20].setVisible(true);
+                queue.enqueue(number);
+                queueView.getTheQueue().enqueue(number);
+                setFrontPointer(queueView.getTheQueue().getFront());
+                setBackPointer(queueView.getTheQueue().getBackend());
+                queueView.getNumbers()[0].setText("" + number);
+
+                if (queueView.getTheQueue().getBackend() == 9) {
+                    for (int i = 0; i < 5; i++) {
+                        queueView.getTheQueue().getTheQueue()[i + 10].setVisible(true);
+                        queueView.getPointersFoto()[i + 10].setVisible(true);
+                        queueView.getPointers()[i + 10].setVisible(true);
+                    }
+                }
+
+                if (queueView.getTheQueue().getBackend() == 14) {
+                    for (int i = 0; i < 5; i++) {
+                        queueView.getTheQueue().getTheQueue()[i + 15].setVisible(true);
+                        queueView.getPointersFoto()[i + 15].setVisible(true);
+                        queueView.getPointers()[i + 15].setVisible(true);
+                    }
                 }
             }
         }
@@ -69,6 +71,17 @@ public class QueueController {
             deletePointer(queueView.getTheQueue().getBackend());
             queue.empty();
             queueView.getTheQueue().empty();
+            for (int i = 0; i < 10; i++) {
+                queueView.getTheQueue().getTheQueue()[i+10].setVisible(false);
+                queueView.getPointersFoto()[i+10].setVisible(false);
+                queueView.getPointers()[i+10].setVisible(false);
+            }
+
+            for (int i = 0; i < 20; i++) {
+                queueView.getTheQueue().getTheQueue()[i+20].setVisible(false);
+                queueView.getPointersFoto()[i+20].setVisible(false);
+                queueView.getPointers()[i+20].setVisible(false);
+            }
         }
     }
 

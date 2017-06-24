@@ -12,9 +12,9 @@ public class QueueView extends JFrame {
     private JTextPane[] numbers = new JTextPane[3];
     private JPanel aQueue = new JPanel();
     private JPanel pointer = new JPanel();
-    private JTextPane[] pointers = new JTextPane[40];
+    private JTextPane[] pointers = new JTextPane[20];
     private JPanel pointerFoto = new JPanel();
-    private JLabel[] pointersFoto = new JLabel[40];
+    private JLabel[] pointersFoto = new JLabel[20];
 
     public QueueView(ActionListener queue, ActionListener dequeue, ActionListener emptyQueue){
         setTitle("Queue Model");
@@ -24,43 +24,43 @@ public class QueueView extends JFrame {
         aQueue.setSize(2000 , 1000);
         aQueue.setAlignmentX(Component.CENTER_ALIGNMENT);
         aQueue.setAlignmentY(Component.CENTER_ALIGNMENT);
-        aQueue.setLayout(new GridLayout(0,40));
-        for (int i = 0; i < 40; i++) {
+        aQueue.setLayout(new GridLayout(0,20));
+        for (int i = 0; i < 20; i++) {
             aQueue.add(theQueue.getTheQueue()[i]);
         }
-        for (int i = 10; i < 40; i++) {
+        for (int i = 10; i < 20; i++) {
             theQueue.getTheQueue()[i].setVisible(false);
         }
 
-        pointer.setSize(1000 , 1000);
+        pointer.setSize(1500 , 1500);
         pointer.setAlignmentX(Component.CENTER_ALIGNMENT);
         pointer.setAlignmentY(Component.CENTER_ALIGNMENT);
-        pointer.setLayout(new GridLayout(0,40));
-        for (int i = 0; i < 40; i++) {
+        pointer.setLayout(new GridLayout(0,20));
+        for (int i = 0; i < 20; i++) {
             pointers[i] = new JTextPane();
             pointers[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
             pointers[i].setFont(new Font("Arial", Font.PLAIN, 20));
             pointers[i].setBackground(Color.WHITE);
-            pointers[i].setSize(10 , 10);
+            pointers[i].setSize(50 , 50);
             pointer.add(pointers[i]);
         }
-        for (int i = 10; i < 40; i++) {
+        for (int i = 10; i < 20; i++) {
             pointers[i].setVisible(false);
         }
 
-        pointerFoto.setSize(1000 , 1000);
+        pointerFoto.setSize(1500 , 1500);
         pointerFoto.setAlignmentX(Component.CENTER_ALIGNMENT);
         pointerFoto.setAlignmentY(Component.CENTER_ALIGNMENT);
-        pointerFoto.setLayout(new GridLayout(0,40));
-        for (int i = 0; i < 40; i++) {
+        pointerFoto.setLayout(new GridLayout(0,20));
+        for (int i = 0; i < 20; i++) {
             pointersFoto[i] = new JLabel();
             pointersFoto[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
             pointersFoto[i].setFont(new Font("Arial", Font.PLAIN, 20));
             pointersFoto[i].setBackground(Color.WHITE);
-            pointersFoto[i].setSize(5 , 5);
+            pointersFoto[i].setSize(50 , 50);
             pointerFoto.add(pointersFoto[i]);
         }
-        for (int i = 10; i < 40; i++) {
+        for (int i = 10; i < 20; i++) {
             pointersFoto[i].setVisible(false);
         }
 
