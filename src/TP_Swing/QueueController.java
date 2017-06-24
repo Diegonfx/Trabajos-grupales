@@ -32,11 +32,21 @@ public class QueueController {
             setFrontPointer(queueView.getTheQueue().getFront());
             setBackPointer(queueView.getTheQueue().getBackend());
             queueView.getNumbers()[0].setText("" + number);
-            if (queueView.getTheQueue().isFull()) {
 
-                createQueue(queueView.getaQueue(), queueView.getTheQueue());
-                queueView.getaQueue().revalidate();
-                queueView.getaQueue().repaint();
+            if (queueView.getTheQueue().getBackend() == 9) {
+                for (int i = 0; i < 10; i++) {
+                    queueView.getTheQueue().getTheQueue()[i+10].setVisible(true);
+                    queueView.getPointersFoto()[i+10].setVisible(true);
+                    queueView.getPointers()[i+10].setVisible(true);
+                }
+            }
+
+            if (queueView.getTheQueue().getBackend() == 19) {
+                for (int i = 0; i < 20; i++) {
+                    queueView.getTheQueue().getTheQueue()[i+20].setVisible(true);
+                    queueView.getPointersFoto()[i+20].setVisible(true);
+                    queueView.getPointers()[i+20].setVisible(true);
+                }
             }
         }
     }
@@ -92,7 +102,6 @@ public class QueueController {
         for (int i = 0; i < theQueue.getTheQueue().length; i++) {
             aQueue.add(theQueue.getTheQueue()[i]);
         }
-
         queueView.setaQueue(aQueue);
     }
 }

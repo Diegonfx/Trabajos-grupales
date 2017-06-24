@@ -7,22 +7,23 @@ import java.awt.*;
  * Created by Tomas on 21/6/2017.
  */
 public class StaticQueueSwing {
-    private JTextPane[] theQueue = new JTextPane[10];
+    private JTextPane[] theQueue = new JTextPane[40];
     private int size;
     private int front;
     private int backend;
     private int quantity;
     private int length;
 
+
     public StaticQueueSwing(){
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 40; i++){
             theQueue[i] = new JTextPane();
             theQueue[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
             theQueue[i].setFont(new Font("Arial", Font.PLAIN, 20));
             theQueue[i].setBackground(Color.WHITE);
             theQueue[i].setSize(10 , 10);
         }
-        length = 10;
+        length = 40;
         size = 0;
         front = 0;
         backend = front - 1;
@@ -37,14 +38,14 @@ public class StaticQueueSwing {
     }
 
     public int enqueue(int number){
-        if (size == length) {
-            growQueue();
-        } else {
+//        if (size == length) {
+//            growQueue();
+//        } else {
             backend = increment(backend);
             theQueue[backend].setText("" + number);
             size++;
             quantity++;
-        }
+//        }
         return number;
     }
 
@@ -82,22 +83,23 @@ public class StaticQueueSwing {
     }
 
     public void growQueue() {
-        JTextPane[] newArray = new JTextPane[theQueue.length + 5];
-        for (int i = 0; i < newArray.length; i++) {
-            newArray[i] = new JTextPane();
-            newArray[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            newArray[i].setFont(new Font("Arial", Font.PLAIN, 20));
-            newArray[i].setBackground(Color.WHITE);
-            newArray[i].setSize(40 , 50);
-        }
-        for (int i = 0; i < size; i++ ) {
-            front = increment(front);
-            newArray[i].setText(theQueue[front].getText());
-        }
+            JTextPane[] newArray = new JTextPane[theQueue.length * 2];
+            for (int i = 0; i < newArray.length; i++) {
+                newArray[i] = new JTextPane();
+                newArray[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                newArray[i].setFont(new Font("Arial", Font.PLAIN, 20));
+                newArray[i].setBackground(Color.WHITE);
+                newArray[i].setSize(40, 50);
+
+            }
+            for (int i = 0; i < size; i++) {
+                front = increment(front);
+                newArray[i].setText(theQueue[front].getText());
+            }
         length = newArray.length;
         theQueue = newArray;
         front = 0;
-        backend = size-1;
+        backend = size - 1;
     }
 
     public int getSize() {
