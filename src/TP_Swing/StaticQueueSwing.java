@@ -13,7 +13,6 @@ public class StaticQueueSwing {
     private int backend;
     private int quantity;
     private int length;
-    private int multiplierFactor;
 
     public StaticQueueSwing(){
         for (int i = 0; i < 10; i++){
@@ -21,13 +20,12 @@ public class StaticQueueSwing {
             theQueue[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
             theQueue[i].setFont(new Font("Arial", Font.PLAIN, 20));
             theQueue[i].setBackground(Color.WHITE);
-            theQueue[i].setSize(50 , 50);
+            theQueue[i].setSize(10 , 10);
         }
         length = 10;
         size = 0;
         front = 0;
         backend = front - 1;
-        multiplierFactor = 2;
     }
 
     public JTextPane[] getTheQueue() {
@@ -35,21 +33,17 @@ public class StaticQueueSwing {
     }
 
     public boolean isFull() {
-        if (size  == length) {
-            return true;
-        } else
-            return false;
+        return size == length;
     }
 
     public int enqueue(int number){
-        if (size == theQueue.length) {
+        if (isFull()) {
             growQueue();
         } else {
             backend = increment(backend);
             theQueue[backend].setText("" + number);
             size++;
             quantity++;
-            theQueue[backend].setBackground(Color.CYAN);
         }
         return number;
     }
@@ -61,7 +55,6 @@ public class StaticQueueSwing {
         size--;
         String returnValue = theQueue[front].getText();
         theQueue[front].setText("");
-        theQueue[front].setBackground(Color.RED);
         front = increment(front);
         quantity--;
         return returnValue;
@@ -88,22 +81,18 @@ public class StaticQueueSwing {
         return size == 0;
     }
 
-    public void setMultiplierFactor(int multiplierFactor) {
-        this.multiplierFactor = multiplierFactor;
-    }
-
     public void growQueue() {
-        JTextPane[] newArray = new JTextPane[theQueue.length * multiplierFactor];
+        JTextPane[] newArray = new JTextPane[theQueue.length + 5];
         for (int i = 0; i < newArray.length; i++) {
             newArray[i] = new JTextPane();
             newArray[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
             newArray[i].setFont(new Font("Arial", Font.PLAIN, 20));
             newArray[i].setBackground(Color.WHITE);
-            newArray[i].setSize(50 , 50);
+            newArray[i].setSize(40 , 50);
         }
         for (int i = 0; i < size; i++ ) {
-            front = increment(front);
             newArray[i].setText(theQueue[front].getText());
+            front = increment(front);
         }
         length = newArray.length;
         theQueue = newArray;
@@ -131,7 +120,4 @@ public class StaticQueueSwing {
         return quantity;
     }
 
-    public int getMultiplierFactor() {
-        return multiplierFactor;
-    }
 }
