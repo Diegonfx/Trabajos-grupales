@@ -37,7 +37,7 @@ public class StaticQueueSwing {
     }
 
     public int enqueue(int number){
-        if (isFull()) {
+        if (size == length) {
             growQueue();
         } else {
             backend = increment(backend);
@@ -91,8 +91,8 @@ public class StaticQueueSwing {
             newArray[i].setSize(40 , 50);
         }
         for (int i = 0; i < size; i++ ) {
-            newArray[i].setText(theQueue[front].getText());
             front = increment(front);
+            newArray[i].setText(theQueue[front].getText());
         }
         length = newArray.length;
         theQueue = newArray;

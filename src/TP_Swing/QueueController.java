@@ -2,6 +2,7 @@ package TP_Swing;
 
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.ThreadLocalRandom;
@@ -33,7 +34,7 @@ public class QueueController {
             queueView.getNumbers()[0].setText("" + number);
             if (queueView.getTheQueue().isFull()) {
 
-                //queueView.createQueue(queueView.getaQueue(), queueView.getTheQueue());
+                createQueue(queueView.getaQueue(), queueView.getTheQueue());
                 queueView.getaQueue().revalidate();
                 queueView.getaQueue().repaint();
             }
@@ -81,5 +82,17 @@ public class QueueController {
         queueView.getPointers()[position].setText("");
         ImageIcon blank = new ImageIcon("src/TP_Swing/blank.png");
         queueView.getPointersFoto()[position].setIcon(blank);
+    }
+
+    private void createQueue(JPanel aQueue, StaticQueueSwing theQueue){
+        aQueue.setSize(1000 , 1000);
+        aQueue.setAlignmentX(Component.CENTER_ALIGNMENT);
+        aQueue.setAlignmentY(Component.CENTER_ALIGNMENT);
+        aQueue.setLayout(new GridLayout(0,theQueue.getLength()));
+        for (int i = 0; i < theQueue.getTheQueue().length; i++) {
+            aQueue.add(theQueue.getTheQueue()[i]);
+        }
+
+        queueView.setaQueue(aQueue);
     }
 }
