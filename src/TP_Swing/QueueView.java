@@ -19,9 +19,9 @@ public class QueueView extends JFrame {
     public QueueView(ActionListener queue, ActionListener dequeue, ActionListener emptyQueue){
         setTitle("Queue Model");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(2200, 2200);
+        setSize(10000, 10000);
 
-        aQueue.setSize(2000 , 1000);
+        aQueue.setSize(2000 , 2000);
         aQueue.setAlignmentX(Component.CENTER_ALIGNMENT);
         aQueue.setAlignmentY(Component.CENTER_ALIGNMENT);
         aQueue.setLayout(new GridLayout(0,20));
@@ -32,7 +32,7 @@ public class QueueView extends JFrame {
             theQueue.getTheQueue()[i].setVisible(false);
         }
 
-        pointer.setSize(1500 , 1500);
+        pointer.setSize(3000 , 3000);
         pointer.setAlignmentX(Component.CENTER_ALIGNMENT);
         pointer.setAlignmentY(Component.CENTER_ALIGNMENT);
         pointer.setLayout(new GridLayout(0,20));
@@ -41,23 +41,25 @@ public class QueueView extends JFrame {
             pointers[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
             pointers[i].setFont(new Font("Arial", Font.PLAIN, 20));
             pointers[i].setBackground(Color.WHITE);
-            pointers[i].setSize(50 , 50);
+            pointers[i].setSize(100 , 100);
             pointer.add(pointers[i]);
         }
         for (int i = 10; i < 20; i++) {
             pointers[i].setVisible(false);
         }
 
-        pointerFoto.setSize(1500 , 1500);
+        pointerFoto.setSize(3000 , 2000);
         pointerFoto.setAlignmentX(Component.CENTER_ALIGNMENT);
         pointerFoto.setAlignmentY(Component.CENTER_ALIGNMENT);
         pointerFoto.setLayout(new GridLayout(0,20));
+        ImageIcon blank = new ImageIcon("src/TP_Swing/blank.png");
         for (int i = 0; i < 20; i++) {
             pointersFoto[i] = new JLabel();
             pointersFoto[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
             pointersFoto[i].setFont(new Font("Arial", Font.PLAIN, 20));
             pointersFoto[i].setBackground(Color.WHITE);
-            pointersFoto[i].setSize(50 , 50);
+            pointersFoto[i].setSize(100 , 100);
+            pointersFoto[i].setIcon(blank);
             pointerFoto.add(pointersFoto[i]);
         }
         for (int i = 10; i < 20; i++) {
@@ -66,11 +68,11 @@ public class QueueView extends JFrame {
 
         JPanel info = new JPanel();
         info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
-        info.setSize(1000, 1000);
+        info.setSize(500, 500);
 
         JPanel buttons = new JPanel();
         buttons.setLayout(new GridLayout(0,3));
-        buttons.setSize(1000,1000);
+        buttons.setSize(500,500);
 
         JButton enqueue = new JButton("Enqueue");
         enqueue.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -123,7 +125,7 @@ public class QueueView extends JFrame {
         info.add(multiplier);
 
         JPanel mainPanel = new JPanel();
-        mainPanel.setSize(2000,2000);
+        mainPanel.setSize(10000,10000);
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.add(aQueue);
         mainPanel.add(pointerFoto);

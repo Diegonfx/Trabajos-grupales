@@ -76,12 +76,6 @@ public class QueueController {
                 queueView.getPointersFoto()[i+10].setVisible(false);
                 queueView.getPointers()[i+10].setVisible(false);
             }
-
-            for (int i = 0; i < 20; i++) {
-                queueView.getTheQueue().getTheQueue()[i+20].setVisible(false);
-                queueView.getPointersFoto()[i+20].setVisible(false);
-                queueView.getPointers()[i+20].setVisible(false);
-            }
         }
     }
 

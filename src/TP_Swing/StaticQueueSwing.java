@@ -7,7 +7,7 @@ import java.awt.*;
  * Created by Tomas on 21/6/2017.
  */
 public class StaticQueueSwing {
-    private JTextPane[] theQueue = new JTextPane[20];
+    private JTextPane[] theQueue;
     private int size;
     private int front;
     private int backend;
@@ -16,14 +16,16 @@ public class StaticQueueSwing {
 
 
     public StaticQueueSwing(){
+        length = 20;
+        theQueue = new JTextPane[20];
         for (int i = 0; i < 20; i++){
             theQueue[i] = new JTextPane();
             theQueue[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
             theQueue[i].setFont(new Font("Arial", Font.PLAIN, 20));
             theQueue[i].setBackground(Color.WHITE);
-            theQueue[i].setSize(40 , 40);
+            theQueue[i].setSize(100 , 100);
         }
-        length = 20;
+
         size = 0;
         front = 0;
         backend = front - 1;
@@ -89,7 +91,7 @@ public class StaticQueueSwing {
                 newArray[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 newArray[i].setFont(new Font("Arial", Font.PLAIN, 20));
                 newArray[i].setBackground(Color.WHITE);
-                newArray[i].setSize(50, 50);
+                newArray[i].setSize(100, 100);
 
             }
             for (int i = 0; i < size; i++) {
