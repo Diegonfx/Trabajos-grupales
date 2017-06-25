@@ -15,6 +15,7 @@ public class QueueView extends JFrame {
     private JTextPane[] pointers = new JTextPane[20];
     private JPanel pointerFoto = new JPanel();
     private JLabel[] pointersFoto = new JLabel[20];
+    private JPanel mainPanel = new JPanel();
 
     public QueueView(ActionListener queue, ActionListener dequeue, ActionListener emptyQueue){
         setTitle("Queue Model");
@@ -24,19 +25,16 @@ public class QueueView extends JFrame {
         aQueue.setSize(2000 , 2000);
         aQueue.setAlignmentX(Component.CENTER_ALIGNMENT);
         aQueue.setAlignmentY(Component.CENTER_ALIGNMENT);
-        aQueue.setLayout(new GridLayout(0,20));
-        for (int i = 0; i < 20; i++) {
+        aQueue.setLayout(new GridLayout(0,theQueue.getLength()));
+        for (int i = 0; i < theQueue.getLength(); i++) {
             aQueue.add(theQueue.getTheQueue()[i]);
-        }
-        for (int i = 10; i < 20; i++) {
-            theQueue.getTheQueue()[i].setVisible(false);
         }
 
         pointer.setSize(3000 , 3000);
         pointer.setAlignmentX(Component.CENTER_ALIGNMENT);
         pointer.setAlignmentY(Component.CENTER_ALIGNMENT);
-        pointer.setLayout(new GridLayout(0,20));
-        for (int i = 0; i < 20; i++) {
+        pointer.setLayout(new GridLayout(0,theQueue.getLength()));
+        for (int i = 0; i < theQueue.getLength(); i++) {
             pointers[i] = new JTextPane();
             pointers[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
             pointers[i].setFont(new Font("Arial", Font.PLAIN, 20));
@@ -44,16 +42,13 @@ public class QueueView extends JFrame {
             pointers[i].setSize(100 , 100);
             pointer.add(pointers[i]);
         }
-        for (int i = 10; i < 20; i++) {
-            pointers[i].setVisible(false);
-        }
 
         pointerFoto.setSize(3000 , 2000);
         pointerFoto.setAlignmentX(Component.CENTER_ALIGNMENT);
         pointerFoto.setAlignmentY(Component.CENTER_ALIGNMENT);
-        pointerFoto.setLayout(new GridLayout(0,20));
+        pointerFoto.setLayout(new GridLayout(0,theQueue.getLength()));
         ImageIcon blank = new ImageIcon("src/TP_Swing/blank.png");
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < theQueue.getLength(); i++) {
             pointersFoto[i] = new JLabel();
             pointersFoto[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
             pointersFoto[i].setFont(new Font("Arial", Font.PLAIN, 20));
@@ -61,9 +56,6 @@ public class QueueView extends JFrame {
             pointersFoto[i].setSize(100 , 100);
             pointersFoto[i].setIcon(blank);
             pointerFoto.add(pointersFoto[i]);
-        }
-        for (int i = 10; i < 20; i++) {
-            pointersFoto[i].setVisible(false);
         }
 
         JPanel info = new JPanel();
@@ -92,7 +84,6 @@ public class QueueView extends JFrame {
         empty.addActionListener(emptyQueue);
         buttons.add(empty);
 
-
         JPanel multiplier = new JPanel();
         multiplier.setLayout(new GridLayout(0,3));
         for (int i = 0; i < numbers.length; i++) {
@@ -118,19 +109,18 @@ public class QueueView extends JFrame {
         dequeued.setFont(new Font(dequeued.getFont().getName(), Font.ROMAN_BASELINE, 20));
         labels.add(dequeued);
 
+        info.add(labels);
+        info.add(multiplier);
         info.add(Box.createRigidArea(new Dimension(500, 50)));
         info.add(buttons);
         info.add(Box.createRigidArea(new Dimension(50,50)));
-        info.add(labels);
-        info.add(multiplier);
 
-        JPanel mainPanel = new JPanel();
         mainPanel.setSize(10000,10000);
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.add(info);
         mainPanel.add(aQueue);
         mainPanel.add(pointerFoto);
         mainPanel.add(pointer);
-        mainPanel.add(info);
 
         add(mainPanel);
         pack();
@@ -159,7 +149,21 @@ public class QueueView extends JFrame {
     public JLabel[] getPointersFoto() {
         return pointersFoto;
     }
-
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+    public void setPointer(JPanel pointer) {
+        this.pointer = pointer;
+    }
+    public void setPointers(JTextPane[] pointers) {
+        this.pointers = pointers;
+    }
+    public void setPointerFoto(JPanel pointerFoto) {
+        this.pointerFoto = pointerFoto;
+    }
+    public void setPointersFoto(JLabel[] pointersFoto) {
+        this.pointersFoto = pointersFoto;
+    }
     public void setaQueue(JPanel aQueue) {
         this.aQueue = aQueue;
     }

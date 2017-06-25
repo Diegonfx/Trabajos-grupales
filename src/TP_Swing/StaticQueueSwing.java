@@ -16,9 +16,9 @@ public class StaticQueueSwing {
 
 
     public StaticQueueSwing(){
-        length = 20;
-        theQueue = new JTextPane[20];
-        for (int i = 0; i < 20; i++){
+        length = 10;
+        theQueue = new JTextPane[10];
+        for (int i = 0; i < 10; i++){
             theQueue[i] = new JTextPane();
             theQueue[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
             theQueue[i].setFont(new Font("Arial", Font.PLAIN, 20));
@@ -40,14 +40,10 @@ public class StaticQueueSwing {
     }
 
     public int enqueue(int number){
-//        if (size == length) {
-//            growQueue();
-//        } else {
-            backend = increment(backend);
-            theQueue[backend].setText("" + number);
-            size++;
-            quantity++;
-//        }
+        backend = increment(backend);
+        theQueue[backend].setText("" + number);
+        size++;
+        quantity++;
         return number;
     }
 
@@ -95,8 +91,9 @@ public class StaticQueueSwing {
 
             }
             for (int i = 0; i < size; i++) {
-                front = increment(front);
+
                 newArray[i].setText(theQueue[front].getText());
+                front = increment(front);
             }
         length = newArray.length;
         theQueue = newArray;
@@ -107,21 +104,16 @@ public class StaticQueueSwing {
     public int getSize() {
         return size;
     }
-
     public int getLength() {
         return length;
     }
-
     public int getFront() {
         return front;
     }
-
     public int getBackend() {
         return backend;
     }
-
     public int getQuantity() {
         return quantity;
     }
-
 }
