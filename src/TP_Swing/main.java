@@ -1,7 +1,9 @@
 package TP_Swing;
 
 /**
- * Created by Tomas on 11/6/2017.
+ * Runs the static queue menu.
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class main {
     public static void main(String[] args) {

@@ -4,7 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Tomas on 21/6/2017.
+ * Implementation of a static queue adapted for swing.
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class StaticQueueSwing {
     private JTextPane[] theQueue;

@@ -5,7 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Tomas on 11/6/2017.
+ * Creates the menu for the static queue.
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class QueueView extends JFrame {
     private StaticQueueSwing theQueue = new StaticQueueSwing();

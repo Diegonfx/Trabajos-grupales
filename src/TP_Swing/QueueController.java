@@ -8,7 +8,9 @@ import java.awt.event.ActionListener;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Created by Tomas on 11/6/2017.
+ * Controller of a static queue.
+ * @author Tomas Iturralde
+ * @author Diego Mancini
  */
 public class QueueController {
     private QueueView queueView;
