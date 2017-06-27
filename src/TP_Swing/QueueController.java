@@ -89,19 +89,19 @@ public class QueueController {
 
     private void setFrontPointer(int position){
         queueView.getPointers()[position].setText("Head");
-        ImageIcon arrow = new ImageIcon("src/TP_Swing/arrow.png");
+        ImageIcon arrow = new ImageIcon(this.getClass().getResource("/TP_Swing/arrow.png"));
         queueView.getPointersFoto()[position].setIcon(arrow);
     }
 
     private void setBackPointer(int position){
         queueView.getPointers()[position].setText("Back");
-        ImageIcon arrow = new ImageIcon("src/TP_Swing/arrow.png");
+        ImageIcon arrow = new ImageIcon(this.getClass().getResource("/TP_Swing/arrow.png"));
         queueView.getPointersFoto()[position].setIcon(arrow);
     }
 
     private void deletePointer(int position){
         queueView.getPointers()[position].setText("");
-        ImageIcon blank = new ImageIcon("src/TP_Swing/blank.png");
+        ImageIcon blank = new ImageIcon(this.getClass().getResource("/TP_Swing/blank.png"));
         queueView.getPointersFoto()[position].setIcon(blank);
     }
 
@@ -146,8 +146,8 @@ public class QueueController {
         pointerFoto.setAlignmentX(Component.CENTER_ALIGNMENT);
         pointerFoto.setAlignmentY(Component.CENTER_ALIGNMENT);
         pointerFoto.setLayout(new GridLayout(0,queue.getLength()));
-        ImageIcon blank = new ImageIcon("src/TP_Swing/blank.png");
-        ImageIcon arrow = new ImageIcon("src/TP_Swing/arrow.png");
+        ImageIcon blank = new ImageIcon(this.getClass().getResource("/TP_Swing/blank.png"));
+        ImageIcon arrow = new ImageIcon(this.getClass().getResource("/TP_Swing/arrow.png"));
         for (int i = 0; i < queue.getLength(); i++) {
             pointersFoto[i] = new JLabel();
             pointersFoto[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));

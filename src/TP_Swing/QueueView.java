@@ -49,7 +49,7 @@ public class QueueView extends JFrame {
         pointerFoto.setAlignmentX(Component.CENTER_ALIGNMENT);
         pointerFoto.setAlignmentY(Component.CENTER_ALIGNMENT);
         pointerFoto.setLayout(new GridLayout(0,theQueue.getLength()));
-        ImageIcon blank = new ImageIcon("src/TP_Swing/blank.png");
+        ImageIcon blank = new ImageIcon(this.getClass().getResource("/TP_Swing/blank.png"));
         for (int i = 0; i < theQueue.getLength(); i++) {
             pointersFoto[i] = new JLabel();
             pointersFoto[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
