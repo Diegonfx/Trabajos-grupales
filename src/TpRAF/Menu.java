@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Created by Tomás Iturralde on 12/10/17.
+ * Created by Tomás Iturralde on 10/12/17.
  * Materia: AyED.
  */
 public class Menu {
@@ -61,7 +61,7 @@ public class Menu {
     }
 
     private void consults(CarFile carFile) throws IOException {
-        System.out.println(" 1. Car data. \n 2. Amount of cars. \n " +
+        System.out.println(" 1. Book data. \n 2. Amount of cars. \n " +
                 "3. Amount of full cars. \n 4. Amount of base cars. \n Choose an option:  ");
         int option = Integer.parseInt(reader.nextLine());
         switch (option){
@@ -215,7 +215,7 @@ public class Menu {
             long end = carFile.carSize * (i+1);
             car = carFile.read();
             if(car.isActive()){
-                fileWriter.write("Car code: " + car.getCode()+ ". From byte" + start + " to byte " + end +".\n");
+                fileWriter.write("Book code: " + car.getCode()+ ". From byte" + start + " to byte " + end +".\n");
             }
         }
         fileWriter.close();

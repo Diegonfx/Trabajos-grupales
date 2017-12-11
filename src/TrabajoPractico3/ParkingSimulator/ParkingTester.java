@@ -31,7 +31,7 @@ public class ParkingTester {
             System.out.println("Position:" + i + ", car parked: " + parking.getParking()[i].getBrand());
         }
         System.out.println("----------------------------");
-        parking.removeCar(4);                //Car E should be removed.
+        parking.removeCar(4);                //Book E should be removed.
 
         for (int i = 0; i <= parking.getTop() ; i++){
             System.out.println("Position:" + i + ", car parked: " + parking.getParking()[i].getBrand());

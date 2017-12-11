@@ -3,7 +3,7 @@ package TPRandomAccessFile;
 import java.io.*;
 
 /**
- * Created by Tomás Iturralde on 12/10/17.
+ * Created by Tomás Iturralde on 10/12/17.
  * Materia: AyED.
  */
 public class Menu {
@@ -23,17 +23,17 @@ public class Menu {
 
     public static void main(String[] args) throws IOException {
         StudentFile studentFile = new StudentFile("studentFile");
-        studentFile.write(new Student("Florencia", 'F', 12345678));
-        studentFile.write(new Student("Martin", 'M', 12654678));
-        studentFile.write(new Student("Agustin", 'M', 15432378));
-        studentFile.write(new Student("Marcos", 'M', 65421324));
+        //studentFile.write(new Student("Florencia", 'F', 12345678));
+        //studentFile.write(new Student("Martin", 'M', 12654678));
+        //studentFile.write(new Student("Agustin", 'M', 15432378));
+        //studentFile.write(new Student("Marcos", 'M', 65421324));
 //        studentFile.close();
 
 //        File fileChosen = null;
 //        fileChosen = new File(main.archivos.Scanner.getString("File name: "));
 
         int option = 0;
-        while (option != 5){
+        while (option != 6){
             option = Scanner.getInt(" 1. Add new element. \n 2. Delete an element. \n 3. Modify an element. \n" +
                     " 4. Consultation. \n 5. Inform. \n 6. Exit. \n Choose an option: ");
             switch (option){
@@ -64,10 +64,10 @@ public class Menu {
 
 
     private static void addNewElement(StudentFile studentFile) throws IOException {
-        String name = (Scanner.getString("Enter elements name: [10 char]"));
-        char gender = (Scanner.getChar("Enter gender char: [F or M]"));
         int enrollmentId = (Scanner.getInt("Enter student enrollment id: [8 int]"));
-        studentFile.write(new Student(name, gender, enrollmentId));
+        char gender = (Scanner.getChar("Enter gender char: [F or M]"));
+        int year = (Scanner.getInt("Enter student year: [1 int, 1 < year < 6]"));
+        studentFile.write(new Student(enrollmentId, gender, year));
     }
 
     private static void deleteElement(StudentFile studentFile) throws IOException {
@@ -78,7 +78,7 @@ public class Menu {
             else{
                 System.out.println("Wrong code.");
             }
-            studentFile.close();
+            //studentFile.close();
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -89,20 +89,20 @@ public class Menu {
         try {
             int code = Scanner.getInt("Enter student code: ");
             Student student = studentFile.search(code);
-            int option = Scanner.getInt("Enter option: \n 1.Change student name.  \n 2.Change student" +
-                    "enrollment id. \n");
+            int option = Scanner.getInt("Enter option: \n 1.Change student enrollment id.  \n 2.Change student" +
+                    " year. \n");
             long place = studentFile.replace(code);
             if (place >= 0) {
                 switch (option) {
                     case 1:
                         studentFile.goTo(place);
-                        studentFile.write(new Student(Scanner.getString("Enter name: "),student.getGender(),
-                                student.getEnrollmentId()));
+                        studentFile.write(new Student(Scanner.getInt("Enter enrollment id: "),student.getGender(),
+                                student.getYear()));
                         break;
                     case 2:
                         studentFile.goTo(place);
-                        studentFile.write(new Student(student.getName(),student.getGender(),
-                                Scanner.getInt("Enter enrollment id: ")));
+                        studentFile.write(new Student(student.getEnrollmentId(),student.getGender(),
+                                Scanner.getInt("Enter year: ")));
                         break;
                     default:
                         System.out.println("Wrong option");
@@ -152,9 +152,9 @@ public class Menu {
     private static void getStudentData(StudentFile studentFile) throws IOException {
         int code = Scanner.getInt("Enter student code: ");
         Student student = studentFile.search(code);
-        System.out.println("Name: " + student.getName());
         System.out.println("Enrollment id: " + student.getEnrollmentId());
         System.out.println("Gender: " + student.getGender());
+        System.out.println("Year: " + student.getYear());
     }
 
 

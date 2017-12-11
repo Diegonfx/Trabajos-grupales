@@ -1,7 +1,7 @@
 package tablaHash;
 
 /**
- * Created by Tomás Iturralde on 12/08/17.
+ * Created by Tomás Iturralde on 08/12/17.
  * Materia: AyED.
  */
 public class Auxa<T> implements List<T> {

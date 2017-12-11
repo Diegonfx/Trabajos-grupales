@@ -6,25 +6,25 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 /**
- * Created by Diego Mancini on 12/10/17.
+ * Created by Diego Mancini on 10/12/17.
  * Materia: AyED.
  */
 public class StudentFile {
     private File file;
     private RandomAccessFile raf;
-    private int studentSize;
+    private int studentSize = 8;
 
     StudentFile(String name)throws FileNotFoundException {
         file = new File(name);
         raf = new RandomAccessFile(file,"rw");
-        studentSize = 55;
     }
 
     public void write(Student student) throws IOException {
-        raf.writeChars(student.getName());
-        raf.writeChar(student.getGender());
         raf.writeInt(student.getEnrollmentId());
+        raf.writeChar(student.getGender());
+        raf.writeInt(student.getYear());
         raf.writeBoolean(student.isAvailable());
+
 //        raf.close();
     }
 
@@ -33,11 +33,11 @@ public class StudentFile {
         beginning();
         Student student;
         for (int i =0 ; i < cant;i++){
-            student = this.read();
+            student = read();
             if(student.isAvailable() && (student.getEnrollmentId() == code))
                 return student;
         }
-        return new Student(null, 'X', -1);
+        return new Student(-1, 'X', -1);
 
     }
 
@@ -141,7 +141,7 @@ public class StudentFile {
     }
 
     private Student read() throws IOException{
-        return new Student(raf.readUTF(), raf.readChar(), raf.readInt());
+        return new Student(raf.readInt(), raf.readChar(), raf.readInt());
     }
 
     long amountOfRegisters() throws IOException {
@@ -165,9 +165,8 @@ public class StudentFile {
     }
 
     private void printStudent(Student student){
-        System.out.println("Name: " + student.getName());
         System.out.println("Enrollment id: " + student.getEnrollmentId());
         System.out.println("Gender: " + student.getGender());
-
+        System.out.println("Year: " + student.getYear());
     }
 }

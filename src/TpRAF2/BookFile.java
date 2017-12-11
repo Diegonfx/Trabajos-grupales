@@ -1,36 +1,35 @@
-package TpRAF;
-
-import java.util.*;
+package TpRAF2;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.Scanner;
 
 /**
  * Created by Diego Mancini on 10/12/17.
  * Materia: AyED.
  */
-public class CarFile {
+public class BookFile {
     private File f;
     private RandomAccessFile raf;
-    int carSize = 16;
+    int bookSize = 16;
     private int bytes = 0;
     private Scanner reader ;
 
-    CarFile(String nombre)throws FileNotFoundException {
-        f = new File(nombre);
+    BookFile(String fileName) throws FileNotFoundException {
+        f = new File(fileName);
         raf = new RandomAccessFile(f,"rw");
         reader = new Scanner(System.in);
     }
 
-    public void write(Car c) throws IOException {
-        raf.writeInt(c.getCode());
+    public void write(Book c) throws IOException {
+        raf.writeInt(c.getBookCode());
         raf.writeDouble(c.getPrice());
         raf.writeBoolean(c.isAvailable());
-        raf.writeChar(c.getType());
+        raf.writeChar(c.getBookType());
         raf.writeBoolean(c.isActive());
-        bytes += carSize;
+        bytes += bookSize;
     }
     public void close() throws IOException {
         raf.close();
@@ -40,80 +39,80 @@ public class CarFile {
         return raf.length();
     }
 
-    Car read() throws IOException{
-        return new Car(raf.readInt(), raf.readDouble(),
+    Book read() throws IOException{
+        return new Book(raf.readInt(), raf.readDouble(),
                 raf.readBoolean(), raf.readChar(),raf.readBoolean());
     }
 
-    long amountOfCars() throws IOException {
-        return raf.length()/carSize;
+    long amountOfBooks() throws IOException {
+        return raf.length()/ bookSize;
     }
 
-    void amountOfActiveCars(CarFile carFile) throws IOException {
-        Car car;
-        int amountActive =0;
+    void amountOfActiveBooks(BookFile bookFile) throws IOException {
+        Book book;
+        int amountActive = 0;
         start();
         try {
-            long cant = carFile.amountOfCars();
+            long cant = bookFile.amountOfBooks();
             for (long i = 0; i < cant ; i++){
-                car = carFile.read();
-                if (car.isActive())
+                book = bookFile.read();
+                if (book.isActive())
                     amountActive++;
             }
-            System.out.println("Amount of cars: " + amountActive+"\n");
+            System.out.println("Amount of books: " + amountActive+"\n");
         }
         catch(Exception e){
             System.out.println(e.getMessage());
         }
     }
 
-    void amountOfFull(CarFile carFile) throws IOException {
-        Car car;
+    void amountOfNovels(BookFile bookFile) throws IOException {
+        Book book;
         start();
-        int amountFull =0;
+        int novelAmount =0;
         try {
-            long cant = carFile.amountOfCars();
+            long cant = bookFile.amountOfBooks();
             for (long i = 0; i < cant ; i++){
-                car = carFile.read();
-                if (car.isActive() && car.isFull())
-                    amountFull++;
+                book = bookFile.read();
+                if (book.isActive() && book.isNovel())
+                    novelAmount++;
             }
-            System.out.println("Amount of full cars: " + amountFull+"\n");
+            System.out.println("Amount of novels: " + novelAmount+"\n");
         }
         catch(Exception e){
             System.out.println(e.getMessage());
         }
     }
 
-    void amountOfBase(CarFile carFile) throws IOException {
-        Car car;
+    void amountOfComics(BookFile bookFile) throws IOException {
+        Book book;
         start();
-        int amountBase =0;
+        int comicAmount =0;
         try {
-            long cant = carFile.amountOfCars();
+            long cant = bookFile.amountOfBooks();
             for (long i = 0; i < cant ; i++){
-                car = carFile.read();
-                if (car.isActive() && car.isBase())
-                    amountBase++;
+                book = bookFile.read();
+                if (book.isActive() && book.isComic())
+                    comicAmount++;
             }
-            System.out.println("Amount of base cars: " + amountBase+"\n");
+            System.out.println("Amount of comics: " + comicAmount+"\n");
         }
         catch(Exception e){
             System.out.println(e.getMessage());
         }
     }
 
-    public Car search(int code) throws IOException{
-        long cant = amountOfCars();
+    public Book search(int code) throws IOException{
+        long cant = amountOfBooks();
         start();
-        Car car;
+        Book book;
         for (int i =0 ; i < cant;i++){
-            car = read();
-            if(car.isActive() && (car.getCode() == code)){
-                return car;
+            book = read();
+            if(book.isActive() && (book.getBookCode() == code)){
+                return book;
             }
         }
-        return new Car();
+        return new Book();
     }
 
 
@@ -126,15 +125,15 @@ public class CarFile {
     }
 
     public void goTo(long number) throws IOException{
-        raf.seek((number-1)*carSize);
+        raf.seek((number-1)* bookSize);
     }
 
     boolean delete(int code) throws IOException{
-        Car car = search(code);
-        if (car.getCode()!=0){
-            raf.seek(raf.getFilePointer()-carSize);
-            car.setActive(false);
-            write(car);
+        Book book = search(code);
+        if (book.getBookCode()!=0){
+            raf.seek(raf.getFilePointer()- bookSize);
+            book.setActive(false);
+            write(book);
             return true;
         }
         else
@@ -143,37 +142,37 @@ public class CarFile {
 
     //Este tendria que ir en menu
     boolean modify(int code) throws IOException{
-        Car car = search(code);
-        if (car.getCode()!=0){
-            raf.seek(raf.getFilePointer()-carSize);
+        Book book = search(code);
+        if (book.getBookCode()!=0){
+            raf.seek(raf.getFilePointer()- bookSize);
             System.out.println("Enter 1 to modify code, 2 to modify price, 3 to modify type or 4 to change availability: ");
             int option = Integer.parseInt(reader.nextLine());
             if (option == 1){
                 System.out.println("Enter new code: ");
                 int newCode = Integer.parseInt(reader.nextLine());
-                car.setCode(newCode);
+                book.setBookCode(newCode);
             }else if (option == 2){
                 System.out.println("Enter new price: ");
                 int newprice = Integer.parseInt(reader.nextLine());
-                car.setPrice(newprice);
+                book.setPrice(newprice);
             }else if (option == 3){
-                System.out.println("Enter new type('F' for full or 'B' for Base): ");
+                System.out.println("Enter new type('N' for novel or 'C' for comic): ");
                 char newType = reader.nextLine().charAt(0);
-                car.setType(newType);
+                book.setBookType(newType);
             }else if (option == 4) {
                 System.out.println("Enter 1 for change to available or 2 for change to not available: ");
                 int newOption = Integer.parseInt(reader.nextLine());
                 if (newOption == 1){
-                    car.setAvailable(true);
+                    book.setAvailable(true);
                 }else if (newOption == 2){
-                    car.setAvailable(false);
+                    book.setAvailable(false);
                 }else{
                     System.out.println("Invalid option \n");
                 }
             }else {
                 System.out.println("Wrong option"+"\n");
             }
-            write(car);
+            write(book);
             return true;
         }
         else
@@ -181,38 +180,38 @@ public class CarFile {
     }
 
 
-    void printEveryCar() throws IOException {
-        long cant = amountOfCars();
+    void printEveryBook() throws IOException {
+        long cant = amountOfBooks();
         start();
-        Car car;
+        Book book;
         for (int i =0 ; i < cant;i++){
-            car = read();
-            if(car.isActive()){
-                System.out.println(car.toString()+"\n");
+            book = read();
+            if(book.isActive()){
+                System.out.println(book.toString()+"\n");
             }
         }
     }
 
-    void printEveryFullCar() throws IOException {
-        long cant = amountOfCars();
+    void printEveryNovel() throws IOException {
+        long cant = amountOfBooks();
         start();
-        Car car;
+        Book book;
         for (int i =0 ; i < cant;i++){
-            car = read();
-            if (car.isActive() && car.isFull()) {
-                System.out.println(car.toString()+"\n");
+            book = read();
+            if (book.isActive() && book.isNovel()) {
+                System.out.println(book.toString()+"\n");
             }
         }
     }
 
-    void printEveryBaseCar() throws IOException {
-        long cant = amountOfCars();
+    void printEveryComic() throws IOException {
+        long cant = amountOfBooks();
         start();
-        Car car;
+        Book book;
         for (int i =0 ; i < cant;i++){
-            car = read();
-            if (car.isActive() && car.isBase()) {
-                System.out.println(car.toString()+"\n");
+            book = read();
+            if (book.isActive() && book.isComic()) {
+                System.out.println(book.toString()+"\n");
             }
         }
     }

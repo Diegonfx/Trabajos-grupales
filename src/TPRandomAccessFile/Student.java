@@ -1,24 +1,24 @@
 package TPRandomAccessFile;
 
 /**
- * Created by Diego Mancini on 12/10/17.
+ * Created by Diego Mancini on 10/12/17.
  * Materia: AyED.
  */
 public class Student {
-    private String name; //10
-    private char gender; //1
     private int enrollmentId; //8
+    private char gender; //1
+    private int year; //6
     private boolean available; //1
 
-    Student(String name, char gender, int enrollmentId) {
-        this.name = name;
-        this.gender = gender;
+    Student(int enrollmentId, char gender, int year) {
         this.enrollmentId = enrollmentId;
+        this.gender = gender;
+        this.year = year;
         available = true;
     }
 
-    public String getName() {
-        return name;
+    public int getYear() {
+        return year;
     }
 
     char getGender() {

@@ -1,7 +1,7 @@
 package tablaHash;
 
 /**
- * Created by Diego Mancini on 12/08/17.
+ * Created by Diego Mancini on 08/12/17.
  * Materia: AyED.
  */
 public class Main {

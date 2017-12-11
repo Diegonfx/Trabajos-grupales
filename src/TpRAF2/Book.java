@@ -1,42 +1,42 @@
-package TpRAF;
+package TpRAF2;
 
 /**
  * Created by Diego Mancini on 10/12/17.
  * Materia: AyED.
  */
-public class Car {
-        private int code;
+public class Book {
+        private int bookCode;
         private double price;
         private boolean available;
-        private char type;
+        private char bookType;
         private boolean active;
 
-    Car(int codigo, double precio, char tipo) {
-        this.code = codigo;
-        this.price = precio;
-        this.type = tipo;
+    Book(int bookCode, double price, char bookType) {
+        this.bookCode = bookCode;
+        this.price = price;
+        this.bookType = bookType;
         available = true;
         active = true;
     }
 
-    Car(int code, double price, boolean available, char type, boolean active) {
-        this.code = code;
+    Book(int bookCode, double price, boolean available, char bookType, boolean active) {
+        this.bookCode = bookCode;
         this.price = price;
-        this.type = type;
+        this.bookType = bookType;
         this.available = available;
         this.active = active;
     }
 
-    Car(){
-        code = 0;
+    Book(){
+        bookCode = 0;
         price = 0;
         available = false;
-        type = 'N';
+        bookType = 'X';
         active = false;
     }
 
-    void setCode(int code) {
-        this.code = code;
+    void setBookCode(int bookCode) {
+        this.bookCode = bookCode;
     }
 
     void setPrice(double price) {
@@ -47,16 +47,16 @@ public class Car {
         this.available = available;
     }
 
-    public void setType(char type) {
-        this.type = type;
+    void setBookType(char bookType) {
+        this.bookType = bookType;
     }
 
     void setActive(boolean active) {
         this.active = active;
     }
 
-    int getCode() {
-        return code;
+    int getBookCode() {
+        return bookCode;
     }
 
     double getPrice() {
@@ -67,8 +67,8 @@ public class Car {
         return available;
     }
 
-    public char getType() {
-        return type;
+    char getBookType() {
+        return bookType;
     }
 
     boolean isActive() {
@@ -78,20 +78,20 @@ public class Car {
     @Override
     public String toString() {
         return "-----\nBook: \n" +
-                "Code: " + code +
+                "Code: " + bookCode +
                 "\nPrice: " + price +
                 "\nAvailable:" + available +
-                "\nType:" + type +
+                "\nType:" + bookType +
                 "\nActive:" + active +
                 "\n------"+"\n";
     }
 
-    boolean isFull(){
-        return type == 'F' || type == 'f';
+    boolean isNovel(){
+        return bookType == 'N' || bookType == 'n';
     }
 
-    boolean isBase(){
-        return type == 'B' || type == 'b';
+    boolean isComic(){
+        return bookType == 'C' || bookType == 'c';
     }
 
 }
