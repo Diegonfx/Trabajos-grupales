@@ -51,6 +51,7 @@ public class Book {
         this.bookType = bookType;
     }
 
+    @SuppressWarnings("all")
     void setActive(boolean active) {
         this.active = active;
     }
@@ -94,4 +95,7 @@ public class Book {
         return bookType == 'C' || bookType == 'c';
     }
 
+    boolean isForKids() {
+        return bookType == 'K' || bookType == 'k';
+    }
 }

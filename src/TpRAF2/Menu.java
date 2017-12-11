@@ -67,7 +67,7 @@ public class Menu {
             code = Integer.parseInt(reader.nextLine());
             System.out.println("Price: ");
             price = Double.parseDouble(reader.nextLine());
-            System.out.println("Type('N' for novel or 'C' for comic): ");
+            System.out.println("Type('N' for novel, 'C' for comic or 'K' for kids): ");
             type = reader.nextLine().charAt(0);
             bookFile.write(new Book(code, price , type));
         }
@@ -107,7 +107,7 @@ public class Menu {
 
     private void consults(BookFile bookFile) throws IOException {
         System.out.println(" 1. Book data. \n 2. Amount of books. \n " +
-                "3. Amount of novels. \n 4. Amount of comics. \n Choose an option:  ");
+                "3. Amount of novels. \n 4. Amount of comics. \n 5. Amount of kids' books. \n Choose an option:  ");
         int option = Integer.parseInt(reader.nextLine());
         switch (option){
             case 1:
@@ -122,6 +122,9 @@ public class Menu {
             case 4:
                 getComicAmount(bookFile);
                 break;
+            case 5:
+                getKidsBooksAmount(bookFile);
+                break;
             default:
                 System.out.println("Wrong option"+"\n");
                 break;
@@ -130,7 +133,7 @@ public class Menu {
 
     private void inform(BookFile bookFile) throws IOException {
         System.out.println(" 1. All books data. \n " +
-                "2. All novels. \n 3. All comics. \n Choose an option: ");
+                "2. All novels. \n 3. All comics. \n 4. All kids' books. \n Choose an option: ");
         int option = Integer.parseInt(reader.nextLine());
         switch (option) {
             case 1:
@@ -141,6 +144,9 @@ public class Menu {
                 break;
             case 3:
                 bookFile.printEveryComic();
+                break;
+            case 4:
+                bookFile.printEveryKidsBook();
                 break;
             default:
                 System.out.println("Wrong option"+"\n");
@@ -174,5 +180,9 @@ public class Menu {
 
     private static void getComicAmount(BookFile bookFile) throws IOException {
         bookFile.amountOfComics(bookFile);
+    }
+
+    private static void getKidsBooksAmount(BookFile bookFile) throws IOException {
+        bookFile.amountOfKidsBooks(bookFile);
     }
 }

@@ -11,14 +11,12 @@ import java.util.Scanner;
  * Materia: AyED.
  */
 public class BookFile {
-    private File f;
     private RandomAccessFile raf;
-    int bookSize = 16;
-    private int bytes = 0;
+    private int bookSize = 16;
     private Scanner reader ;
 
     BookFile(String fileName) throws FileNotFoundException {
-        f = new File(fileName);
+        File f = new File(fileName);
         raf = new RandomAccessFile(f,"rw");
         reader = new Scanner(System.in);
     }
@@ -29,7 +27,6 @@ public class BookFile {
         raf.writeBoolean(c.isAvailable());
         raf.writeChar(c.getBookType());
         raf.writeBoolean(c.isActive());
-        bytes += bookSize;
     }
     public void close() throws IOException {
         raf.close();
@@ -39,12 +36,12 @@ public class BookFile {
         return raf.length();
     }
 
-    Book read() throws IOException{
+    private Book read() throws IOException{
         return new Book(raf.readInt(), raf.readDouble(),
                 raf.readBoolean(), raf.readChar(),raf.readBoolean());
     }
 
-    long amountOfBooks() throws IOException {
+    private long amountOfBooks() throws IOException {
         return raf.length()/ bookSize;
     }
 
@@ -59,7 +56,7 @@ public class BookFile {
                 if (book.isActive())
                     amountActive++;
             }
-            System.out.println("Amount of books: " + amountActive+"\n");
+            System.out.println("Amount of books: " + amountActive + "\n");
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -69,7 +66,7 @@ public class BookFile {
     void amountOfNovels(BookFile bookFile) throws IOException {
         Book book;
         start();
-        int novelAmount =0;
+        int novelAmount = 0;
         try {
             long cant = bookFile.amountOfBooks();
             for (long i = 0; i < cant ; i++){
@@ -77,7 +74,7 @@ public class BookFile {
                 if (book.isActive() && book.isNovel())
                     novelAmount++;
             }
-            System.out.println("Amount of novels: " + novelAmount+"\n");
+            System.out.println("Amount of novels: " + novelAmount + "\n");
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -87,7 +84,7 @@ public class BookFile {
     void amountOfComics(BookFile bookFile) throws IOException {
         Book book;
         start();
-        int comicAmount =0;
+        int comicAmount = 0;
         try {
             long cant = bookFile.amountOfBooks();
             for (long i = 0; i < cant ; i++){
@@ -95,7 +92,25 @@ public class BookFile {
                 if (book.isActive() && book.isComic())
                     comicAmount++;
             }
-            System.out.println("Amount of comics: " + comicAmount+"\n");
+            System.out.println("Amount of comics: " + comicAmount + "\n");
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    void amountOfKidsBooks(BookFile bookFile) throws IOException {
+        Book book;
+        start();
+        int kidsAmount = 0;
+        try {
+            long cant = bookFile.amountOfBooks();
+            for (long i = 0; i < cant ; i++){
+                book = bookFile.read();
+                if (book.isActive() && book.isForKids())
+                    kidsAmount++;
+            }
+            System.out.println("Amount of kids' books: " + kidsAmount + "\n");
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -106,7 +121,7 @@ public class BookFile {
         long cant = amountOfBooks();
         start();
         Book book;
-        for (int i =0 ; i < cant;i++){
+        for (int i = 0; i < cant; i++){
             book = read();
             if(book.isActive() && (book.getBookCode() == code)){
                 return book;
@@ -116,7 +131,7 @@ public class BookFile {
     }
 
 
-    void start() throws IOException{
+    private void start() throws IOException{
         raf.seek(0);
     }
 
@@ -140,7 +155,6 @@ public class BookFile {
             return false;
     }
 
-    //Este tendria que ir en menu
     boolean modify(int code) throws IOException{
         Book book = search(code);
         if (book.getBookCode()!=0){
@@ -153,10 +167,10 @@ public class BookFile {
                 book.setBookCode(newCode);
             }else if (option == 2){
                 System.out.println("Enter new price: ");
-                int newprice = Integer.parseInt(reader.nextLine());
-                book.setPrice(newprice);
+                int newPrice = Integer.parseInt(reader.nextLine());
+                book.setPrice(newPrice);
             }else if (option == 3){
-                System.out.println("Enter new type('N' for novel or 'C' for comic): ");
+                System.out.println("Enter new type('N' for novel, 'C' for comic or 'K' for kids): ");
                 char newType = reader.nextLine().charAt(0);
                 book.setBookType(newType);
             }else if (option == 4) {
@@ -216,4 +230,15 @@ public class BookFile {
         }
     }
 
+    void printEveryKidsBook() throws IOException {
+        long cant = amountOfBooks();
+        start();
+        Book book;
+        for (int i = 0 ; i < cant;i++){
+            book = read();
+            if (book.isActive() && book.isForKids()) {
+                System.out.println(book.toString()+"\n");
+            }
+        }
+    }
 }
