@@ -45,20 +45,6 @@ public class TablaHash {
         }
 
     }
-
-    public DynamicList<String> getSimilarSwing(String word){
-        String aux = soundex(word);
-        int key = hashFunction(aux);
-
-        DynamicList<String> similarWords = new DynamicList<>();
-
-        for (int i = 0; i < hashTable[key].size() ; i++) {
-            hashTable[key].goTo(i);
-            similarWords.insertNext(hashTable[key].getActual());
-        }
-        return similarWords;
-    }
-
     private static int hashFunction(String soundexResult){
         String result = "";
         char aux = soundexResult.charAt(0);

@@ -215,7 +215,7 @@ public class Menu {
             long end = carFile.carSize * (i+1);
             car = carFile.read();
             if(car.isActive()){
-                fileWriter.write("Book code: " + car.getCode()+ ". From byte" + start + " to byte " + end +".\n");
+                fileWriter.write("Car code: " + car.getCode()+ ". From byte" + start + " to byte " + end +".\n");
             }
         }
         fileWriter.close();

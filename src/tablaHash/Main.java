@@ -8,9 +8,7 @@ public class Main {
     private static TablaHash dictionary = new TablaHash();
     public static void main(String[] args) {
         dictionary.insert("Beer");
-  //      dictionary.insert("Bear");
         dictionary.insert("Bearer");
-        //dictionary.insert("Bare");
 
         int choice = 0;
         while (choice != 3){
